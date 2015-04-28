@@ -142,92 +142,45 @@ class acf_field_user extends acf_field
 	
 	function create_field( $field )
 	{
-		if( ! function_exists( 'get_editable_roles' ) )
-		{ 
-			// if using front-end forms then we need to add this core file
-			require_once( ABSPATH . '/wp-admin/includes/user.php' ); 
-		}
-		
-		// options
-   		$options = array(
-			'post_id' => get_the_ID(),
-		);
-		
-		
 		// vars
+		$field['choices'] = array();
 		$args = array();
-		
-		
-		// editable roles
 		$editable_roles = get_editable_roles();
-		
-		if( !empty($field['role']) )
+
+
+		// roles
+		if( !$field['role'] || !is_array( $field['role'] ) || $field['role'][0] == 'all' )
 		{
-			if( ! in_array('all', $field['role']) )
-			{
-				foreach( $editable_roles as $role => $role_info )
-				{
-					if( !in_array($role, $field['role']) )
-					{
-						unset( $editable_roles[ $role ] );
-					}
-				}
+			$field['role'] = array();
+			
+
+			foreach( $editable_roles as $role => $details )
+			{			
+				// only translate the output not the value
+				$field['role'][] = $role;
 			}
-			
 		}
+				
 		
-		// filters
-		$args = apply_filters('acf/fields/user/query', $args, $field, $options['post_id']);
-		$args = apply_filters('acf/fields/user/query/name=' . $field['_name'], $args, $field, $options['post_id'] );
-		$args = apply_filters('acf/fields/user/query/key=' . $field['key'], $args, $field, $options['post_id'] );
-		
-		
-		// get users
-		$users = get_users( $args );
-		
-		
-		if( !empty($users) && !empty($editable_roles) )
+		// choices
+		foreach( $field['role'] as $role )
 		{
-			$field['choices'] = array();
+			$label = translate_user_role( $editable_roles[ $role ]['name'] );
 			
-			foreach( $editable_roles as $role => $role_info )
+			// get users			
+			$users = get_users(array(
+				'role' => $role	
+			));
+					
+			
+			if( $users )
 			{
-				// vars
-				$this_users = array();
-				$this_json = array();
-				
-				
-				// loop over users
-				$keys = array_keys($users);
-				foreach( $keys as $key )
-				{
-					if( in_array($role, $users[ $key ]->roles) )
-					{
-						$this_users[] = $users[ $key ];
-						unset( $users[ $key ] );
-					}
-				}
-				
-				
-				// bail early if no users for this role
-				if( empty($this_users) )
-				{
-					continue;
-				}
-				
-				
-				// label
-				$label = translate_user_role( $role_info['name'] );
-				
-				
-				// append to choices
 				$field['choices'][ $label ] = array();
 				
-				foreach( $this_users as $user )
+				foreach( $users as $user )
 				{
 					$field['choices'][ $label ][ $user->ID ] = ucfirst( $user->display_name );
 				}
-				
 			}
 		}
 		

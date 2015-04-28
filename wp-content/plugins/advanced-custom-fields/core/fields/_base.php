@@ -180,6 +180,8 @@ class acf_field
 		if( !empty($this->l10n) )
 		{
 			$l10n[ $this->name ] = $this->l10n;
+			
+			
 		}
 		
 		return $l10n;

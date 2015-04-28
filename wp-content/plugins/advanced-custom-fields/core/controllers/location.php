@@ -23,7 +23,6 @@ class acf_location
 	{
 		// ajax
 		add_action('wp_ajax_acf/location/match_field_groups_ajax', array($this, 'match_field_groups_ajax'));
-		add_action('wp_ajax_nopriv_acf/location/match_field_groups_ajax', array($this, 'match_field_groups_ajax'));
 		
 		
 		// filters
@@ -174,14 +173,6 @@ class acf_location
 					{
 						foreach( $group as $rule_id => $rule )
 						{
-							// Hack for ef_media => now post_type = attachment
-							if( $rule['param'] == 'ef_media' )
-							{
-								$rule['param'] = 'post_type';
-								$rule['value'] = 'attachment';
-							}
-							
-							
 							// $match = true / false
 							$match = apply_filters( 'acf/location/rule_match/' . $rule['param'] , false, $rule, $options );
 							
@@ -643,21 +634,16 @@ class acf_location
 	{
 		global $plugin_page;
 		    	
-		// NOTE
-		// comment out below code as it was interfering with custom slugs
-		
+		    	
 		// older location rules may be "options-pagename"
-		/*
-if( substr($rule['value'], 0, 8) == 'options-' )
+		if( substr($rule['value'], 0, 8) == 'options-' )
 		{
 			$rule['value'] = 'acf-' . $rule['value'];
 		}
-*/
 		
 		
 		// older location ruels may be "Pagename"
-		/*
-if( substr($rule['value'], 0, 11) != 'acf-options' )
+		if( substr($rule['value'], 0, 11) != 'acf-options' )
 		{
 			$rule['value'] = 'acf-options-' . sanitize_title( $rule['value'] );
 			
@@ -667,8 +653,7 @@ if( substr($rule['value'], 0, 11) != 'acf-options' )
 				$rule['value'] = 'acf-options';
 			}
 		}
-*/
-	
+		
 		
 		if($rule['operator'] == "==")
         {
@@ -978,7 +963,58 @@ if( substr($rule['value'], 0, 11) != 'acf-options' )
         
         return $match;
         
-    }	
+    }
+    
+    
+    /*
+	*  rule_match_ef_media
+	*
+	*  @description: 
+	*  @since: 3.5.7
+	*  @created: 3/01/13
+	*/
+	
+	function rule_match_ef_media( $match, $rule, $options )
+	{
+		global $pagenow;
+
+		
+		if( $pagenow == 'post.php' )
+		{
+			// in 3.5, the media rule should check the post type
+			$rule['param'] = 'post_type';
+			$rule['value'] = 'attachment';
+			return $this->rule_match_post_type( $match, $rule, $options );
+		}
+		
+		
+		$ef_media = $options['ef_media'];
+		
+        if( $ef_media )
+		{
+			if($rule['operator'] == "==")
+	        {
+	        	// override for "all"
+		        if( $rule['value'] === "all" )
+				{
+					$match = true;
+				}
+	        }
+	        elseif($rule['operator'] == "!=")
+	        {
+	        	// override for "all"
+		        if( $rule['value'] === "all" )
+				{
+					$match = false;
+				}
+	        }
+
+		}
+		
+        return $match;
+        
+    }
+	
 			
 }
 

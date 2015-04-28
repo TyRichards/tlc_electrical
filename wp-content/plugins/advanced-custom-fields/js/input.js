@@ -63,7 +63,7 @@ var acf = {
 	/*
 	*  acf.helpers.isset
 	*
-	*  description
+	*  http://phpjs.org/functions/isset
 	*
 	*  @type	function
 	*  @date	20/07/13
@@ -76,25 +76,19 @@ var acf = {
 		
 		var a = arguments,
 	        l = a.length,
-	        c = null,
+	        i = 0,
 	        undef;
-		
+	
 	    if (l === 0) {
 	        throw new Error('Empty isset');
 	    }
-		
-		c = a[0];
-		
-	    for (i = 1; i < l; i++) {
-	    	
-	        if (a[i] === undef || c[ a[i] ] === undef) {
+	
+	    while (i !== l) {
+	        if (a[i] === undef || a[i] === null) {
 	            return false;
 	        }
-	        
-	        c = c[ a[i] ];
-	        
+	        i++;
 	    }
-	    
 	    return true;
 			
 	};
@@ -329,7 +323,7 @@ var acf = {
 			
 			
 			// if wp exists
-			if( typeof wp !== 'undefined' )
+			if( typeof(wp) == "object" )
 			{
 				type = 'backbone';
 			}
@@ -340,20 +334,6 @@ var acf = {
 			
 		},
 		init : function(){
-			
-			// validate
-			if( this.type() !== 'backbone' )
-			{
-				return false;
-			}
-			
-			
-			// validate prototype
-			if( ! acf.helpers.isset(wp, 'media', 'view', 'AttachmentCompat', 'prototype') )
-			{
-				return false;	
-			}
-			
 			
 			// vars
 			var _prototype = wp.media.view.AttachmentCompat.prototype;
@@ -446,7 +426,7 @@ var acf = {
 				clearTimeout( acf.media.render_timout );
 				acf.media.render_timout = setTimeout(function(){
 
-					$(document).trigger( 'acf/setup_fields', [ _this.$el ] );
+					$(document).trigger( 'acf/setup_fields', _this.$el );
 					
 				}, 50);
 
@@ -536,75 +516,31 @@ var acf = {
 			// events
 			$(document).on('change', '.field input, .field textarea, .field select', function(){
 				
-				// preview hack
-				if( $('#acf-has-changed').exists() )
-				{
-					$('#acf-has-changed').val(1);
-				}
-				
-				_this.change( $(this) );
+				_this.change();
 				
 			});
 			
 			
-			$(document).on('acf/setup_fields', function(e, el){
-				
-				//console.log('acf/setup_fields calling acf.conditional_logic.refresh()');
-				_this.refresh( $(el) );
-				
-			});
-			
-			//console.log('acf.conditional_logic.init() calling acf.conditional_logic.refresh()');
-			_this.refresh();
+			_this.change();
 			
 		},
-		change : function( $el ){
+		change : function(){
 			
-			//console.log('change %o', $el);
 			// reference
 			var _this = this;
 			
 			
 			// vars
-			var $field = $el.closest('.field'),
-				key = $field.attr('data-field_key');
+			//var $el		=	$( e.target ),
+			//	$field	=	$el.closest('.field');
 			
 			
-			// loop through items and find rules where this field key is a trigger
+			// loop through items
 			$.each(this.items, function( k, item ){
 				
-				$.each(item.rules, function( k2, rule ){
-					
-					// compare rule against the changed $field
-					if( rule.field == key )
-					{
-						_this.refresh_field( item );
-					}
-					
-				});
-				
-			});
-			
-		},
-		
-		refresh_field : function( item ){
-			
-			//console.log( 'refresh_field: %o ', item );
-			// reference
-			var _this = this;
-			
-			
-			// vars
-			var $targets	=	$('.field_key-' + item.field);
-
-			
-			// may be multiple targets (sub fields)
-			$targets.each(function(){
-				
-				//console.log('target %o', $(this));
-				
 				// vars
-				var show = true;
+				var show	=	true,
+					$field	=	$('.field_key-' + item.field);
 				
 				
 				// if 'any' was selected, start of as false and any match will result in show = true
@@ -614,81 +550,10 @@ var acf = {
 				}
 				
 				
-				// vars
-				var $target		=	$(this),
-					hide_all	=	true;
-				
-				
 				// loop through rules
 				$.each(item.rules, function( k2, rule ){
 					
-					// vars
-					var $toggle = $('.field_key-' + rule.field);
-					
-					
-					// are any of $toggle a sub field?
-					if( $toggle.hasClass('sub_field') )
-					{
-						// toggle may be a sibling sub field.
-						// if so ,show an empty td but keep the column
-						$toggle = $target.siblings('.field_key-' + rule.field);
-						hide_all = false;
-						
-						
-						// if no toggle was found, we need to look at parent sub fields.
-						// if so, hide the entire column
-						if( ! $toggle.exists() )
-						{
-							// loop through all the parents that could contain sub fields
-							$target.parents('tr').each(function(){
-								
-								// attempt to update $toggle to this parent sub field
-								$toggle = $(this).find('.field_key-' + rule.field)
-								
-								// if the parent sub field actuallly exists, great! Stop the loop
-								if( $toggle.exists() )
-								{
-									return false;
-								}
-								
-							});
-
-							hide_all = true;
-						}
-						
-					}
-					
-					
-					// if this sub field is within a flexible content layout, hide the entire column because 
-					// there will never be another row added to this table
-					var parent = $target.parent('tr').parent().parent('table').parent('.layout');
-					if( parent.exists() )
-					{
-						hide_all = true;
-						
-						if( $target.is('th') && $toggle.is('th') )
-						{
-							$toggle = $target.closest('.layout').find('td.field_key-' + rule.field);
-						}
-
-					}
-					
-					// if this sub field is within a repeater field which has a max row of 1, hide the entire column because 
-					// there will never be another row added to this table
-					var parent = $target.parent('tr').parent().parent('table').parent('.repeater');
-					if( parent.exists() && parent.attr('data-max_rows') == '1' )
-					{
-						hide_all = true;
-						
-						if( $target.is('th') && $toggle.is('th') )
-						{
-							$toggle = $target.closest('table').find('td.field_key-' + rule.field);
-						}
-
-					}
-					
-					
-					var calculate = _this.calculate( rule, $toggle, $target );
+					var calculate = _this.calculate( rule );
 					
 					if( item.allorany == 'all' )
 					{
@@ -712,86 +577,41 @@ var acf = {
 					}
 					
 				});
-				// $.each(item.rules, function( k2, rule ){
-				
-				
-				// clear classes
-				$target.removeClass('acf-conditional_logic-hide acf-conditional_logic-show acf-show-blank');
 				
 				
 				// hide / show field
 				if( show )
 				{
 					// remove "disabled"
-					$target.find('input, textarea, select').removeAttr('disabled');
+					$field.find('input, textarea, select').removeAttr('disabled');
 					
-					$target.addClass('acf-conditional_logic-show');
 					
-					// hook
-					$(document).trigger('acf/conditional_logic/show', [ $target, item ]);
-					
+					$field.removeClass('acf-conditional_logic-hide').addClass('acf-conditional_logic-show');
 				}
 				else
 				{
 					// add "disabled"
-					$target.find('input, textarea, select').attr('disabled', 'disabled');
+					$field.find('input, textarea, select').attr('disabled', 'disabled');
 					
-					$target.addClass('acf-conditional_logic-hide');
 					
-					if( !hide_all )
-					{
-						$target.addClass('acf-show-blank');
-					}
-					
-					// hook
-					$(document).trigger('acf/conditional_logic/hide', [ $target, item ]);
+					$field.removeClass('acf-conditional_logic-show').addClass('acf-conditional_logic-hide');
 				}
 				
 				
 			});
 			
 		},
-		
-		refresh : function( $el ){
-			
-			// defaults
-			$el = $el || $('body');
-			
-			
-			// reference
-			var _this = this;
-			
-			
-			// loop through items and find rules where this field key is a trigger
-			$.each(this.items, function( k, item ){
-				
-				$.each(item.rules, function( k2, rule ){
-					
-					// is this field within the $el
-					// this will increase performance by ignoring conditional logic outside of this newly appended element ($el)
-					if( ! $el.find('.field[data-field_key="' + item.field + '"]').exists() )
-					{
-						return;
-					}
-					
-					_this.refresh_field( item );
-					
-				});
-				
-			});
-			
-		},
-		
-		calculate : function( rule, $toggle, $target ){
+		calculate : function( rule ){
 			
 			// vars
-			var r = false;
+			var $field	=	$('.field_key-' + rule.field),
+				r		=	false;
 			
-
+			
 			// compare values
-			if( $toggle.hasClass('field_type-true_false') || $toggle.hasClass('field_type-checkbox') || $toggle.hasClass('field_type-radio') )
+			if( $field.hasClass('field_type-true_false') || $field.hasClass('field_type-checkbox') || $field.hasClass('field_type-radio') )
 			{
-				var exists = $toggle.find('input[value="' + rule.value + '"]:checked').exists();
+				var exists = $field.find('input[value="' + rule.value + '"]:checked').exists();
 				
 				
 				if( rule.operator == "==" )
@@ -813,7 +633,7 @@ var acf = {
 			else
 			{
 				// get val and make sure it is an array
-				var val = $toggle.find('input, textarea, select').last().val();
+				var val = $field.find('input, textarea, select').last().val();
 				
 				if( ! $.isArray(val) )
 				{
@@ -872,10 +692,6 @@ var acf = {
 			
 		});
 		
-		
-		// Remove 'field_123' from native custom field metabox
-		$('#metakeyselect option[value^="field_"]').remove();
-		
 	
 	});
 	
@@ -899,12 +715,7 @@ var acf = {
 			// Hack for CPT without a content editor
 			try
 			{
-				// post_id may be string (user_1) and therefore, the uploaded image cannot be attached to the post
-				if( $.isNumeric(acf.o.post_id) )
-				{
-					wp.media.view.settings.post.id = acf.o.post_id;
-				}
-				
+				wp.media.view.settings.post.id = acf.post_id;	
 			} 
 			catch(e)
 			{
@@ -943,7 +754,6 @@ var acf = {
 		}
 	};
 	
-		
 	
 })(jQuery);
 
@@ -1029,9 +839,10 @@ var acf = {
 	
 	$(document).on('acf/update_field_groups', function(){
 		
+		
 		// Only for a post.
 		// This is an attempt to stop the action running on the options page add-on.
-		if( ! acf.screen.post_id || ! $.isNumeric(acf.screen.post_id) )
+		if( ! acf.o.post_id )
 		{
 			return false;	
 		}
@@ -1086,7 +897,7 @@ var acf = {
 						$.ajax({
 							url			:	ajaxurl,
 							data		:	{
-								action	:	'acf/post/render_fields',
+								action	:	'acf/input/render_fields',
 								acf_id	:	v,
 								post_id	:	acf.o.post_id,
 								nonce	:	acf.o.nonce
@@ -1110,7 +921,7 @@ var acf = {
 				$.ajax({
 					url			:	ajaxurl,
 					data		:	{
-						action	:	'acf/post/get_style',
+						action	:	'acf/input/get_style',
 						acf_id	:	result[0],
 						nonce	:	acf.o.nonce
 					},
@@ -1190,88 +1001,36 @@ var acf = {
 	});	
 	
 	
-	function _sync_taxonomy_terms() {
-		
-		// vars
-		var values = [];
-		
-		
-		$('.categorychecklist input:checked, .acf-taxonomy-field input:checked, .acf-taxonomy-field option:selected').each(function(){
-			
-			// validate
-			if( $(this).is(':hidden') || $(this).is(':disabled') )
-			{
-				return;
-			}
-			
-			
-			// validate media popup
-			if( $(this).closest('.media-frame').exists() )
-			{
-				return;
-			}
-			
-			
-			// validate acf
-			if( $(this).closest('.acf-taxonomy-field').exists() )
-			{
-				if( $(this).closest('.acf-taxonomy-field').attr('data-save') == '0' )
-				{
-					return;
-				}
-			}
-			
-			
-			// append
-			if( values.indexOf( $(this).val() ) === -1 )
-			{
-				values.push( $(this).val() );
-			}
-			
-		});
-
-		
-		// update screen
-		acf.screen.post_category = values;
-		acf.screen.taxonomy = values;
-
-		
-		// trigger change
-		$(document).trigger('acf/update_field_groups');
-			
-	}
-	
-	
-	$(document).on('change', '.categorychecklist input, .acf-taxonomy-field input, .acf-taxonomy-field select', function(){
-		
-		// a taxonomy field may trigger this change event, however, the value selected is not
-		// actually a term relatinoship, it is meta data
-		if( $(this).closest('.acf-taxonomy-field').exists() )
-		{
-			if( $(this).closest('.acf-taxonomy-field').attr('data-save') == '0' )
-			{
-				return;
-			}
-		}
-		
-		
-		// this may be triggered from editing an imgae in a popup. Popup does not support correct metaboxes so ignore this
-		if( $(this).closest('.media-frame').exists() )
-		{
-			return;
-		}
-		
+	$(document).on('change', '.categorychecklist input[type="checkbox"]', function(){
 		
 		// set timeout to fix issue with chrome which does not register the change has yet happened
 		setTimeout(function(){
 			
-			_sync_taxonomy_terms();
+			// vars
+			var values = [];
+			
+			
+			$('.categorychecklist input[type="checkbox"]:checked').each(function(){
+				
+				if( $(this).is(':hidden') || $(this).is(':disabled') )
+				{
+					return;
+				}
+			
+				values.push( $(this).val() );
+			});
+	
+			
+			acf.screen.post_category = values;
+			acf.screen.taxonomy = values;
+	
+	
+			$(document).trigger('acf/update_field_groups');
 		
 		}, 1);
 		
 		
 	});
-	
 	
 	
 	
@@ -1316,12 +1075,8 @@ var acf = {
 		},
 		init : function(){
 			
-			// vars (reference)
-			var $input = this.$input;
-			
-			
 			// is clone field?
-			if( acf.helpers.is_clone_field($input) )
+			if( acf.helpers.is_clone_field(this.$input) )
 			{
 				return;
 			}
@@ -1874,550 +1629,6 @@ var acf = {
 		acf.fields.file.set({ $el : $(this).closest('.acf-file-uploader') }).popup();
 		
 	});
-	
-
-})(jQuery);
-
-/* **********************************************
-     Begin google-map.js
-********************************************** */
-
-(function($){
-	
-	/*
-	*  Location
-	*
-	*  static model for this field
-	*
-	*  @type	event
-	*  @date	1/06/13
-	*
-	*/
-	
-	acf.fields.google_map = {
-		
-		$el : null,
-		$input : null,
-		
-		o : {},
-		
-		ready : false,
-		geocoder : false,
-		map : false,
-		maps : {},
-		
-		set : function( o ){
-			
-			// merge in new option
-			$.extend( this, o );
-			
-			
-			// find input
-			this.$input = this.$el.find('.value');
-			
-			
-			// get options
-			this.o = acf.helpers.get_atts( this.$el );
-			
-			
-			// get map
-			if( this.maps[ this.o.id ] )
-			{
-				this.map = this.maps[ this.o.id ];
-			}
-			
-			
-			// return this for chaining
-			return this;
-			
-		},
-		init : function(){
-			
-			// geocode
-			if( !this.geocoder )
-			{
-				this.geocoder = new google.maps.Geocoder();
-			}
-			
-			
-			// google maps is loaded and ready
-			this.ready = true;
-			
-			
-			// is clone field?
-			if( acf.helpers.is_clone_field(this.$input) )
-			{
-				return;
-			}
-			
-			this.render();
-					
-		},
-		render : function(){
-			
-			// reference
-			var _this	= this,
-				_$el	= this.$el;
-			
-			
-			// vars
-			var args = {
-        		zoom		: parseInt(this.o.zoom),
-        		center		: new google.maps.LatLng(this.o.lat, this.o.lng),
-        		mapTypeId	: google.maps.MapTypeId.ROADMAP
-        	};
-			
-			// create map	        	
-        	this.map = new google.maps.Map( this.$el.find('.canvas')[0], args);
-	        
-	        
-	        // add search
-			var autocomplete = new google.maps.places.Autocomplete( this.$el.find('.search')[0] );
-			autocomplete.map = this.map;
-			autocomplete.bindTo('bounds', this.map);
-			
-			
-			// add dummy marker
-	        this.map.marker = new google.maps.Marker({
-		        draggable	: true,
-		        raiseOnDrag	: true,
-		        map			: this.map,
-		    });
-		    
-		    
-		    // add references
-		    this.map.$el = this.$el;
-		    
-		    
-		    // value exists?
-		    var lat = this.$el.find('.input-lat').val(),
-		    	lng = this.$el.find('.input-lng').val();
-		    
-		    if( lat && lng )
-		    {
-			    this.update( lat, lng ).center();
-		    }
-		    
-		    
-			// events
-			google.maps.event.addListener(autocomplete, 'place_changed', function( e ) {
-			    
-			    // reference
-			    var $el = this.map.$el;
-
-
-			    // manually update address
-			    var address = $el.find('.search').val();
-			    $el.find('.input-address').val( address );
-			    $el.find('.title h4').text( address );
-			    
-			    
-			    // vars
-			    var place = this.getPlace();
-			    
-			    
-			    // validate
-			    if( place.geometry )
-			    {
-			    	var lat = place.geometry.location.lat(),
-						lng = place.geometry.location.lng();
-						
-						
-				    _this.set({ $el : $el }).update( lat, lng ).center();
-			    }
-			    else
-			    {
-				    // client hit enter, manulaly get the place
-				    _this.geocoder.geocode({ 'address' : address }, function( results, status ){
-				    	
-				    	// validate
-						if( status != google.maps.GeocoderStatus.OK )
-						{
-							console.log('Geocoder failed due to: ' + status);
-							return;
-						}
-						
-						if( !results[0] )
-						{
-							console.log('No results found');
-							return;
-						}
-						
-						
-						// get place
-						place = results[0];
-						
-						var lat = place.geometry.location.lat(),
-							lng = place.geometry.location.lng();
-							
-							
-					    _this.set({ $el : $el }).update( lat, lng ).center();
-					    
-					});
-			    }
-			    
-			});
-		    
-		    
-		    google.maps.event.addListener( this.map.marker, 'dragend', function(){
-		    	
-		    	// reference
-			    var $el = this.map.$el;
-			    
-			    
-		    	// vars
-				var position = this.map.marker.getPosition(),
-					lat = position.lat(),
-			    	lng = position.lng();
-			    	
-				_this.set({ $el : $el }).update( lat, lng ).sync();
-			    
-			});
-			
-			
-			google.maps.event.addListener( this.map, 'click', function( e ) {
-				
-				// reference
-			    var $el = this.$el;
-			    
-			    
-				// vars
-				var lat = e.latLng.lat(),
-					lng = e.latLng.lng();
-				
-				
-				_this.set({ $el : $el }).update( lat, lng ).sync();
-			
-			});
-
-			
-			
-	        // add to maps
-	        this.maps[ this.o.id ] = this.map;
-	        
-	        
-		},
-		
-		update : function( lat, lng ){
-			
-			// vars
-			var latlng = new google.maps.LatLng( lat, lng );
-		    
-		    
-		    // update inputs
-			this.$el.find('.input-lat').val( lat );
-			this.$el.find('.input-lng').val( lng ).trigger('change');
-			
-			
-		    // update marker
-		    this.map.marker.setPosition( latlng );
-		    
-		    
-			// show marker
-			this.map.marker.setVisible( true );
-		    
-		    
-	        // update class
-	        this.$el.addClass('active');
-	        
-	        
-	        // validation
-			this.$el.closest('.field').removeClass('error');
-			
-			
-	        // return for chaining
-	        return this;
-		},
-		
-		center : function(){
-			
-			// vars
-			var position = this.map.marker.getPosition(),
-				lat = this.o.lat,
-				lng = this.o.lng;
-			
-			
-			// if marker exists, center on the marker
-			if( position )
-			{
-				lat = position.lat();
-				lng = position.lng();
-			}
-			
-			
-			var latlng = new google.maps.LatLng( lat, lng );
-				
-			
-			// set center of map
-	        this.map.setCenter( latlng );
-		},
-		
-		sync : function(){
-			
-			// reference
-			var $el	= this.$el;
-				
-			
-			// vars
-			var position = this.map.marker.getPosition(),
-				latlng = new google.maps.LatLng( position.lat(), position.lng() );
-			
-			
-			this.geocoder.geocode({ 'latLng' : latlng }, function( results, status ){
-				
-				// validate
-				if( status != google.maps.GeocoderStatus.OK )
-				{
-					console.log('Geocoder failed due to: ' + status);
-					return;
-				}
-				
-				if( !results[0] )
-				{
-					console.log('No results found');
-					return;
-				}
-				
-				
-				// get location
-				var location = results[0];
-				
-				
-				// update h4
-				$el.find('.title h4').text( location.formatted_address );
-
-				
-				// update input
-				$el.find('.input-address').val( location.formatted_address ).trigger('change');
-				
-			});
-			
-			
-			// return for chaining
-	        return this;
-		},
-		
-		locate : function(){
-			
-			// reference
-			var _this	= this,
-				_$el	= this.$el;
-			
-			
-			// Try HTML5 geolocation
-			if( ! navigator.geolocation )
-			{
-				alert( acf.l10n.google_map.browser_support );
-				return this;
-			}
-			
-			
-			// show loading text
-			_$el.find('.title h4').text(acf.l10n.google_map.locating + '...');
-			_$el.addClass('active');
-			
-		    navigator.geolocation.getCurrentPosition(function(position){
-		    	
-		    	// vars
-				var lat = position.coords.latitude,
-			    	lng = position.coords.longitude;
-			    	
-				_this.set({ $el : _$el }).update( lat, lng ).sync().center();
-				
-			});
-
-				
-		},
-		
-		clear : function(){
-			
-			// update class
-	        this.$el.removeClass('active');
-			
-			
-			// clear search
-			this.$el.find('.search').val('');
-			
-			
-			// clear inputs
-			this.$el.find('.input-address').val('');
-			this.$el.find('.input-lat').val('');
-			this.$el.find('.input-lng').val('');
-			
-			
-			// hide marker
-			this.map.marker.setVisible( false );
-		},
-		
-		edit : function(){
-			
-			// update class
-	        this.$el.removeClass('active');
-			
-			
-			// clear search
-			var val = this.$el.find('.title h4').text();
-			
-			
-			this.$el.find('.search').val( val ).focus();
-			
-		},
-		
-		refresh : function(){
-			
-			// trigger resize on div
-			google.maps.event.trigger(this.map, 'resize');
-			
-			// center map
-			this.center();
-			
-		}
-	
-	};
-	
-	
-	/*
-	*  acf/setup_fields
-	*
-	*  run init function on all elements for this field
-	*
-	*  @type	event
-	*  @date	20/07/13
-	*
-	*  @param	{object}	e		event object
-	*  @param	{object}	el		DOM object which may contain new ACF elements
-	*  @return	N/A
-	*/
-	
-	$(document).on('acf/setup_fields', function(e, el){
-		
-		// vars
-		$fields = $(el).find('.acf-google-map');
-		
-		
-		// validate
-		if( ! $fields.exists() )
-		{
-			return;
-		}
-		
-		
-		// validate google
-		if( typeof google === 'undefined' )
-		{
-			$.getScript('https://www.google.com/jsapi', function(){
-			
-			    google.load('maps', '3', { other_params: 'sensor=false&libraries=places', callback: function(){
-			    
-			        $fields.each(function(){
-					
-						acf.fields.google_map.set({ $el : $(this) }).init();
-						
-					});
-			        
-			    }});
-			});
-			
-		}
-		else
-		{
-			google.load('maps', '3', { other_params: 'sensor=false&libraries=places', callback: function(){
-				
-				$fields.each(function(){
-					
-					acf.fields.google_map.set({ $el : $(this) }).init();
-					
-				});
-		        
-		    }});
-				
-		}
-		
-	});
-	
-	
-	/*
-	*  Events
-	*
-	*  jQuery events for this field
-	*
-	*  @type	function
-	*  @date	1/03/2011
-	*
-	*  @param	N/A
-	*  @return	N/A
-	*/
-	
-	$(document).on('click', '.acf-google-map .acf-sprite-remove', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.google_map.set({ $el : $(this).closest('.acf-google-map') }).clear();
-		
-		$(this).blur();
-		
-	});
-	
-	
-	$(document).on('click', '.acf-google-map .acf-sprite-locate', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.google_map.set({ $el : $(this).closest('.acf-google-map') }).locate();
-		
-		$(this).blur();
-		
-	});
-	
-	$(document).on('click', '.acf-google-map .title h4', function( e ){
-		
-		e.preventDefault();
-		
-		acf.fields.google_map.set({ $el : $(this).closest('.acf-google-map') }).edit();
-			
-	});
-	
-	$(document).on('keydown', '.acf-google-map .search', function( e ){
-		
-		// prevent form from submitting
-		if( e.which == 13 )
-		{
-		    return false;
-		}
-			
-	});
-	
-	$(document).on('blur', '.acf-google-map .search', function( e ){
-		
-		// vars
-		var $el = $(this).closest('.acf-google-map');
-		
-		
-		// has a value?
-		if( $el.find('.input-lat').val() )
-		{
-			$el.addClass('active');
-		}
-		
-	});
-	
-	$(document).on('acf/fields/tab/show acf/conditional_logic/show', function( e, $field ){
-		
-		// validate
-		if( ! acf.fields.google_map.ready )
-		{
-			return;
-		}
-		
-		
-		// validate
-		if( $field.attr('data-field_type') == 'google_map' )
-		{
-			acf.fields.google_map.set({ $el : $field.find('.acf-google-map') }).refresh();
-		}
-		
-	});
-
 	
 
 })(jQuery);
@@ -3290,131 +2501,6 @@ var acf = {
 
 (function($){
 
-	acf.fields.tab = {
-		
-		add_group : function( $wrap ){
-			
-			// vars
-			var html = '';
-			
-			
-			// generate html
-			if( $wrap.is('tbody') )
-			{
-				html = '<tr class="acf-tab-wrap"><td colspan="2"><ul class="hl clearfix acf-tab-group"></ul></td></tr>';
-			}
-			else
-			{
-				html = '<div class="acf-tab-wrap"><ul class="hl clearfix acf-tab-group"></ul></div>';
-			}
-			
-			
-			// append html
-			$wrap.children('.field_type-tab:first').before( html );
-			
-		},
-		
-		add_tab : function( $tab ){
-			
-			// vars
-			var $field	= $tab.closest('.field'),
-				$wrap	= $field.parent(),
-				
-				key		= $field.attr('data-field_key'),
-				label 	= $tab.text();
-				
-				
-			// create tab group if it doesnt exist
-			if( ! $wrap.children('.acf-tab-wrap').exists() )
-			{
-				this.add_group( $wrap );
-			}
-			
-			// add tab
-			$wrap.children('.acf-tab-wrap').find('.acf-tab-group').append('<li><a class="acf-tab-button" href="#" data-key="' + key + '">' + label + '</a></li>');
-			
-		},
-		
-		toggle : function( $a ){
-			
-			// reference
-			var _this = this;
-				
-				
-			//console.log( 'toggle %o ', $a);
-			// vars
-			var $wrap	= $a.closest('.acf-tab-wrap').parent(),
-				key		= $a.attr('data-key');
-			
-			
-			// classes
-			$a.parent('li').addClass('active').siblings('li').removeClass('active');
-			
-			
-			// hide / show
-			$wrap.children('.field_type-tab').each(function(){
-			
-				
-				// vars
-				var $tab = $(this);
-					
-				
-				if( $tab.attr('data-field_key') == key  )
-				{
-					_this.show_tab_fields( $(this) );
-				}
-				else
-				{
-					_this.hide_tab_fields( $(this) );
-				}
-				
-				
-			});
-			
-		},
-		
-		show_tab_fields : function( $field ) {
-			
-			//console.log('show tab fields %o', $field);
-			$field.nextUntil('.field_type-tab').each(function(){
-				
-				$(this).removeClass('acf-tab_group-hide').addClass('acf-tab_group-show');
-				$(document).trigger('acf/fields/tab/show', [ $(this) ]);
-				
-			});
-		},
-		
-		hide_tab_fields : function( $field ) {
-			
-			$field.nextUntil('.field_type-tab').each(function(){
-				
-				$(this).removeClass('acf-tab_group-show').addClass('acf-tab_group-hide');
-				$(document).trigger('acf/fields/tab/hide', [ $(this) ]);
-				
-			});
-		},
-		
-		refresh : function( $el ){
-			
-			// reference
-			var _this = this;
-			
-			
-			// trigger
-			$el.find('.acf-tab-group').each(function(){
-				
-				$(this).find('.acf-tab-button:first').each(function(){
-					
-					_this.toggle( $(this) );
-					
-				});
-				
-			});
-
-		}
-		
-	};
-	
 	
 	/*
 	*  acf/setup_fields
@@ -3431,29 +2517,51 @@ var acf = {
 	
 	$(document).on('acf/setup_fields', function(e, el){
 		
-		// add tabs
 		$(el).find('.acf-tab').each(function(){
 			
-			acf.fields.tab.add_tab( $(this) );
+			// vars
+			var $el		=	$(this),
+				$field	=	$el.parent(),
+				$wrap	=	$field.parent(),
+				
+				id		=	$el.attr('data-id'),
+				label 	= 	$el.html();
+				
+
+
+			// only run once for each tab
+			if( $el.hasClass('acf-tab-added') )
+			{
+				return;
+			}
+			
+			$el.addClass('acf-tab-added');
+			
+			
+			// create tab group if it doesnt exist
+			if( ! $wrap.children('.acf-tab-group').exists() )
+			{
+				$wrap.children('.field_type-tab:first').before('<ul class="hl clearfix acf-tab-group"></ul>');
+			}
+			
+			
+			// add tab
+			$wrap.children('.acf-tab-group').append('<li class="field_key-' + id + '" data-field_key="' + id + '"><a class="acf-tab-button" href="#" data-id="' + id + '">' + label + '</a></li>');
+			
 			
 		});
 		
 		
-		// activate first tab
-		acf.fields.tab.refresh( $(el) );
-		
-		
-		// NOTE: this code is defined BEFORE the acf.conditional_logic action. This is becuase the 'acf/setup_fields' listener is defined INSIDE the conditional_logic.init() function which is run on doc.ready
-		
-		// trigger conditional logic
-		// this code ( acf/setup_fields ) is run after the main acf.conditional_logic.init();
-		//console.log('acf/setup_fields (after tab refresh) calling acf.conditional_logic.refresh()');
-		//acf.conditional_logic.refresh();
-		
+		// trigger
+		$(el).find('.acf-tab-group').each(function(){
+			
+			$(this).find('li:first a').trigger('click');
+			
+		});
+
+	
 	});
 	
-	
-		
 	
 	/*
 	*  Events
@@ -3469,103 +2577,45 @@ var acf = {
 	
 	$(document).on('click', '.acf-tab-button', function( e ){
 		
+		
 		e.preventDefault();
 		
-		acf.fields.tab.toggle( $(this) );
-		
-		$(this).trigger('blur');
-		
-	});
-	
-	
-	$(document).on('acf/conditional_logic/hide', function( e, $target, item ){
-		
-		// validate
-		if( $target.attr('data-field_type') != 'tab' )
-		{
-			return;
-		}
-		
-		//console.log('conditional_logic/hide tab %o', $target);
-		
 		
 		// vars
-		var $tab = $target.siblings('.acf-tab-wrap').find('a[data-key="' + $target.attr('data-field_key') + '"]');
+		var $a		=	$(this),
+			$ul		=	$a.closest('ul'),
+			$wrap	=	$ul.parent(),
+			id		=	$a.attr('data-id');
 		
 		
-		// if tab is already hidden, then ignore the following functiolnality
-		if( $tab.is(':hidden') )
-		{
-			return;
-		}
+		// classes
+		$ul.find('li').removeClass('active');
+		$a.parent('li').addClass('active');
 		
 		
-		// visibility
-		$tab.parent().hide();
-		
-		
-		// if 
-		if( $tab.parent().siblings(':visible').exists() )
-		{
-			// if the $target to be hidden is a tab button, lets toggle a sibling tab button
-			$tab.parent().siblings(':visible').first().children('a').trigger('click');
-		}
-		else
-		{
-			// no onther tabs
-			acf.fields.tab.hide_tab_fields( $target );
-		}
-		
-	});
-	
-	
-	$(document).on('acf/conditional_logic/show', function( e, $target, item ){
-		
-		// validate
-		if( $target.attr('data-field_type') != 'tab' )
-		{
-			return;
-		}
-		
-		
-		//console.log('conditional_logic/show tab %o', $target);
-		
-		
-		// vars
-		var $tab = $target.siblings('.acf-tab-wrap').find('a[data-key="' + $target.attr('data-field_key') + '"]');
-		
-		
-		// if tab is already visible, then ignore the following functiolnality
-		if( $tab.is(':visible') )
-		{
-			return;
-		}
-		
-		
-		// visibility
-		$tab.parent().show();
-		
-		
-		// if this is the active tab
-		if( $tab.parent().hasClass('active') )
-		{
-			$tab.trigger('click');
-			return;
-		}
-		
-		
-		// if the sibling active tab is actually hidden by conditional logic, take ownership of tabs
-		if( $tab.parent().siblings('.active').is(':hidden') )
-		{
-			// show this tab group
-			$tab.trigger('click');
-			return;
-		}
-		
+		// hide / show
+		$wrap.children('.field_type-tab').each(function(){
+			
+			var $tab = $(this);
+			
+			if( $tab.hasClass('field_key-' + id) )
+			{
+				$tab.nextUntil('.field_type-tab').removeClass('acf-tab_group-hide').addClass('acf-tab_group-show');
+			}
+			else
+			{
+				$tab.nextUntil('.field_type-tab').removeClass('acf-tab_group-show').addClass('acf-tab_group-hide');
+			}
+			
+		});
 
+		
+		// blur to remove dotted lines around button
+		$a.trigger('blur');
+
+		
 	});
-	
-	
+		
 
 })(jQuery);
 
@@ -3588,8 +2638,8 @@ var acf = {
 	
 	acf.validation = {
 	
-		status		: true,
-		disabled	: false,
+		status : true,
+		disabled : false,
 		
 		run : function(){
 			
@@ -3602,210 +2652,153 @@ var acf = {
 			
 			
 			// loop through all fields
-			$('.field.required, .form-field.required').each(function(){
+			$('.postbox:not(.acf-hidden) .field.required, .form-field.required').each(function(){
 				
-				// run validation
-				_this.validate( $(this) );
+				// vars
+				var div = $(this);
+				
+				
+				// set validation data
+				div.data('validation', true);
+				
+	
+				// if is hidden by conditional logic, ignore
+				if( div.hasClass('acf-conditional_logic-hide') )
+				{
+					return;
+				}
+				
+				
+				// if is hidden by conditional logic on a parent tab, ignore
+				if( div.hasClass('acf-tab_group-hide') )
+				{
+					if( div.prevAll('.field_type-tab:first').hasClass('acf-conditional_logic-hide') )
+					{
+						return;
+					}
+				}
+				
+				
+				// text / textarea
+				if( div.find('input[type="text"], input[type="email"], input[type="number"], input[type="hidden"], textarea').val() == "" )
+				{
+					div.data('validation', false);
+				}
+				
+				
+				// wysiwyg
+				if( div.find('.acf_wysiwyg').exists() && typeof(tinyMCE) == "object")
+				{
+					div.data('validation', true);
+					
+					var id = div.find('.wp-editor-area').attr('id'),
+						editor = tinyMCE.get( id );
+	
+	
+					if( editor && !editor.getContent() )
+					{
+						div.data('validation', false);
+					}
+				}
+				
+				
+				// select
+				if( div.find('select').exists() )
+				{
+					div.data('validation', true);
+	
+					if( div.find('select').val() == "null" || ! div.find('select').val() )
+					{
+						div.data('validation', false);
+					}
+				}
+	
+				
+				// radio
+				if( div.find('input[type="radio"]').exists() )
+				{
+					div.data('validation', false);
+	
+					if( div.find('input[type="radio"]:checked').exists() )
+					{
+						div.data('validation', true);
+					}
+				}
+				
+				
+				// checkbox
+				if( div.find('input[type="checkbox"]').exists() )
+				{
+					div.data('validation', false);
+	
+					if( div.find('input[type="checkbox"]:checked').exists() )
+					{
+						div.data('validation', true);
+					}
+				}
+	
+				
+				// relationship
+				if( div.find('.acf_relationship').exists() )
+				{
+					div.data('validation', false);
+					
+					if( div.find('.acf_relationship .relationship_right input').exists() )
+					{
+						div.data('validation', true);
+					}
+				}
+				
+				
+				// repeater
+				if( div.find('.repeater').exists() )
+				{
+					div.data('validation', false);
+					
+					if( div.find('.repeater tr.row').exists() )
+					{
+						div.data('validation', true);
+					}			
+				}
+				
+				
+				// flexible content
+				if( div.find('.acf_flexible_content').exists() )
+				{
+					div.data('validation', false);
+					if( div.find('.acf_flexible_content .values table').exists() )
+					{
+						div.data('validation', true);
+					}	
+				}
+				
+				
+				// gallery
+				if( div.find('.acf-gallery').exists() )
+				{
+					div.data('validation', false);
+					
+					if( div.find('.acf-gallery .thumbnail').exists())
+					{
+						div.data('validation', true);
+					}
+				}
+				
+				
+				// hook for custom validation
+				$(document).trigger('acf/validate_field', div );
+				
+				
+				// set validation
+				if( ! div.data('validation') )
+				{
+					_this.status = false;
+					div.closest('.field').addClass('error');
+				}
 				
 	
 			});
 			// end loop through all fields
-		},
-		
-		validate : function( div ){
-			
-			// var
-			var ignore = false,
-				$tab = null;
-			
-			
-			// set validation data
-			div.data('validation', true);
-			
-			
-			// not visible
-			if( div.is(':hidden') )
-			{
-				// ignore validation
-				ignore = true;
-				
-				
-				// if this field is hidden by a tab group, allow validation
-				if( div.hasClass('acf-tab_group-hide') )
-				{
-					ignore = false;
-					
-					
-					// vars
-					var $tab_field = div.prevAll('.field_type-tab:first'),
-						$tab_group = div.prevAll('.acf-tab-wrap:first');
-					
-					
-					// if the tab itself is hidden, bypass validation
-					if( $tab_field.hasClass('acf-conditional_logic-hide') )
-					{
-						ignore = true;
-					}
-					else
-					{
-						// activate this tab as it holds hidden required field!
-						$tab = $tab_group.find('.acf-tab-button[data-key="' + $tab_field.attr('data-field_key') + '"]');
-					}
-				}
-			}
-			
-			
-			// if is hidden by conditional logic, ignore
-			if( div.hasClass('acf-conditional_logic-hide') )
-			{
-				ignore = true;
-			}
-			
-			
-			// if field group is hidden, igrnoe
-			if( div.closest('.postbox.acf-hidden').exists() ) {
-				
-				ignore = true;
-				
-			}
-			
-			
-			if( ignore )
-			{
-				return;
-			}
-			
-			
-			
-			// text / textarea
-			if( div.find('input[type="text"], input[type="email"], input[type="number"], input[type="hidden"], textarea').val() == "" )
-			{
-				div.data('validation', false);
-			}
-			
-			
-			// wysiwyg
-			if( div.find('.acf_wysiwyg').exists() && typeof(tinyMCE) == "object")
-			{
-				div.data('validation', true);
-				
-				var id = div.find('.wp-editor-area').attr('id'),
-					editor = tinyMCE.get( id );
-
-
-				if( editor && !editor.getContent() )
-				{
-					div.data('validation', false);
-				}
-			}
-			
-			
-			// select
-			if( div.find('select').exists() )
-			{
-				div.data('validation', true);
-
-				if( div.find('select').val() == "null" || ! div.find('select').val() )
-				{
-					div.data('validation', false);
-				}
-			}
-
-			
-			// radio
-			if( div.find('input[type="radio"]').exists() )
-			{
-				div.data('validation', false);
-
-				if( div.find('input[type="radio"]:checked').exists() )
-				{
-					div.data('validation', true);
-				}
-			}
-			
-			
-			// checkbox
-			if( div.find('input[type="checkbox"]').exists() )
-			{
-				div.data('validation', false);
-
-				if( div.find('input[type="checkbox"]:checked').exists() )
-				{
-					div.data('validation', true);
-				}
-			}
-
-			
-			// relationship
-			if( div.find('.acf_relationship').exists() )
-			{
-				div.data('validation', false);
-				
-				if( div.find('.acf_relationship .relationship_right input').exists() )
-				{
-					div.data('validation', true);
-				}
-			}
-			
-			
-			// repeater
-			if( div.find('.repeater').exists() )
-			{
-				div.data('validation', false);
-				
-				if( div.find('.repeater tr.row').exists() )
-				{
-					div.data('validation', true);
-				}			
-			}
-			
-			
-			// gallery
-			if( div.find('.acf-gallery').exists() )
-			{
-				div.data('validation', false);
-				
-				if( div.find('.acf-gallery .thumbnail').exists())
-				{
-					div.data('validation', true);
-				}
-			}
-			
-			
-			// hook for custom validation
-			$(document).trigger('acf/validate_field', [ div ] );
-			
-			
-			// set validation
-			if( ! div.data('validation') )
-			{
-				// show error
-				this.status = false;
-				div.closest('.field').addClass('error');
-				
-				
-				// custom validation message
-				if( div.data('validation_message') )
-				{
-					var $label = div.find('p.label:first'),
-						$message = null;
-						
-					
-					// remove old message
-					$label.children('.acf-error-message').remove();
-					
-					
-					$label.append( '<span class="acf-error-message"><i class="bit"></i>' + div.data('validation_message') + '</span>' );
-				}
-				
-				
-				// display field (curently hidden due to another tab being active)
-				if( $tab )
-				{
-					$tab.trigger('click');
-				}
-				
-			}
 		}
 		
 	};
@@ -3828,15 +2821,6 @@ var acf = {
 		$(this).closest('.field').removeClass('error');
 		
 	});
-	
-	
-	/*
-	$(document).on('blur change', '.field.required input, .field.required textarea, .field.required select', function( e ){
-		
-			acf.validation.validate( $(this).closest('.field') );
-			
-		});
-	*/
 	
 	
 	/*
@@ -3895,18 +2879,9 @@ var acf = {
 			
 			
 			// hide ajax stuff on submit button
-			if( $('#submitdiv').exists() ) {
-				
-				// remove disabled classes
-				$('#submitdiv').find('.disabled').removeClass('disabled');
-				$('#submitdiv').find('.button-disabled').removeClass('button-disabled');
-				$('#submitdiv').find('.button-primary-disabled').removeClass('button-primary-disabled');
-				
-				
-				// remove spinner
-				$('#submitdiv .spinner').hide();
-				
-			}
+			$('#publish').removeClass('button-primary-disabled');
+			$('#ajax-loading').attr('style','');
+			$('#publishing-action .spinner').hide();
 			
 			return false;
 		}
@@ -3984,22 +2959,6 @@ var acf = {
 			return r;
 			
 		},
-		
-		get_toolbar : function(){
-			
-			// safely get toolbar
-			if( acf.helpers.isset( this, 'toolbars', this.o.toolbar ) ) {
-				
-				return this.toolbars[ this.o.toolbar ];
-				
-			}
-			
-			
-			// return
-			return false;
-			
-		},
-		
 		init : function(){
 			
 			// is clone field?
@@ -4009,64 +2968,38 @@ var acf = {
 			}
 			
 			
-			// vars
-			var toolbar = this.get_toolbar(),
-				command = 'mceAddControl',
-				setting = 'theme_advanced_buttons{i}';
+			// temp store tinyMCE.settings
+			var tinyMCE_settings = $.extend( {}, tinyMCE.settings );
 			
 			
-			// backup
-			var _settings = $.extend( {}, tinyMCE.settings );
+			// reset tinyMCE settings
+			tinyMCE.settings.theme_advanced_buttons1 = '';
+			tinyMCE.settings.theme_advanced_buttons2 = '';
+			tinyMCE.settings.theme_advanced_buttons3 = '';
+			tinyMCE.settings.theme_advanced_buttons4 = '';
 			
-			
-			// v4 settings
-			if( tinymce.majorVersion == 4 ) {
-				
-				command = 'mceAddEditor';
-				setting = 'toolbar{i}';
-				
+			if( acf.helpers.isset( this.toolbars[ this.o.toolbar ] ) )
+			{
+				$.each( this.toolbars[ this.o.toolbar ], function( k, v ){
+					tinyMCE.settings[ k ] = v;
+				})
 			}
-			
-			
-			// add toolbars
-			if( toolbar ) {
-					
-				for( var i = 1; i < 5; i++ ) {
-					
-					// vars
-					var v = '';
-					
-					
-					// load toolbar
-					if( acf.helpers.isset( toolbar, 'theme_advanced_buttons' + i ) ) {
-						
-						v = toolbar['theme_advanced_buttons' + i];
-						
-					}
-					
-					
-					// update setting
-					tinyMCE.settings[ setting.replace('{i}', i) ] = v;
-					
-				}
 				
-			}
-			
-			
-			// add editor
-			tinyMCE.execCommand( command, false, this.o.id);
+				
+			// add functionality back in
+			tinyMCE.execCommand("mceAddControl", false, this.o.id);
 			
 			
 			// events - load
 			$(document).trigger('acf/wysiwyg/load', this.o.id);
-			
-			
+				
+				
 			// add events (click, focus, blur) for inserting image into correct editor
 			this.add_events();
 				
 			
 			// restore tinyMCE.settings
-			tinyMCE.settings = _settings;
+			tinyMCE.settings = tinyMCE_settings;
 			
 			
 			// set active editor to null
@@ -4117,50 +3050,19 @@ var acf = {
 			
 			// vars
 			var id = this.o.id,
-				command = 'mceRemoveControl';
+				editor = tinyMCE.get( id );
 			
 			
 			// Remove tinymcy functionality.
 			// Due to the media popup destroying and creating the field within such a short amount of time,
 			// a JS error will be thrown when launching the edit window twice in a row.
-			try {
-				
-				// vars
-				var editor = tinyMCE.get( id );
-				
-				
-				// validate
-				if( !editor ) {
-					
-					return;
-					
-				}
-				
-				
-				// v4 settings
-				if( tinymce.majorVersion == 4 ) {
-					
-					command = 'mceRemoveEditor';
-					
-				}
-				
-				
-				// store value
-				var val = editor.getContent();
-				
-				
-				// remove editor
-				tinyMCE.execCommand(command, false, id);
-				
-				
-				// set value
-				this.$textarea.val( val );
-				
-				
-			} catch(e) {
-				
-				//console.log( e );
-				
+			try
+			{
+				tinyMCE.execCommand("mceRemoveControl", false, id);
+			} 
+			catch(e)
+			{
+				console.log( e );
 			}
 			
 			
@@ -4458,7 +3360,6 @@ var acf = {
 			
 		}, 11);
 		
-		
 	});
 	
 	
@@ -4483,5 +3384,5 @@ var acf = {
 		
 	});
 	
-	
+
 })(jQuery);

@@ -92,13 +92,10 @@ class acf_field_radio extends acf_field
 			$atts2 = 'name="" value="" style="display:none"';
 			
 			
-			if( $field['value'] !== false )
+			if( !isset($field['choices'][ $field['value'] ]) )
 			{
-				if( !isset($field['choices'][ $field['value'] ]) )
-				{
-					$atts = 'checked="checked" data-checked="checked"';
-					$atts2 = 'name="' . esc_attr($field['name']) . '" value="' . esc_attr($field['value']) . '"' ;
-				}
+				$atts = 'checked="checked" data-checked="checked"';
+				$atts2 = 'name="' . esc_attr($field['name']) . '" value="' . esc_attr($field['value']) . '"' ;
 			}
 			
 			

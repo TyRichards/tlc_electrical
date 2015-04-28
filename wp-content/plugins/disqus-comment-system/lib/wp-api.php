@@ -79,7 +79,6 @@ class DisqusWordPressAPI {
             DISQUS_IMPORTER_URL . 'api/import-wordpress-comments/',
             array(
                 'method' => 'POST',
-                'timeout' => 60,
                 'body' => array(
                     'forum_url' => $this->short_name,
                     'forum_api_key' => $this->forum_api_key,
@@ -87,10 +86,10 @@ class DisqusWordPressAPI {
                     'wxr' => $wxr,
                     'timestamp' => $timestamp,
                     'eof' => (int)$eof
-                ),
+                )
             )
         );
-        if ($response['response']['code'] !== 200) {
+        if ($response->errors) {
             // hack
             $this->api->last_error = $response->errors;
             return -1;

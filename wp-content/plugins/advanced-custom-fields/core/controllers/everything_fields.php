@@ -69,18 +69,11 @@ class acf_everything_fields
 	function attachment_fields_to_edit( $form_fields, $post ) 
 	{
 		// vars
-		$screen = get_current_screen();
 		$post_id = $post->ID;
 		
 		
-		if( !empty($screen) )
-		{
-			return $form_fields;
-		}
-		
-		
 		// get field groups
-		$filter = array( 'post_type' => 'attachment' );
+		$filter = array( 'ef_media' => 'all' );
 		$metabox_ids = array();
 		$metabox_ids = apply_filters( 'acf/location/match_field_groups', $metabox_ids, $filter );
 		
@@ -200,7 +193,7 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 	function validate_page()
 	{
 		// global
-		global $pagenow, $wp_version;
+		global $pagenow;
 		
 		
 		// vars
@@ -218,14 +211,6 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 		if( $pagenow == "admin.php" && isset( $_GET['page'], $_GET['id'] ) && $_GET['page'] == "shopp-categories" )
 		{
 			$return = true;
-		}
-		
-		
-		// WP4
-		if( $pagenow === 'upload.php' && version_compare($wp_version, '4.0', '>=') ) {
-			
-			$return = true;
-			
 		}
 		
 		
@@ -329,11 +314,11 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 			$this->data['option_name'] = "";
 
 		}
-		elseif( $pagenow == "media.php" || $pagenow == 'upload.php' )
+		elseif( $pagenow == "media.php" )
 		{
 			
 			$this->data['page_type'] = "media";
-			$filter['post_type'] = 'attachment';
+			$filter['ef_media'] = 'all';
 			
 			$this->data['page_action'] = "add";
 			$this->data['option_name'] = "";
@@ -347,7 +332,7 @@ if( !isset($_POST['acf_nonce']) || !wp_verify_nonce($_POST['acf_nonce'], 'input'
 				$this->data['page_action'] = "edit";
 				$this->data['option_name'] = $_GET['attachment_id'];
 			}
-
+			
 		}
 		
 		
@@ -433,7 +418,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					echo "$('#your-profile .form-table:last').after( html );";
+					echo "$('#your-profile > p.submit').before( html );";
 				}
 			}
 			elseif($this->data['page_type'] == "shopp_category")
@@ -448,7 +433,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					echo "$('#edittag > table.form-table:first > tbody').append( html );";
+					echo "$('#edittag > table.form-table:last > tbody').append( html );";
 				}
 			}
 			elseif($this->data['page_type'] == "media")
@@ -682,26 +667,12 @@ $(document).ready(function(){
 				{
 					continue;
 				}
-				
-				
-				// layout dictates heading
-				$title = true;
-				
-				if( $acf['options']['layout'] == 'no_box' )
-				{
-					$title = false;
-				}
-				
+
 
 				// title 
 				if( $options['page_action'] == "edit" && $options['page_type'] == 'user' )
 				{
-					if( $title )
-					{
-						echo '<h3>' .$acf['title'] . '</h3>';
-					}
-					
-					echo '<table class="form-table"><tbody>';
+					echo '<h3>' .$acf['title'] . '</h3><table class="form-table"><tbody>';
 				}
 				
 				
@@ -709,7 +680,7 @@ $(document).ready(function(){
 				if( $layout == 'tr' )
 				{
 					//nonce
-					echo '<tr style="display:none;"><td colspan="2"><input type="hidden" name="acf_nonce" value="' . wp_create_nonce( 'input' ) . '" /></td></tr>';
+					echo '<tr><td colspan="2"><input type="hidden" name="acf_nonce" value="' . wp_create_nonce( 'input' ) . '" /></td></tr>';
 				}
 				else
 				{

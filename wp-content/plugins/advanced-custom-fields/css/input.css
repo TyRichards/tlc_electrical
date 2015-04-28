@@ -21,16 +21,11 @@
 .acf_postbox.no_box {
 	border: 0 none;
 	background: transparent;
-	box-shadow: none;
 }
 
 .acf_postbox.no_box > h3,
 .acf_postbox.no_box > .handlediv {
 	display: none;
-}
-
-.acf_postbox.no_box.closed .inside {
-	display: block;
 }
 
 .acf_postbox .widefat th, 
@@ -47,20 +42,18 @@
 
 .acf_postbox .field {
 	position: relative;
+	padding: 15px 10px;
+	border-bottom: #e8e8e8 solid 1px;
 	color: #333333;
 }
 
-.acf_postbox > .inside > .field {
-	padding: 15px 10px;
-	border-top: #e8e8e8 solid 1px;
+.acf_postbox .field:last-child {
+	border-bottom: none;
 }
 
-.acf_postbox > .inside > .field:first-child {
-	border-top: none;
-}
-
-.acf_postbox.no_box > .inside > .field { 
+.acf_postbox.no_box .field { 
     border-top: 0 none;
+    border-bottom: 0 none;
     padding-left: 0;
     padding-right: 0;
 }
@@ -68,63 +61,34 @@
 
 /* Field Error */
 .acf_postbox .field.error {
+	margin: 0;
 	border: #CC0000 solid 1px !important;
-	background: #FFEBE8 !important;
+	border-radius: 0;
 }
 
-.acf_postbox .field .acf-error-message {
-	display: none;
-	position: relative;
-	
-	background: #CC0000;
-	color: #fff;
-	text-shadow: none;
-	
-	border-radius: 3px;
-	padding: 5px 10px;
-	
-	font-size: 12px;
-	line-height: 14px;
-	
-	margin: 5px 0 0;
+.acf_postbox.no_box .field.error { 
+	padding-left: 10px;
+	padding-right: 10px;
+} 
+
+
+.acf_postbox .field.error + .error {
+	border-top: 0 none !important;
 }
 
-.acf_postbox .field .acf-error-message .bit {
-	width: 0;
-	height: 0;
-	border: transparent 5px solid;
-	border-bottom-color: #CC0000;
-	
-	display: block;
-	position: absolute;
-	top: -10px;
-	left: 10px;
-}
-
-.acf_postbox .field.error .acf-error-message {
-	display: inline-block;
+.acf_postbox .field.error:last-child {
+    border-bottom: #CC0000 solid 1px;
 }
 
 .acf_postbox .field.error label.field_label {
 	color: #CC0000;
 }
 
-.acf_postbox.no_box > .inside > .field.error { 
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.acf_postbox > .inside > .field.error + .field.error {
-	border-top: 0 none !important;
-}
-
-
-
 
 /* Field Label */
 .acf_postbox p.label {
-	font-size: 12px;
-	line-height: 1.5em;
+	font-size: 11px;
+	line-height: 1.1em;
 	margin: 0 0 1em;
 	padding: 0;
 	color: #666666;
@@ -134,7 +98,6 @@
 .acf_postbox p.label label {
 	color: #333333;
     font-size: 13px;
-    line-height: 1.5em;
     font-weight: bold;
     padding: 0;
     margin: 0 0 3px;
@@ -218,6 +181,10 @@
 	min-height: 250px;
 }
 
+#post-body .acf_wysiwyg .wp_themeSkin .mceStatusbar a.mceResize {
+	top: -2px !important;
+}
+
 .acf_wysiwyg .wp-editor-container {
 	background: #fff;
 	border-color: #CCCCCC #CCCCCC #DFDFDF;
@@ -225,19 +192,6 @@
     border-radius: 3px 3px 0 0;
     border-width: 1px;
 }
-
-/*
-
-not needed in WP 3.8
-
-.acf_wysiwyg .mceStatusbar {
-	position: relative;
-}
-
-.acf_wysiwyg .mceStatusbar  a.mceResize {
-	top: -2px !important;
-}
-*/
 
 
 /*
@@ -513,7 +467,7 @@ not needed in WP 3.8
 }
 
 .media-modal.acf-media-modal .media-frame-content {
-    top: 56px;
+    top: 45px;
 }
 
 .media-modal.acf-media-modal .media-frame-title {
@@ -689,11 +643,11 @@ not needed in WP 3.8
 	padding-left: 6px;
 }
 
-ul.acf-checkbox-list {
+ul.checkbox_list {
 	background: transparent !important;
 }
 
-#createuser ul.acf-checkbox-list input {
+#createuser ul.checkbox_list input {
     width: auto;
 }
 
@@ -941,11 +895,6 @@ td.acf_input-wrap {
 	margin:-3px 5px 0 0;
 }
 
-.acf_relationship .relationship_list .result-thumbnail img {
-	width: 21px; 
-	height: 21px; 
-}
-
 
 /*---------------------------------------------------------------------------------------------
 *
@@ -968,7 +917,7 @@ td.acf_input-wrap {
 	overflow: auto;
 }
 
-.acf-taxonomy-field .acf-checkbox-list {
+.acf-taxonomy-field .categorychecklist {
 	margin: 0;
 	padding: 10px;
 }
@@ -990,74 +939,73 @@ td.acf_input-wrap {
 
 .field_type-tab {
 	display: none !important;
+	
 }
 
 .acf-tab-group {
-	background: transparent;
-	border-bottom: #CCCCCC solid 1px;
+	border-bottom: #DFDFDF solid 1px;
 	margin: 0 0 10px;
-	padding: 10px 2px 0 0;
+	padding: 10px 4px 0 10px;
+	
+	background: #F3F3F3;
 }
 
 .acf-tab-group li {
-	font-family: "Open Sans",sans-serif;
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
 	font-size: 23px;
     line-height: 29px;
-    margin: 0 8px 0 0;
+    margin: 0 6px -1px 0;
     
 }
 
 .acf-tab-group li a {
-	padding: 6px 10px;
+	padding: 10px;
 	display: block;
+	border-radius: 3px 3px 0 0;
 	
-	color: #555555;
-	font-size: 15px;
-    font-weight: 700;
-    line-height: 24px;
+	color: #AAAAAA;
+	font-size: 20px;
+    font-weight: 200;
+    line-height: 1em;
+    padding: 5px 10px 7px;
     
-    border: #CCCCCC solid 1px;
-    border-bottom: 0 none;
+    border: #DFDFDF solid 1px;
     text-decoration: none;
-    background: #E4E4E4;
+    background: #F8F8F8;
     
 }
 
 .acf-tab-group li a:hover, 
 .acf-tab-group li.active a {
-    background: #FFFFFF;
-    outline: none;
+    color: #d54e21
 }
 
 .acf-tab-group li.active a {
-	background: #F1F1F1;
-	color: #000;
+	color: #464646;
 	border-color: #CCCCCC;
     border-bottom-color: #F7F7F7;
-    padding-bottom: 7px;
-    margin-bottom: -1px;
 }
 
-.acf_postbox > .inside > .field_type-tab + .field {
-	border-top: 0 none;
-}
 
 
 /*
-*  Box
+*  No Box
 */
 
-.acf_postbox.default .acf-tab-group {
-	padding-left: 10px;
-	border-bottom-color: #E8E8E8;
+.acf_postbox.no_box .acf-tab-group {
+	padding-left: 0;
+	border-bottom-color: #CCC;
+	background: transparent;
 }
 
-.acf_postbox.default .acf-tab-group li a {
-    background: #F1F1F1;
+.acf_postbox.no_box .acf-tab-group li.active a {
+    border-bottom-color: #fff;
 }
 
-.acf_postbox.default .acf-tab-group li.active a {
-	background: #FFFFFF;
+
+.acf_postbox.no_box .acf-tab-group li a {
+    background: #fff;
+    
 }
 
 
@@ -1112,38 +1060,13 @@ tr.acf-tab_group-show {
 *	
 *-------------------------------------------------------------------------*/
 
-/* Show */
 .acf-conditional_logic-show {
 	display: block;
 }
-
 tr.acf-conditional_logic-show {
 	display: table-row;
 }
-
-td.acf-conditional_logic-show,
-th.acf-conditional_logic-show {
-    display: table-cell;
-}
-
-
-/* Hide */
-.acf-conditional_logic-hide,
-tr.acf-conditional_logic-hide,
-td.acf-conditional_logic-hide,
-th.acf-conditional_logic-hide {
-    display: none;
-}
-
-
-/* Hide (show blank) */
-td.acf-conditional_logic-hide.acf-show-blank,
-th.acf-conditional_logic-hide.acf-show-blank {
-    display: table-cell;
-}
-
-td.acf-conditional_logic-hide.acf-show-blank .inner,
-th.acf-conditional_logic-hide.acf-show-blank .inner {
+.acf-conditional_logic-hide {
 	display: none;
 }
 
@@ -1202,96 +1125,6 @@ th.acf-conditional_logic-hide.acf-show-blank .inner {
 .compat-item .field .acf-color_picker .button {
 	height: 24px;
 	padding: 0 10px 1px;
-}
-
-
-/*--------------------------------------------------------------------------
-*
-*	Field: Location
-*	
-*-------------------------------------------------------------------------*/
-
-.acf-google-map {
-	position: relative;
-	border: #DFDFDF solid 1px;
-	background: #fff;
-}
-
-.acf-google-map .title {
-	position: relative;
-	border-bottom: #DFDFDF solid 1px;
-}
-
-.acf-google-map .has-value { display: none; }
-.acf-google-map .no-value { display: block; }
-
-.acf-google-map.active .has-value { display: block; }
-.acf-google-map.active .no-value { display: none; }
-
-.acf-google-map .title h4,
-.acf-google-map .title input[type="text"] {
-	margin: 0;
-	font-size: 12px;
-	line-height: 16px;
-	padding: 10px;
-	border: 0 none;
-	box-shadow: none;
-	border-radius: 0;
-	font-family: inherit;
-	cursor: text;
-}
-
-.acf-google-map .title input[type="text"] {
-	height: 36px;
-	line-height: normal;
-}
-
-.acf-google-map .title .search {
-	height: auto;
-	border: 0 none;
-}
-
-.acf-google-map .acf-sprite-remove,
-.acf-google-map .acf-sprite-locate {
-	right: 7px;
-	top: 7px;
-	position: absolute;
-}
-
-.acf-google-map .acf-sprite-remove {
-	background-position: -71px -221px;
-	height: 9px;
-	width: 9px;
-	border: 6px solid transparent;
-}
-.acf-google-map .acf-sprite-remove:hover { background-position: -71px -271px; }
-
-.acf-google-map .acf-sprite-locate {
-	background-position: -50px -300px;
-	width: 13px;
-	height: 13px;
-	border: 5px solid transparent;
-}
-.acf-google-map .acf-sprite-locate:hover { background-position: -50px -350px; }
-
-.acf-google-map .canvas {
-	height: 400px;
-}
-
-.pac-container {
-	margin-left: -1px;
-	margin-top: -1px;
-	padding: 5px 0;
-	border-color: #DFDFDF;
-}
-
-.pac-container:after {
-	display: none;
-}
-
-.pac-container .pac-item {
-	padding: 5px;
-	margin: 0 5px;
 }
 
 /*--------------------------------------------------------------------------
