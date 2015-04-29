@@ -3,7 +3,7 @@
 Plugin Name: Facebook Feed Grabber
 Plugin URI: http://wordpress.org/extend/plugins/facebook-feed-grabber/
 Description: Allows you to display the feed of a public page or profile on your website. Requires that you create a Facebook Application. Only works with profiles that have public content. To set your App ID & Secret as well as other settings go to <a href="options-general.php?page=facebook-feed-grabber/ffg-options.php">Settings &rarr; Facebook Feed Grabber</a>.
-Version: 0.8.2
+Version: 0.8.4
 Author: Lucas Bonner
 Author URI: http://www.lucasbonner.com 
 License: GPLv2 or Later
@@ -33,175 +33,32 @@ License: GPLv2 or Later
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-/* - - - - - -
-	
-	Class containing plugin setup and deactivation stuff.
-	
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-class ffg_setup {
-	
+/**
+ * Run the settup stuff for the plugin.	
+ */
+include_once 'ffg-setup.php';
 
-	// Current plugin version
-	protected $version = '0.8.2';
-	
-	// For the defaults. (Look in $this->__construct())
-	public $defaults = false;
-	
-	// Will be true if the SDK has been loaded.
-	private $sdk_loaded = false;
-	
-
-	/* - - - - - -
-		
-		Set the default settings.
-		
-	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	function __construct(  ) {
-		
-				
-		// The defaults
-		$this->defaults = array(
-			// Facebook App ID & Secret
-			'app_id' => null,
-			'secret' => null,
-		
-			// Misc Settings
-			'default_feed' => null,
-			'show_title' => 1,
-			'cache_feed' => 5,
-			'cache_folder' => WP_CONTENT_DIR. '/uploads/cache/',
-			'num_entries' => 3,
-			'locale' => 'en_US',
-			'proxy_url' => null,
-			'limit' => 1,
-			'show_thumbnails' => 1,
-			'style_sheet' => 'style.css',
-			'delete_options' => 0,
-		
-			// Current Version
-			'version' => $this->version
-		);
-		
-		if ( ! wp_mkdir_p($this->defaults['cache_folder']) ) {
-			$this->defaults['cache_feed'] = 0;
-			
-			// Tell wp of the error (wp 3+)
-			if ( function_exists('add_settings_error') )
-				add_settings_error( 'ffg_cache_folder', 'cache-folder', __('We were unable to create directory '. $this->defaults['cache_folder'] .' which would be used for caching the feed to reduce page load time. Check to see if it\'s parent directory writable by the server?') );
-		}
-		
-	}
-	
-	
-	/* - - - - - -
-		
-		Define default options
-		
-	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	function activate() {
-	
-		// Get stored plugin options
-		$options = get_option('ffg_options');
-				
-		// If there aren't already settings defined then set the defaults.
-	    if( !is_array($options) ) {
-		
-			$options = $this->defaults;
-		
-		// If the defined settings aren't for this version add any new settings.
-		} else if ( $options['version'] != $this->version) {
-			$options = array_merge($this->defaults, $options);
-		}
-		
-		$options['version'] = $this->version;
-	
-		update_option('ffg_options', $options);
-	}
-
-	
-	/* - - - - - -
-		
-		Delete ffg options if 'restore_defaults' is true
-		
-	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	function deactivate(  ) {
-	
-		$options = get_option('ffg_options');
-	
-		if ( $options['delete_options'] )
-			delete_option('ffg_options');
-	
-	}
-	
-	
-	/* - - - - - -
-		
-		Starts a session if it isn't already done.
-		
-	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	function sessionStart() {
-	    if( !session_id() )
-			session_start();
-	}
-	
-	
-	/* - - - - - -
-		
-		Destroy the session.
-		
-	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	function sessionDestroy() {
-	    session_destroy();
-	}
-	
-	
-	/* - - - - - -
-		
-		loads facebook SDK
-		
-	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	function load_sdk() {
-		
-		if ( $this->sdk_loaded )
-			return true;
-		
-		// 
-		// Get the facebook sdk
-		if ( ! class_exists('Facebook') )
-			require_once 'facebook-sdk/facebook.php';
-		
-		$this->sdk_loaded = true;
-		
-		return true;
-	}
-
-}// End class ffg_setup
-
-// On activation or deactivation
-$ffg_setup = new ffg_setup();
-register_activation_hook(__FILE__, array($ffg_setup, 'activate'));
-register_deactivation_hook(__FILE__, array($ffg_setup, 'deactivate'));
-
-
-// The Facebook PHP SDK uses sessions. Lets hook in session start and stop functionality.
-add_action('init', array($ffg_setup, 'sessionStart'), 1);
-add_action('wp_logout', array($ffg_setup, 'sessionDestroy'));
-add_action('wp_login', array($ffg_setup, 'sessionDestroy'));
-
-
-// 
-// Get the options page stuff if in the admin area.
+/**
+ * Get the ffg options page stuff if in the admin area.
+ */
 if ( is_admin() )
-	include 'ffg-options.php';
+	include_once 'ffg-options.php';
 
-// Hook in widgets.
+/**
+ * Hook in ffg widgets.
+ */
 include_once 'ffg-widgets.php';
 
-/* - - - - - -
- 
- A class to display a wordpress feed.
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/**
+ * A class to display a wordpress feed.
+ * 
+ * @global object The ffg setup object.
+ * 
+ * @param string $appId Optional. The App ID to use.
+ * @param string $secret Optional. The App Secret to use.
+ * 
+ * @return boolean True if connected to Facebook.
+ */
 class ffg {
 	
 	/* - - - Beginning of settings - - - */
@@ -243,10 +100,11 @@ class ffg {
 
 		Fetches facebook app_id and secret and makes a new connection.
 
-	- - - - - - - - - - - - - -3 - - - - - - - - - - - - - - - - - - */
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	function __construct( $appId = null, $secret = null ) {
+		global $ffg_setup;
 		
-		$this->options = get_option('ffg_options');
+		$this->options = $ffg_setup->get_options();
 		
 		// See if we're getting the default App Id.
 		if ( $appId == null )
@@ -420,6 +278,95 @@ class ffg {
 	}
 	// End format_date()
 
+
+	/**
+	 * Count the number of comments
+	 * 
+	 * @since 0.8.3
+	 * 
+	 * @param array $item The items array.
+	 * 
+	 * @return string The HTML output.
+	 */
+	public function count_comments( $item )
+	{
+
+		$output = __('No Comments');
+
+		// Check for comments
+		if ( ! isset($item['comments']) )
+			return $output;
+
+		$count =  count($item['comments']['data']);
+
+		if ( $count > 1 ) {
+			$output = __("$count Comments");
+		} else if ( $count == 1 ) {
+			// Is there more then one?
+			$output = __("1 Comment");
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Get and format event's time and date.
+	 * 
+	 * Get the specified event name and date/time and 
+	 * prepare it for display.
+	 * 
+	 * @param string Event URL.
+	 * 
+	 * @since 0.8.4
+	 * @return string The events date/time.
+	 */
+	function event_date( $event_url, $args = array() )
+	{
+
+		if ( preg_match('{/events/([0-9]+)/}', $event_url, $match) )
+			$event_id = $match[1];
+		else
+			return null;
+
+		// If args were provided in a query style string.
+		if ( is_string($args) )
+			parse_str($args, $args);
+		
+		// Default arguments
+		$defaults = array(
+			'cache_feed' => $this->options['cache_feed'],
+			'locale' => $this->options['locale'],
+		);
+		
+		// Overwrite the defaults and exract our arguments.
+		extract( array_merge($defaults, $args) );
+
+		// Get the feed (maybe it's cached?)
+		if ( $cache_feed != 0 ) {
+			
+			// Include cache class
+			include_once 'caching.php';
+			
+			// Initiate class
+			$cache = new ffg_cache();
+
+			// Let it do it's magic. (Will return the needed content)
+			$event = $cache->theMagic($this, '/'. $event_id .'/?date_format=U&locale='. $locale, (($cache_feed * 60)));
+			
+		} else
+			$event = $this->facebook->api('/'. $event_id .'/?date_format=U&locale='. $locale);
+
+		if ( ! $event )
+			return false;
+
+		$output = "<p><a href='". $event_url ."' class='the_link' target='_blank'>". $event['name'] ."</a></p>\n";
+		$output .= "<p><small class='caption'>". $this->format_date($event['start_time'], 'event') ."</small></p>\n";
+		$output .= "<p><small>". $event['location'] ."</small></p>\n";
+
+		return $output;
+	}
+
+
 	
 	/* - - - - - -
 		
@@ -433,6 +380,7 @@ class ffg {
 	}
 	// End validate_feed()
 	
+
 	/* - - - - - -
 
 		Retrieves a public page's news feed and by default echos it.
@@ -470,7 +418,7 @@ class ffg {
 				  'show_thumbnails' => $this->options['show_thumbnails'],
 
 				~ The maximum number of items to display.
-				  'maxitems' => $this->options['num_entries'],
+				  'num_entries' => $this->options['num_entries'],
 				
 			),
 
@@ -496,7 +444,6 @@ class ffg {
 		// Default arguments
 		$defaults = array(
 			'cache_feed' => $this->options['cache_feed'],
-			'num_entries' => '2',
 			'locale' => $this->options['locale'],
 			'container' => 'div',
 			'container_class' => 'fb-feed',
@@ -505,9 +452,9 @@ class ffg {
 			'limit' => $this->options['limit'],
 			'show_title' => $this->options['show_title'],
 			'show_thumbnails' => $this->options['show_thumbnails'],
-			'maxitems' => $this->options['num_entries'],
+			'num_entries' => $this->options['num_entries'],
 		);
-
+		
 		// Overwrite the defaults and exract our arguments.
 		extract( array_merge($defaults, $args) );
 		
@@ -582,54 +529,29 @@ class ffg {
 
 				// Get the description of item or the message of the one who posted the item
 				$message = isset($item['message']) ? trim($item['message']) : null;
-				$message = preg_replace('/\n/', '<br />', $message);
+				$message = preg_replace(array('{\b((https?|ftp)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[a-zA-Z0-9+&@#/%=~_|])}', '/\n/'), array("<a href='$1'>\\1</a>", '<br />'), $message);
 
 				// Get the description of item or the message of the one who posted the item
 				$descript = isset($item['description']) ? trim($item['description']) : null;
 				// Turn urls into links and replace new lines with <br />
-				$descript = preg_replace(array('/((http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}\/\S*)/', '/\n/'), array("<a href='$1'>\\1</a>", '<br />'), $descript);
+				$descript = preg_replace(array('{\b((https?|ftp)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[a-zA-Z0-9+&@#/%=~_|])}', '/\n/'), array("<a href='$1'>\\1</a>", '<br />'), $descript);
 				
 				// Get the description of item or the message of the one who posted the item
 				$story = isset($item['story']) ? trim($item['story']) : null;
 				$story = preg_replace('/\n/', '<br />', $story);
-				
-				// If it's an event…
-				if ( isset($item['properties']) ) {
 
-					$properties = null;
-					
-					foreach( $item['properties'] as $key => $property ) {
-						
-						$date = $this->is_date($property['text']);
-						
-						if ( $date != false ) {
-							
-							$date = $this->format_date($date, 'event');
 
-							$properties .= ( $date != false ) ? $date : $property['text'];
-							
-						} else
-							$properties .= $property['text'];
-
-							// If there's another line of text
-							if ( $key != (count($item['properties']) - 1) )
-								$properties .= "<br />";
-												
-					}// End foreach( $item['properties'] as $key => $property )
-				
-				// End if ( isset($item['properties']) )
-				} else
+				// See if we have an event
+				if ( $item['type'] == 'link' && stristr($item['link'], '/events/') )
+					$properties = $this->event_date($item['link']);
+				else 
 					$properties = null;
 
 				// Format the date
 				$published = $this->format_date($item['created_time']);
 
-				// Check for comments
-				if ( $item['comments']['count'] > 0 ) {
-					$comments = ( $item['comments']['count'] > 1 ) ? __(' Comments') : __(' Comment');
-					$comments = ' &bull; '. $item['comments']->count . $comments;
-				} else
-					$comments = __(' &bull; No Comments');
+
+				$comments = ' &bull; '.$this->count_comments($item);
 
 				// Create a link to the item on facebook
 				$item_link = preg_split('/_/', $item['id']);
@@ -641,7 +563,7 @@ class ffg {
 				
 				// The published date
 				$date = "<p class='fb-date'>";
-					$date .= "<a href='". $item_link ."' target='_blank' class='quiet' title='". __('See this post on Facebook') ."'>". $published . $comments ."</a>";
+					$date .= "<a href='". $item_link ."' target='_blank' class='quiet' title='". __('See this post on Facebook') ."'>". $published . " ". $comments ."</a>";
 				$date .= "</p>\n";
 				
 				// 
@@ -665,20 +587,23 @@ class ffg {
 					if ( isset($item['link']) || $descript != null || $properties != null ) {
 						
 						$output .= "<blockquote>\n";
-						
-							$output .= "<p>\n";
-							
+
+							if ( ($show_thumbnails != false && isset($item['picture'])) || (isset($item['link']) && isset($item['name'])) ) {
+
+								$output .= "<p>\n";
+								
 								if ( $show_thumbnails != false && isset($item['picture']) ) {
 									$img = "<img src='". htmlentities($item['picture']) ."' class='thumbnail alignleft' />\n";
 									if ( isset($item['link']) )
 										$output .= "<a href='". esc_attr($item['link']) ."' class='the_link'>$img</a>\n";
 								}
-								
+
 								// The item link
 								if ( isset($item['link']) && isset($item['name']) )
 									$output .= "<a href='". esc_attr($item['link']) ."' class='the_link'>". $item['name'] ."</a>\n";
 								
-							$output .= "</p>\n";
+								$output .= "</p>\n";
+							}
 								
 							// The item caption
 							if ( isset($item['caption']) ) {
@@ -693,20 +618,13 @@ class ffg {
 							}							
 							
 							if ( $descript != null || $properties != null ) {
-								
-								$output .= "<p>\n";
-														
+																						
 								if ( $descript != null )
-									$output .= "<span class='descript'>". $descript ."</span>\n";
-						
-								if ( $descript != null && $properties != null )
-									$output .= "<br /><br />";
+									$output .= "<p class='descript'>". $descript ."</p>\n";
 
 								if ( $properties != null )
 									$output .= $properties;
-								
-								$output .= "</p>\n";
-								
+																
 							}
 
 						$output .= "</blockquote>\n";
@@ -721,7 +639,7 @@ class ffg {
 				$count++;
 
 				// If we reached our limit
-				if( $count == $maxitems)
+				if( $count == $num_entries)
 					break;
 
 			}// End foreach

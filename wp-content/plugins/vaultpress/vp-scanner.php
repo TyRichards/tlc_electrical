@@ -1,4 +1,6 @@
 <?php
+// don't call the file directly
+defined( 'ABSPATH' ) or die();
 
 class VP_FileScan {
 	var $path;
@@ -6,7 +8,7 @@ class VP_FileScan {
 	var $offset = 0;
 	var $ignore_symlinks = false;
 
-	function VP_FileScan( $path, $ignore_symlinks = false ) {
+	function __construct( $path, $ignore_symlinks = false ) {
 		if ( is_dir( $path ) )
 			$this->last_dir = $this->path = @realpath( $path );
 		else

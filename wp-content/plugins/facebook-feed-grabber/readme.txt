@@ -2,9 +2,9 @@
 Contributors: bonnerl
 Donate link: http://www.lucasbonner.com/redirect/donate/facebook-feed-grabber/
 Tags: Facebook, Social Networking
-Requires at least: 2.8
-Tested up to: 3.5.1
-Stable tag: 0.8.2
+Requires at least: 3.3
+Tested up to: 3.8
+Stable tag: 0.8.4
 License: GPLv2 or Later
 
 Allows you to display the feed of a public page or profile on your website. Requires that you create a Facebook Application.
@@ -121,6 +121,12 @@ Because you have either supplied an invalid App Id & Secret combo or you're tryi
 
 == Changelog ==
 
+= 0.8.4 =
+* Fixed the display of shared events to show the date/time and location.
+
+= 0.8.3 =
+* Fixed the displayed comment count.
+
 = 0.8.2 =
 * Removed call time pass-by-reference for compatibility with PHP 5.4.
 * Add Localization. (Beta)
@@ -185,6 +191,12 @@ Because you have either supplied an invalid App Id & Secret combo or you're tryi
 
 == Upgrade Notice ==
 
+= 0.8.4 =
+* Fixed the display of shared events to show the date/time and location.
+
+= 0.8.3 =
+* Fixed the displayed comment count.
+
 = 0.8.2 =
 * Removed call time pass-by-reference for compatibility with PHP 5.4.
 * Add Localization. (Beta)
@@ -226,7 +238,8 @@ My apologies to those who jumped on 0.5 only to find see bug and upgrade again v
 == Next Version ==
 
 In no particular order,
+
 * Add a "like" button.
-* Add more customization ability to the widget.
 * Add ability to load the feed via javascript.
 * Add oEmbed support maybe?
+* Add more styling support.

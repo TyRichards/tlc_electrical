@@ -1,13 +1,11 @@
 <?php
+// don't call the file directly
+defined( 'ABSPATH' ) or die();
 
 class VaultPress_Database {
 
 	var $table = null;
 	var $pks = null;
-
-	function VaultPress_Database() {
-		$this->__construct();
-	}
 
 	function __construct() {
 	}
@@ -31,7 +29,7 @@ class VaultPress_Database {
 		global $wpdb;
 		if ( !$this->table )
 			return false;
-		$table = $wpdb->escape( $this->table );
+		$table = esc_sql( $this->table );
 		$results = $wpdb->get_row( "SHOW CREATE TABLE `$table`" );
 		$want = 'Create Table';
 		if ( $results )
@@ -43,7 +41,7 @@ class VaultPress_Database {
 		global $wpdb;
 		if ( !$this->table )
 			return false;
-		$table = $wpdb->escape( $this->table );
+		$table = esc_sql( $this->table );
 		return $wpdb->get_results( "EXPLAIN `$table`" );
 	}
 
@@ -53,7 +51,7 @@ class VaultPress_Database {
 			return false;
 		if ( !$this->table )
 			return false;
-		$table = $wpdb->escape( $this->table );
+		$table = esc_sql( $this->table );
 		$diff = array();
 		foreach ( $signatures as $where => $signature ) {
 			$pksig = md5( $where );
@@ -77,8 +75,8 @@ class VaultPress_Database {
 			return false;
 		if ( !$this->table )
 			return false;
-		$table = $wpdb->escape( $this->table );
-		$column = $wpdb->escape( array_shift( $columns ) );
+		$table = esc_sql( $this->table );
+		$column = esc_sql( array_shift( $columns ) );
 		return $wpdb->get_var( "SELECT COUNT( $column ) FROM `$table`" );
 	}
 
@@ -112,7 +110,7 @@ class VaultPress_Database {
 			return false;
 		if ( !$this->table )
 			return false;
-		$table = $wpdb->escape( $this->table );
+		$table = esc_sql( $this->table );
 		$limitsql = '';
 		$offsetsql = '';
 		$wheresql = '';
@@ -139,8 +137,8 @@ class VaultPress_Database {
 				$keys = array();
 				$vals = array();
 				foreach ( get_object_vars( $row ) as $i => $v ) {
-					$keys[] = sprintf( "`%s`", $wpdb->escape( $i ) );
-					$vals[] = sprintf( "'%s'", $wpdb->escape( $v ) );
+					$keys[] = sprintf( "`%s`", esc_sql( $i ) );
+					$vals[] = sprintf( "'%s'", esc_sql( $v ) );
 					if ( !in_array( $i, $columns ) )
 						unset( $row->$i );
 				}
@@ -160,7 +158,7 @@ class VaultPress_Database {
 			return false;
 
 		foreach ( array_keys( (array)$data ) as $key )
-			$keys[] = sprintf( "`%s`", $wpdb->escape( $key ) );
+			$keys[] = sprintf( "`%s`", esc_sql( $key ) );
 		foreach ( (array)$data as $key => $val ) {
 			if ( null === $val ) {
 				$vals[] = 'NULL';
@@ -176,8 +174,8 @@ class VaultPress_Database {
 				// do not add quotes to numeric types.
 				$vals[] = $val;
 			} else {
-				$val = $wpdb->escape( $val );
-				// Escape characters that aren't escaped by $wpdb->escape(): \n, \r, etc.
+				$val = esc_sql( $val );
+				// Escape characters that aren't escaped by esc_sql(): \n, \r, etc.
 				$val = str_replace( array( "\x0a", "\x0d", "\x1a" ), array( '\n', '\r', '\Z' ), $val );
 				$vals[] = sprintf( "'%s'", $val );
 			}
@@ -338,5 +336,44 @@ class VaultPress_Database {
 		}
 
 		return $table;
+	}
+
+	function restore( $data_file, $md5_sum, $delete = true ) {
+		global $wpdb;
+		if ( !file_exists( $data_file ) || !is_readable( $data_file ) || !filesize( $data_file ) )
+			return array( 'last_error' => 'File does not exist', 'data_file' => $data_file );
+		if ( $md5_sum && md5_file( $data_file ) !== $md5_sum )
+			return array( 'last_error' => 'Checksum mistmatch', 'data_file' => $data_file );
+		if ( function_exists( 'exec' ) && ( $mysql = exec( 'which mysql' ) ) ) {
+			$details = explode( ':', DB_HOST, 2 );
+			$params = array( defined( 'DB_CHARSET' ) && DB_CHARSET ? DB_CHARSET : 'utf8', DB_USER, DB_PASSWORD, $details[0], isset( $details[1] ) ? $details[1] : 3306, DB_NAME, $data_file );
+			exec( sprintf( '%s %s', escapeshellcmd( $mysql ), vsprintf( '-A --default-character-set=%s -u%s -p%s -h%s -P%s %s < %s', array_map( 'escapeshellarg', $params ) ) ), $output, $r );
+			if ( 0 === $r ) {
+				if ( $delete )
+					@unlink( $data_file );
+				return array( 'affected_rows' => 1, 'data_file' => $data_file, 'mysql_cli' => true );
+			}
+		}
+		$size = filesize( $data_file );
+		$fh = fopen( $data_file, 'r' );
+		$last_error = false;
+		$affected_rows = 0;
+		if ( $size == 0 || !is_resource( $fh ) ) {
+			if ( $delete )
+				@unlink( $data_file );
+			return array( 'last_error' => 'Empty file or not readable', 'data_file' => $data_file );
+		} else {
+			while( !feof( $fh ) ) {
+				$query = trim( stream_get_line( $fh, $size, ";\n" ) );
+				if ( !empty( $query ) ) {
+					$affected_rows += $wpdb->query( $query );
+					$last_error = $wpdb->last_error;
+				}
+			}
+			fclose( $fh );
+		}
+		if ( $delete )
+			@unlink( $data_file );
+		return array( 'affected_rows' => $affected_rows, 'last_error' => $last_error, 'data_file' => $data_file );
 	}
 }

@@ -24,9 +24,32 @@
 
 		$browser =  new Browser();
 	?>
-			<h3><?php _e( 'System Information', 'wprss' ) ?></h3>
-			<form action="<?php echo esc_url( admin_url( 'edit.php?post_type=wprss_feed&page=wprss-debugging' ) ); ?>" method="post">
-				<textarea readonly="readonly" onclick="this.focus();this.select()" id="system-info-textarea" name="wprss-sysinfo" title="<?php _e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', 'wprss' ); ?>">
+			<h3><?php _e( 'System Information', WPRSS_TEXT_DOMAIN ) ?></h3>
+			<?php
+				$form_url = admin_url( 'edit.php?post_type=wprss_feed&page=wprss-debugging' );
+				$nonce_url = wp_nonce_url( $form_url, 'wprss-sysinfo' );
+			?>
+			<form action="<?php echo esc_url( $nonce_url ); ?>" method="post">
+				<textarea readonly="readonly" onclick="this.focus();this.select()" id="system-info-textarea" name="wprss-sysinfo" title="<?php _e( 'To copy the system info, click below then press Ctrl + C (PC) or Cmd + C (Mac).', WPRSS_TEXT_DOMAIN ); ?>">
+				<?php wprss_print_system_info(); ?>
+				</textarea>
+				<p class="submit">
+					<input type="hidden" name="wprss-action" value="download_sysinfo" />
+					<?php submit_button( __( 'Download System Info File', WPRSS_TEXT_DOMAIN ), 'primary', 'wprss-download-sysinfo', false ); ?>
+				</p>
+			</form>
+
+	<?php
+	}
+
+
+	/**
+	 * Prints the system information
+	 *
+	 * @since 4.6.8
+	 */
+	function wprss_print_system_info() {
+?>
 ### Begin System Info ###
 
 ## Please include this information when posting support requests ##
@@ -42,7 +65,15 @@ WordPress Version:        <?php echo get_bloginfo( 'version' ) . "\n"; ?>
 <?php echo $browser ; ?>
 
 PHP Version:              <?php echo PHP_VERSION . "\n"; ?>
-MySQL Version:            <?php echo mysql_get_server_info() . "\n"; ?>
+MySQL Version:            <?php
+								if ( function_exists( 'mysqli_get_server_info' ) ){
+									$mysqli = new mysqli( DB_HOST, DB_USER, DB_PASSWORD );
+									echo $mysqli->server_info . " (mysqli)\n";
+								} else {
+									$mysql = mysql_connect( DB_HOST, DB_USER, DB_PASSWORD );
+									echo mysql_get_server_info( $mysql ) . " (mysql)\n";
+								}
+						  ?>
 Web Server Info:          <?php echo $_SERVER['SERVER_SOFTWARE'] . "\n"; ?>
 
 PHP Safe Mode:            <?php echo ini_get( 'safe_mode' ) ? "Yes" : "No\n"; ?>
@@ -69,14 +100,14 @@ UPLOAD_MAX_FILESIZE:      <?php if ( function_exists( 'phpversion' ) ) echo ( wp
 POST_MAX_SIZE:            <?php if ( function_exists( 'phpversion' ) ) echo ( wprss_let_to_num( ini_get( 'post_max_size' ) )/( 1024*1024 ) )."MB"; ?><?php echo "\n"; ?>
 WordPress Memory Limit:   <?php echo ( wprss_let_to_num( WP_MEMORY_LIMIT )/( 1024*1024 ) )."MB"; ?><?php echo "\n"; ?>
 DISPLAY ERRORS:           <?php echo ( ini_get( 'display_errors' ) ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A'; ?><?php echo "\n"; ?>
-FSOCKOPEN:                <?php echo ( function_exists( 'fsockopen' ) ) ? __( 'Your server supports fsockopen.', 'wprss' ) : __( 'Your server does not support fsockopen.', 'wprss' ); ?><?php echo "\n"; ?>
+FSOCKOPEN:                <?php echo ( function_exists( 'fsockopen' ) ) ? __( 'Your server supports fsockopen.', WPRSS_TEXT_DOMAIN ) : __( 'Your server does not support fsockopen.', WPRSS_TEXT_DOMAIN ); ?><?php echo "\n"; ?>
 
 ACTIVE PLUGINS:
 
 <?php
 $plugins = get_plugins();
 $active_plugins = get_option( 'active_plugins', array() );
-
+$inactive_plugins = array();
 foreach ( $plugins as $plugin_path => $plugin ):
 	// If the plugin isn't active, don't show it.
 	if ( ! in_array( $plugin_path, $active_plugins ) ) {
@@ -86,7 +117,32 @@ foreach ( $plugins as $plugin_path => $plugin ):
 
 echo $plugin['Name']; ?>: <?php echo $plugin['Version'] ."\n";
 
-endforeach; ?>
+endforeach; 
+
+if ( is_multisite() ) :
+?>
+
+NETWORK ACTIVE PLUGINS:
+
+<?php
+$plugins = wp_get_active_network_plugins();
+$active_plugins = get_site_option( 'active_sitewide_plugins', array() );
+
+foreach ( $plugins as $plugin_path ) {
+	$plugin_base = plugin_basename( $plugin_path );
+
+	// If the plugin isn't active, don't show it.
+	if ( ! array_key_exists( $plugin_base, $active_plugins ) )
+		continue;
+
+	$plugin = get_plugin_data( $plugin_path );
+
+	echo $plugin['Name'] . ': ' . $plugin['Version'] ."\n";
+}
+
+endif; 
+
+if ( ! is_multisite() ) : ?>
 
 DEACTIVATED PLUGINS:
 
@@ -96,7 +152,9 @@ foreach ( $inactive_plugins as $inactive_plugin ):
 
 echo $inactive_plugin['Name']; ?>: <?php echo $inactive_plugin['Version'] ."\n";
 
-endforeach; ?>
+endforeach; 
+
+endif; ?>
 
 CURRENT THEME:
 
@@ -112,15 +170,9 @@ if ( get_bloginfo( 'version' ) < '3.4' ) {
 
 
 ### End System Info ###
-				</textarea>
-				<p class="submit">
-					<input type="hidden" name="wprss-action" value="download_sysinfo" />
-					<?php submit_button( __( 'Download System Info File', 'wprss' ), 'primary', 'wprss-download-sysinfo', false ); ?>
-				</p>
-			</form>
-		
-	<?php
+<?php
 	}
+
 
 	/**
 	 * Generates the System Info Download File
@@ -131,6 +183,8 @@ if ( get_bloginfo( 'version' ) < '3.4' ) {
 	function wprss_generate_sysinfo_download() {
 		nocache_headers();
 
+		check_admin_referer('wprss-sysinfo');
+		
 		header( "Content-type: text/plain" );
 		header( 'Content-Disposition: attachment; filename="wprss-system-info.txt"' );
 

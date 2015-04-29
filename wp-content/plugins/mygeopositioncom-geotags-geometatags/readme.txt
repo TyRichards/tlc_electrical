@@ -3,13 +3,13 @@ Contributors: daniel.filzhut
 Tags: Post, posts, plugin, admin, page, geo, geocoding, geo coding, geotagging, geo tagging, geo location, geolocation, tagging, geotag, geo tag, geotags, geo tags, geometatags, geo metatags, geo meta tags, geoposttags, geo posttags, geo post tags, geofeedtags, geo feedtags, geo feed tags, geomicroformats, geo microformats, geo micro formats
 Requires at least: 2.9
 Tested up to: 3.4
-Stable tag: 1.3.2
+Stable tag: 1.3.5
 
 Create geo-posttags, geo-metatags & maps for posts + pages. An easy-to-use geopicker map with auto-locating functionality helps entering locations.
 
 == Description ==
 
-Create geo-posttags, geo-metatags, geo-feedtags, geo-microformats and maps for posts and pages. Display the geotagged location in form of a map before, after or within the post. An easy-to-use geopicker map with search, drag & drop and optional auto-locating functionality helps entering locations.
+Create geo-posttags, geo-metatags, geo-feedtags, geo-microformats and maps for posts and pages. Display the geotagged location in form of a map before, after or within the post. An easy-to-use geopicker map with search, drag & drop and optional auto-locating functionality helps entering locations. Based on the http://mygeoposition.com GeoPicker API.
 
 * Add Geo-Metatags to posts & pages
 * Add Geo-Posttags to posts
@@ -28,6 +28,12 @@ Supported geotagging:
 
 Check http://api.mygeoposition.com/wordpress/ for more information.
 
+Languages:
+
+* English
+* German
+* Spanish ( thanks to Maria Ramos, WebHostingHub / http://webhostinghub.com )
+
 == Screenshots ==
 
 1. Geodata input on "Edit post" page: Will be used for Post-/Meta-/Feedtags. Enter it manually or use the geopicker tool.
@@ -41,6 +47,18 @@ Check http://api.mygeoposition.com/wordpress/ for more information.
 9. Available settings.
 
 == Changelog ==
+
+= 1.3.5 =
+* 2015-03-11
+* Removed "http:" from Google Maps API URL to avoid mixed content warning
+
+= 1.3.4 =
+* 2014-01-05
+* Documentation updates
+
+= 1.3.3 =
+* 2013-11-24
+* Added spanish language support (thanks to Maria Ramos)
 
 = 1.3.2 =
 * 2012-06-16

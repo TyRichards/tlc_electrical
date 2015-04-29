@@ -1,14 +1,12 @@
 <?php
+// don't call the file directly
+defined( 'ABSPATH' ) or die();
 
 class VaultPress_Filesystem {
 
 	var $type = null;
 	var $dir  = null;
 	var $keys = array( 'ino', 'uid', 'gid', 'size', 'mtime', 'blksize', 'blocks' );
-
-	function VaultPress_Filesystem() {
-		$this->__construct();
-	}
 
 	function __construct() {
 	}
@@ -73,6 +71,50 @@ class VaultPress_Filesystem {
 		die();
 	}
 
+	function exec_checksum( $file, $method ) {
+		if ( !function_exists( 'exec' ) )
+			return false;
+		$out = array();
+		if ( 'md5' == $method )
+			$method_bin = 'md5sum';
+		if ( 'sha1' == $method )
+			$method_bin = 'sha1sum';
+		$checksum = '';
+		exec( sprintf( '%s %s', escapeshellcmd( $method_bin ), escapeshellarg( $file ) ), $out );
+		if ( !empty( $out ) )
+			$checksum = trim( array_shift( explode( ' ', array_pop( $out ) ) ) );
+		if ( !empty( $checksum ) )
+			return $checksum;
+		return false;
+	}
+
+	function checksum_file( $file, $method ) {
+		$use_exec = false;
+		if ( filesize( $file ) >= 104857600 )
+			$use_exec = true;
+		switch( $method ) {
+			case 'md5':
+			if ( $use_exec ) {
+				$checksum = $this->exec_checksum( $file, $method );
+				if ( !empty( $checksum ) )
+					return $checksum;
+			}
+			return md5_file( $file );
+			break;
+			case 'sha1':
+			if ( $use_exec ) {
+				$checksum = $this->exec_checksum( $file, $method );
+				if ( !empty( $checksum ) )
+					return $checksum;
+			}
+			return sha1_file( $file );
+			break;
+			default:
+			return false;
+			break;
+		}
+	}
+
 	function stat( $file, $md5=true, $sha1=true ) {
 		$rval = array();
 		foreach ( stat( $file ) as $i => $v ) {
@@ -83,9 +125,9 @@ class VaultPress_Filesystem {
 		$rval['type'] = filetype( $file );
 		if ( $rval['type'] == 'file' ) {
 			if ( $md5 )
-				$rval['md5'] = md5_file( $file );
+				$rval['md5'] = $this->checksum_file( $file, 'md5' );
 			if ( $sha1 )
-				$rval['sha1'] = sha1_file( $file );
+				$rval['sha1'] = $this->checksum_file( $file, 'sha1' );
 		}
 		$dir = $this->dir;
 		if ( 0 !== strpos( $file, $dir ) && 'wp-config.php' == basename( $file ) ) {
@@ -93,11 +135,21 @@ class VaultPress_Filesystem {
 			array_pop( $dir );
 			$dir = implode( DIRECTORY_SEPARATOR, $dir );
 		}
-		$rval['path'] = str_replace( $dir, '', $file );
+		$rval['full_path'] = realpath( $file );
+		
+		//	Avoid rebuilding path tidy-up regex when fetching multiple entries
+		static $last_dir = null;
+		static $dir_regex = null;
+		if ( $last_dir !== $dir ) {
+			$dir_regex = '#' . preg_quote( $dir ) . '#';
+			$last_dir = $dir;
+		}
+		
+		$rval['path'] = preg_replace( $dir_regex, '', $file, 1 );
 		return $rval;
 	}
 
-	function ls( $what, $md5=false, $sha1=false, $limit=null, $offset=null ) {
+	function ls( $what, $md5=false, $sha1=false, $limit=null, $offset=null, $full_list=false ) {
 		clearstatcache();
 		$path = realpath($this->dir . $what);
 		$dir = $this->dir;
@@ -116,6 +168,8 @@ class VaultPress_Filesystem {
 			$orig_limit = (int)$limit;
 			$limit = $offset + (int)$limit;
 			foreach ( (array)$this->scan_dir( $path ) as $i ) {
+				if ( !$full_list && !$this->should_backup_file( $i ) )
+					continue;
 				$current++;
 				if ( $offset >= $current )
 					continue;
@@ -130,6 +184,20 @@ class VaultPress_Filesystem {
 			}
 			return $entries;
 		}
+	}
+
+	function should_backup_file( $filepath ) {
+		$vp = VaultPress::init();
+		if ( is_dir( $filepath ) )
+			$filepath = trailingslashit( $filepath );
+		$regex_patterns = $vp->get_should_ignore_files();
+		foreach ( $regex_patterns as $pattern ) {
+			$matches = array();
+			if ( preg_match( $pattern, $filepath, $matches ) ) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	function validate( $file ) {

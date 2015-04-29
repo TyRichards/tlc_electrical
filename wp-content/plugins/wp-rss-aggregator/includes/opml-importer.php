@@ -60,9 +60,9 @@
 		 */
 		public function opml_import() {
 			// Show the Icon and Title
-			echo '<div class="wrap">';
+			?><div class="wrap"><?php
 			screen_icon();
-			echo '<h2>Import OPML</h2>';
+			?><h2><?php _e( 'Import OPML', WPRSS_TEXT_DOMAIN ) ?></h2><?php
 
 			// Get the current step from URL query string
 			$step = empty( $_GET['step'] ) ? 0 : (int) $_GET['step'];
@@ -72,9 +72,9 @@
 				default :
 				case 0 :
 					// Show the Import Message and the import upload form
-					echo '<p>' . __( 'Howdy! Import your feeds here from an OPML (.xml) export file.', 'wprss' ) . '</p>';
-					echo '<p>' . __( "Click the button below, choose your file, and click 'Upload'.", 'wprss' ) . '</p>';
-					echo '<p>' . __( 'We will take care of the rest.', 'wprss' ) . '</p>';
+					echo '<p>' . __( 'Howdy! Import your feeds here from an OPML (.xml) export file.', WPRSS_TEXT_DOMAIN ) . '</p>';
+					echo '<p>' . __( "Click the button below, choose your file, and click 'Upload'.", WPRSS_TEXT_DOMAIN ) . '</p>';
+					echo '<p>' . __( 'We will take care of the rest.', WPRSS_TEXT_DOMAIN ) . '</p>';
 
 					// Show an import upload form that submits to the same page, with GET parameter step=1
 					wp_import_upload_form( 'admin.php?import=wprss_opml_importer&amp;step=1' );
@@ -94,7 +94,7 @@
 					break;
 			}
 			
-			echo '</div>';
+			?></div><?php
 		}
 
 
@@ -105,14 +105,14 @@
 
 			// If the 'error' property is set, show the error message and return FALSE
 			if ( isset( $file['error'] ) ) {
-				echo '<p><strong>' . __( 'Sorry, an error has been encountered.', 'wprss' ) . '</strong><br />';
+				echo '<p><strong>' . __( 'Sorry, an error has been encountered.', WPRSS_TEXT_DOMAIN ) . '</strong><br />';
 				echo esc_html( $file['error'] ) . '</p>';
 				return false;
 			// If the file does not exist, then show the error message and return FALSE
 			} else if ( ! file_exists( $file['file'] ) ) {
-				echo '<p><strong>' . __( 'Sorry, it seems your uploaded file has been misplaced!', 'wprss' ) . '</strong><br />';
-				echo __( 'The uploaded file could not be found at ', 'wprss') . '<code>' . esc_html( $file['file'] ) . '</code>';
-				echo __( 'It is likely that this was caused by a permissions problem.' , 'wprss'  );
+				echo '<p><strong>' . __( 'Sorry, it seems your uploaded file has been misplaced!', WPRSS_TEXT_DOMAIN ) . '</strong><br />';
+				echo __( 'The uploaded file could not be found at ', WPRSS_TEXT_DOMAIN ) . '<code>' . esc_html( $file['file'] ) . '</code>';
+				echo __( 'It is likely that this was caused by a permissions problem.' , WPRSS_TEXT_DOMAIN  );
 				echo '</p>';
 				return false;
 			}
@@ -129,18 +129,42 @@
 		 * @since 3.3
 		 * @param $outline The outline OPML element
 		 */
-		 private function import_opml_feed( $outline ) {
-		 	// Create an associative array, with the feed's properties
-			$feed = array(
-				'post_title' => $outline['title'],
-				'post_content' => '',
-				'post_status' => 'publish',
-				'post_type' => 'wprss_feed'
+		private function import_opml_feed( $outline ) {
+			// IF the necassary fields are not present in the element
+			if ( !isset( $outline['title'] ) && !isset( $outline['xmlUrl'] ) ) {
+				// Check if the element is an array
+				if ( is_array( $outline ) ) {
+					// Treat it as an array of sub <outline> elements
+					$inserted_ids = array();
+					// Insert all sub outline elements
+					foreach ( $outline as $key => $sub_outline ) {
+						$inserted_ids[] = $this->import_opml_feed( $sub_outline );
+					}
+					// Return the inserted IDs
+					return $inserted_ids;
+				}
+				// IF not an array, return NULL
+				else return NULL;
+			} 
+			// Create an associative array, with the feed's properties
+			$feed = apply_filters(
+				'wprss_opml_insert_feed', 
+				array(
+					'post_title' => $outline['title'],
+					'post_content' => '',
+					'post_status' => 'publish',
+					'post_type' => 'wprss_feed'
+				)
 			);
+			
 			// Insert the post into the database and store the inserted ID
 			$inserted_id = wp_insert_post( $feed );
 			// Update the post's meta
-			update_post_meta( $inserted_id, 'wprss_url', $outline['xmlUrl'] );
+			update_post_meta( $inserted_id, 'wprss_url', $outline['xmlUrl'] ); 
+			
+			// Trigger an action, to allow modifications to the inserted feed, based on the outline element
+			do_action( 'wprss_opml_inserted_feed', $inserted_id, $outline );
+
 			// Return inserted ID
 			return $inserted_id;
 		 }
@@ -160,37 +184,47 @@
 				$opml = new WPRSS_OPML( $file );
 
 				// Show Success Message				
-				echo '<h3>Feeds were imported successfully!</h3>';
+				?><h3><?php _e( 'Feeds were imported successfully!', WPRSS_TEXT_DOMAIN ) ?></h3><?php
 
 				// Show imported feeds
 				?>
 				<table class="widefat">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Title</th>
-							<th>URL</th>
+							<th><?php _e( 'ID', WPRSS_TEXT_DOMAIN ) ?></th>
+							<th><?php _e( 'Title', WPRSS_TEXT_DOMAIN ) ?></th>
+							<th><?php _e( 'URL', WPRSS_TEXT_DOMAIN ) ?></th>
 						</tr>
 					</thead>
 					
 					<tbody>
 						<?php
 							foreach ( $opml->body as $opml_feed ) :
-								$inserted_id = $this->import_opml_feed( $opml_feed );
-						?>
-							<tr>
-								<td><?php echo $inserted_id; ?></td>
-								<td><?php echo $opml_feed['title']; ?> </td>
-								<td><?php echo $opml_feed['xmlUrl']; ?></td>
-							</tr>
+								$inserted_ids = $this->import_opml_feed( $opml_feed );
+								if ( !is_array( $inserted_ids ) ) {
+									$inserted_ids = array( $inserted_ids );
+								}
+								foreach ( $inserted_ids as $inserted_id ) :
+									if ( $inserted_id !== NULL ) :
+										$imported_feed = get_post( $inserted_id, 'ARRAY_A' );
+									?>
+
+										<tr>
+											<td><?php echo $inserted_id; ?></td>
+											<td><?php echo $imported_feed['post_title']; ?> </td>
+											<td><?php echo get_post_meta( $inserted_id, 'wprss_url', TRUE ); ?></td>
+										</tr>
+
+								<?php endif; ?>
+							<?php endforeach; ?>
 						<?php endforeach; ?>
 					</tbody>
 					
 					<tfoot>
 						<tr>
-							<th>ID</th>
-							<th>Title</th>
-							<th>URL</th>
+							<th><?php _e( 'ID', WPRSS_TEXT_DOMAIN ) ?></th>
+							<th><?php _e( 'Title', WPRSS_TEXT_DOMAIN ) ?></th>
+							<th><?php _e( 'URL', WPRSS_TEXT_DOMAIN ) ?></th>
 						</tr>
 					</tfoot>
 					
@@ -199,7 +233,7 @@
 
 			} catch (Exception $e) {
 				// Show Error Message
-				echo '<div class="error"><p>' . $e->getMessage() . '</p></div>';
+				?><div class="error"><?php echo wpautop( __( $e->getMessage(), WPRSS_TEXT_DOMAIN ) ) ?></div><?php
 			}
 		}
 
@@ -220,12 +254,9 @@
 
 		register_importer(
 			'wprss_opml_importer',
-			'WP RSS OPML',
-			'Import Feeds from an OPML file into WP RSS Aggregator',
+			__( 'WP RSS OPML', WPRSS_TEXT_DOMAIN ),
+			__( 'Import Feeds from an OPML file into WP RSS Aggregator', WPRSS_TEXT_DOMAIN ),
 			array( WPRSS_OPML_Importer::$singleton ,'opml_import' )
 		);
 
 	}
-
-
-?>
