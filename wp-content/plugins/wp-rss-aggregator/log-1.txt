@@ -1,4 +1,0 @@
-[29-04-2015 13:38:00] [Error] WPRSS > wprss_get_feed_items:
-Failed to fetch feed "http://api.customerlobby.com/v1/companies/19501/reviews.rss/". cURL error 6: Couldn't resolve host 'api.customerlobby.com'
-
-
