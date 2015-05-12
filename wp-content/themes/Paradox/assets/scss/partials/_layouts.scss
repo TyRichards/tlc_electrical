@@ -19,13 +19,18 @@ body > header {
     padding-bottom: $space-sm;
 }
 
+section.content {
+    padding-top: 40px;
+    padding-bottom: 0;
+}
+
 // Navbar Section /////////////////////////////////////////////////////////////////
 
 // Masthead Section /////////////////////////////////////////////////////////////////
 
 .masthead {
     padding-top: 0px;
-    padding-bottom: 140px;    
+    padding-bottom: 60px;
 }
 
 // Body Content Section /////////////////////////////////////////////////////////////////

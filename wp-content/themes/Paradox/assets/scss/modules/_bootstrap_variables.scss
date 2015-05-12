@@ -10,8 +10,9 @@ $gray-light:            lighten(#000, 50%);   // #999
 $gray-lighter:          lighten(#000, 93.5%); // #eee
 
 // Color Conventions
-$brand-primary:         #b700ba;
-$brand-secondary:       #e74c3c;
+$brand-primary:         #2d2d90;
+$brand-secondary:       #469fc5;
+$brand-accent:          #ffce00;
 $brand-default:         $gray-light;
 $brand-success:         #51D15B;
 $brand-info:            #3498db; // #5bc0de;
@@ -21,23 +22,24 @@ $brand-dark:            #226FA2;
 $brand-light:           $gray-light;
 
 // Scaffolding /////////////////////////////////////////////////////////////////
-$body-bg:               $gray-dark; //#ecf0f1;
-$header-bg-color:       $body-bg;
-$footer-bg-color:       $brand-dark;
-$text-color:            $gray-light;
-$link-color:            $brand-primary;
-$link-hover-color:      $brand-light;
+$body-bg:               #f7f1e1; //#ecf0f1;
+$header-bg-color:       $brand-primary;
+$footer-bg-color:       $brand-primary;
+$text-color:            #7a7a7a;
+$link-color:            $brand-secondary;
+$link-hover-color:      darken($brand-primary, 10%);
 
 // Border Radius /////////////////////////////////////////////////////////////////
-$default-border-radius:     3px;
+$default-border-radius:     40px;
 $border-radius-img:         3px;
 
 // Typography /////////////////////////////////////////////////////////////////
 
 // Font weights
 $light: 300;
-$regular: normal;
+$regular: 400;
 $bold: 700;
+$extra-bold: 800;
 
 // Font Families
 $font-family-sans-serif:    "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -51,9 +53,9 @@ $font-size-base:        17px;
 $font-size-large:       ceil(($font-size-base * 1.25));
 $font-size-small:       ceil(($font-size-base * 0.85));
 
-$font-size-h1:          floor(($font-size-base * 3.2));
-$font-size-h2:          floor(($font-size-base * 2.5));
-$font-size-h3:          ceil(($font-size-base * 2.0));
+$font-size-h1:          48px;
+$font-size-h2:          38px;
+$font-size-h3:          25px;
 $font-size-h4:          ceil(($font-size-base * 1.5));
 $font-size-h5:          ceil(($font-size-base * 1.0));
 $font-size-h6:          ($font-size-base + 1.0);
@@ -337,9 +339,9 @@ $navbar-default-bg:                transparent; //darken($header-bg-color, 5%);
 $navbar-default-border:            transparent; //darken($header-bg-color, 10%);
 
 // // Navbar links
-$navbar-default-link-color:                #ffffff;
-$navbar-default-link-hover-color:          $brand-light;
-$navbar-default-link-open-color:           $navbar-default-link-hover-color;
+$navbar-default-link-color:                #3f3faa;
+$navbar-default-link-hover-color:          darken($brand-primary, 10%);
+$navbar-default-link-open-color:           darken($brand-primary, 10%);
 // $navbar-default-link-hover-bg:             transparent;
 // $navbar-default-link-active-color:         #ffffff;
 // $navbar-default-link-active-bg:            lighten($header-bg-color, 10%);

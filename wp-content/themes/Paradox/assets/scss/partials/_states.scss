@@ -32,14 +32,8 @@
 
 // Medium devices (desktops, 992px and up)
 @media (min-width: $screen-md-min) {
-    // #features { background: #ffffff url('../Paradox/assets/images/bg-practice-w.jpg') left 0px no-repeat fixed; }
-    #features { background: #ffffff url('../Paradox/assets/images/bg-3.jpg') left 0px no-repeat fixed; }
-    // #features2 { background: $body-bg url('../Paradox/assets/images/bg-ac2-b.jpg') right 0px no-repeat fixed; }
-    #features2 { background: $body-bg url('../Paradox/assets/images/bg-4.jpg') right 0px no-repeat fixed; }
-    // #features3 { background: $body-bg url('../Paradox/assets/images/bg-practice2-w.jpg') left 0px no-repeat fixed; }
-    #features3 { background: $body-bg url('../Paradox/assets/images/bg-5.jpg') left 0px no-repeat fixed; }
-    // #features4 { background: $body-bg url('../Paradox/assets/images/bg-performance-b.jpg') left 0px no-repeat fixed; }
-    #features4 { background: $body-bg url('../Paradox/assets/images/bg-6.jpg') left 0px no-repeat fixed; }
+    .sidebar-right { border-left: 1px solid #dedede; }
+    .sidebar-left { border-right: 1px solid #dedede; }
 
     header .navbar-brand img {
         width: 100%;

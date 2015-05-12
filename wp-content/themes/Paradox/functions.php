@@ -150,6 +150,15 @@ function bootstrapBasicWidgetsInit()
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	));	
+
+	register_sidebar(array(
+		'name'          => __('Bottom Menu', 'bootstrap-basic'),
+		'id'            => 'bottom-menu',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	));		
 	
 }// bootstrapBasicWidgetsInit
 add_action('widgets_init', 'bootstrapBasicWidgetsInit');

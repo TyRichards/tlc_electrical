@@ -46,17 +46,24 @@
 		</script>
 		<!-- End of SMOOTH SCROLL -->
 	</head>
-	<body <?php body_class(); ?>>
+	<body <?php body_class(); ?> >               		
 
 		<!-- Google Analytics -->	
 
 		<!--[if lte IE 8]>
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 		<![endif]-->	
+	    
+		<?php global $post; ?>
+		<?php
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 5600,1000 ), false, '' );
+		?>		
 
-<!--  		<div id="bg">
-			<img src="<?php // echo get_template_directory_uri(); ?>/assets/images/bg.jpg" alt="Worship Online">
-		</div> -->
+		<div class="bg-fade" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/header-fade.png') !important;" alt="<?php wp_title('|', true, 'right'); ?>">
+		</div>		
+		<div class="bg-image feature-image wp-post-image" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/bg-default.jpg') !important;" alt="<?php wp_title('|', true, 'right'); ?>">
+		</div>
+<!-- 		<div id="bg-image" class="feature-image attachment-sidebar-thumb wp-post-image" style="background-image: url(<?php //echo $image[0]; ?> ) !important;" alt="<?php //wp_title('|', true, 'right'); ?>"></div> -->		
 		
 		<?php do_action('before'); ?> 
 		<header>				
@@ -72,19 +79,33 @@
 							</button>
 							<a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>">
 								<?php // echo esc_attr(get_bloginfo('name', 'display')); ?>
-								<img style="max-width:199px; margin-top: -9px;" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png">
+								<img style="max-width:281px;" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png">
 							</a>					
 						</div>						
 						<div class="collapse navbar-collapse navbar-primary-collapse">
-							<div class="btn-header">
-								<a class="btn btn-sm btn-primary navbar-btn navbar-right hidden-xs" href="http://worshiponline.herokuapp.com/users/sign_in" style="margin-left:10px;">
-									Sign In
-								</a>  								
-								<a class="btn btn-sm btn-primary navbar-btn navbar-right hidden-xs" href="/pricing">
-									Start Free Trial
-								</a>  													   						
-							</div>
-							<?php wp_nav_menu(array('theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav navbar-right', 'walker' => new BootstrapBasicMyWalkerNavMenu())); ?>
+							<ul class="nav navbar-nav navbar-right nav-special">
+								<li class="menu-item btn-menu schedule">
+									<a title="Save 10%" href="/schedule/">
+										<i class="fa fa-calendar"></i>
+										Schedule Service
+										<span>— Save 10% —</span>
+									</a>
+								</li>
+								<li class="menu-item btn-menu phone">
+									<a title="24-Hr Service" href="tel:8174242684">
+										<i class="fa fa-phone"></i>
+										(817) 424-2684
+										<span>— 24-Hr Service –</span>
+									</a>									
+								</li>								
+							</ul>								
+							<?php wp_nav_menu(array(
+								'theme_location' => 'primary', 
+								'container' => false, 
+								'menu_class' => 'nav navbar-nav navbar-right primary-menu', 
+								'walker' => new BootstrapBasicMyWalkerNavMenu()
+								)
+							); ?>													
 						</div><!--.navbar-collapse-->
 					</div>
 				</nav>				

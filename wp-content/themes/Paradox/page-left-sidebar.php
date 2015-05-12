@@ -6,7 +6,7 @@ Template Name: Left Sidebar
 
 <?php get_header(); ?>
 
-<section class="primary-content">
+<section class="content">
     <div class="sidebar background landscape">
         <div class="container">
             <div class="row">
