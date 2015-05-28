@@ -41,7 +41,7 @@ Template Name: Single Column
                         echo "\n\n";
                     } //endwhile;
                     ?>              
-                </div>
+                </div> 
             </main>            
         </div>
     </div>
