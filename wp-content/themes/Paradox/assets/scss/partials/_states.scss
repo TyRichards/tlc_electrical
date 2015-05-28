@@ -33,7 +33,10 @@
 // Medium devices (desktops, 992px and up)
 @media (min-width: $screen-md-min) {
 
-    .page-template-page-home, .page-template-page-right-sidebar {
+    .page-template-page-home, 
+    .page-template-page-right-sidebar, 
+    body.blog,
+    body.single-post {
         .main-col { padding-right: 70px; }
         .sidebar-right { padding-left: 70px; }    
     }    

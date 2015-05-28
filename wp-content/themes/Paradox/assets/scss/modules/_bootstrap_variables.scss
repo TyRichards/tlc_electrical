@@ -209,7 +209,7 @@ $input-border-radius:            4px;
 // //## Dropdown menu container and contents.
 
 // //** Background for the dropdown menu.
-$dropdown-bg:                    $brand-dark;
+$dropdown-bg:                    #fff;
 // //** Dropdown menu `border-color`.
 // $dropdown-border:                darken($brand-dark, 25%);
 // //** Dropdown menu `border-color` **for IE8**.
@@ -218,9 +218,9 @@ $dropdown-bg:                    $brand-dark;
 // $dropdown-divider-bg:            $dropdown-border;
 
 // //** Dropdown link text color.
-// $dropdown-link-color:            $gray-dark;
+$dropdown-link-color:            $gray-dark;
 // //** Hover color for dropdown links.
-$dropdown-link-hover-color:      #ffffff;
+$dropdown-link-hover-color:      $gray-darker;
 // //** Hover background for dropdown links.
 $dropdown-link-hover-bg:         inherit;
 
@@ -343,7 +343,7 @@ $navbar-default-link-color:                #3f3faa;
 $navbar-default-link-hover-color:          darken($brand-primary, 10%);
 $navbar-default-link-open-color:           darken($brand-primary, 10%);
 // $navbar-default-link-hover-bg:             transparent;
-// $navbar-default-link-active-color:         #ffffff;
+// $navbar-default-link-active-color:         darken($brand-primary, 10%);
 // $navbar-default-link-active-bg:            lighten($header-bg-color, 10%);
 // $navbar-default-link-disabled-color:       #ccc;
 // $navbar-default-link-disabled-bg:          transparent;

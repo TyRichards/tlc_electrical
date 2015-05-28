@@ -1,11 +1,16 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
-
-		<div class="entry-meta">
-			<?php bootstrapBasicPostOn(); ?> 
-		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
+
+    <?php if(get_field('youtube_code')) { ?>
+        <div class="flex-video widescreen feature-video">                
+            <iframe src="//www.youtube.com/embed/<?php echo get_field('youtube_code') ?>?autohide=1&amp;modestbranding=1&amp;rel=0&amp;showinfo=0" height="200" width="300" controls="2" allowfullscreen="" frameborder="0"></iframe>
+        </div>                                    
+    <?php } ?> 	
+
+	<?php if ( has_post_thumbnail() ) {
+		the_post_thumbnail( 'full', array( 'class' => 'img-responsive feature-image' ) ); 
+	} ?>   	
 
 	<div class="entry-content">
 		<?php the_content(); ?> 

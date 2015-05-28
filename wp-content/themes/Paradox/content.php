@@ -1,6 +1,6 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<h1 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 
 		<?php if ('post' == get_post_type()) { ?> 
 		<div class="entry-meta">
@@ -9,15 +9,25 @@
 		<?php } //endif; ?> 
 	</header><!-- .entry-header -->
 
+    <?php if(get_field('youtube_code')) { ?>
+        <div class="flex-video widescreen feature-video">                
+            <iframe src="//www.youtube.com/embed/<?php echo get_field('youtube_code') ?>?autohide=1&amp;modestbranding=1&amp;rel=0&amp;showinfo=0" height="200" width="300" controls="2" allowfullscreen="" frameborder="0"></iframe>
+        </div>                                    
+    <?php } ?> 	
+
+	<?php if ( has_post_thumbnail() ) {
+		the_post_thumbnail( 'full', array( 'class' => 'img-responsive feature-image' ) ); 
+	} ?>    
 	
 	<?php if (is_search()) { // Only display Excerpts for Search ?> 
 	<div class="entry-summary">
-		<?php the_excerpt(); ?> 
+		
 		<div class="clearfix"></div>
 	</div><!-- .entry-summary -->
 	<?php } else { ?> 
 	<div class="entry-content">
-		<?php the_content(bootstrapBasicMoreLinkText()); ?> 
+		<?php the_excerpt(); ?> 
+		<a class="btn btn-primary" href="<?php the_permalink(); ?>">See More</a>
 		<div class="clearfix"></div>
 		<?php 
 		/**
@@ -33,9 +43,9 @@
 	</div><!-- .entry-content -->
 	<?php } //endif; ?> 
 
-	<div class="well well-lg text-center">
-			<?php gravity_form(5, true, true, false, null, true, 50); ?>
-	</div>	
+<!-- 	<div class="well well-lg text-center">
+			<?php // gravity_form(5, true, true, false, null, true, 50); ?>
+	</div>	 -->
 
 	<footer class="entry-meta">
 		<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?> 

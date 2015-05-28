@@ -184,7 +184,8 @@ function load_js(){
 	wp_enqueue_script('jquery');
 	wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/assets/js/vendor/bootstrap.min.js');
 	wp_enqueue_script('modernizr-script', get_template_directory_uri() . '/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js');
-	wp_enqueue_script('html5-shiv-script', get_template_directory_uri() . '/assets/js/vendor/html5shiv.js');		
+	wp_enqueue_script('html5-shiv-script', get_template_directory_uri() . '/assets/js/vendor/html5shiv.js');
+	wp_enqueue_script('masonry-script', get_template_directory_uri() . '/assets/js/vendor/masonry.pkgd.min.js');		
 
 	// Custom JS
 	wp_enqueue_script('main-script', get_template_directory_uri() . '/assets/js/custom.js');
@@ -238,3 +239,8 @@ require get_template_directory() . '/inc/template-widgets-hook.php';
 
 // Image Thumbnail Sizes
 add_image_size( 'sidebar-thumb', 500, 9999 );
+
+// Old Thumbnail sizes
+add_image_size( 'featured-header', 574, 9999 );
+add_image_size( 'slide-image', 500, 260, true );
+add_image_size( 'slide-thumb', 192, 134, true );
