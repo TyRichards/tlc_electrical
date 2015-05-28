@@ -75,7 +75,7 @@
                     <?php endwhile; ?>  
                 </div><!-- end .row --> 
                 
-                <div class="clearfix">
+                <div class="clearfix"> 
 
                 <div class="row">                
                     <?php if (function_exists('bones_page_navi')) { ?>
