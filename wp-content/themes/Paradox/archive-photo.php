@@ -71,7 +71,8 @@
                                     <img src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" />
                                 </a> 
                             <?php endif; ?>                             
-                        </div><!-- .photobox -->                    
+                        </div><!-- .photobox -->   
+                        <div class="clear-fix">                 
                     <?php endwhile; ?>  
                 </div><!-- end .row --> 
                 
