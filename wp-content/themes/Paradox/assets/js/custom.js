@@ -1,4 +1,4 @@
-jQuery(function($){
+jQuery(window).on('load', function(){ var $ = jQuery;
 var $container = $('#masonry-container');
     $container.masonry({
           isFitWidth: true,           
