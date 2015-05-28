@@ -14,7 +14,7 @@
 		<meta charset="<?php bloginfo('charset'); ?>">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta name="description" content="<?php bloginfo('description'); ?>">
+		<!--  -->
 		<meta name="author" content="Shelly Morgan">
 		<title><?php wp_title('|', true, 'right'); ?></title>		
 		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon.png">
@@ -61,8 +61,15 @@
 
 		<div class="bg-fade" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/header-fade.png') !important;" alt="<?php wp_title('|', true, 'right'); ?>">
 		</div>		
-		<div class="bg-image feature-image wp-post-image" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/bg-default.jpg') !important;" alt="<?php wp_title('|', true, 'right'); ?>">
-		</div>
+
+        <?php         	
+        $feature_img = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );				
+        if ( has_post_thumbnail() ) { ?>
+			
+			<div class="bg-image feature-image wp-post-image" style="background-image: url('<?php echo $feature_img ?>') !important;" alt="<?php wp_title('|', true, 'right'); ?>">
+			</div>                    	           
+        <?php } ?> 
+
 <!-- 		<div id="bg-image" class="feature-image attachment-sidebar-thumb wp-post-image" style="background-image: url(<?php //echo $image[0]; ?> ) !important;" alt="<?php //wp_title('|', true, 'right'); ?>"></div> -->		
 		
 		<?php do_action('before'); ?> 

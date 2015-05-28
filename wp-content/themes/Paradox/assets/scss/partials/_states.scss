@@ -32,6 +32,17 @@
 
 // Medium devices (desktops, 992px and up)
 @media (min-width: $screen-md-min) {
+
+    .page-template-page-home, .page-template-page-right-sidebar {
+        .main-col { padding-right: 70px; }
+        .sidebar-right { padding-left: 70px; }    
+    }    
+
+    .page-template-page-left-sidebar, .page-template-default {
+        .main-col { padding-left: 70px; }
+        .sidebar-left { padding-right: 70px; }    
+    }        
+
     .sidebar-right { border-left: 1px solid #dedede; }
     .sidebar-left { border-right: 1px solid #dedede; }
 

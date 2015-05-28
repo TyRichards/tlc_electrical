@@ -8,25 +8,27 @@
 		</div><!--.body-content-->			
 		<footer class="footer">	
 			<section class="creds">
-				<div class="row">
-					<div class="col-md-2">
-						<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+				<div class="container">		        
+					<div class="row">
+						<div class="col-md-2">
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+						</div>
+						<div class="col-md-2">
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+						</div>
+						<div class="col-md-2">
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+						</div>
+						<div class="col-md-2">
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+						</div>
+						<div class="col-md-2">
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+						</div>
+						<div class="col-md-2">
+							<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+						</div>																				
 					</div>
-					<div class="col-md-2">
-						<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
-					</div>
-					<div class="col-md-2">
-						<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
-					</div>
-					<div class="col-md-2">
-						<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
-					</div>
-					<div class="col-md-2">
-						<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
-					</div>
-					<div class="col-md-2">
-						<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
-					</div>																				
 				</div>
 			</section>			
       		<section class="small-footer">

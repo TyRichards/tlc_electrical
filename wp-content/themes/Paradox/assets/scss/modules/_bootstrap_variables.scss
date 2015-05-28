@@ -10,7 +10,7 @@ $gray-light:            lighten(#000, 50%);   // #999
 $gray-lighter:          lighten(#000, 93.5%); // #eee
 
 // Color Conventions
-$brand-primary:         #2d2d90;
+$brand-primary:         #413faa; // #2d2d90;
 $brand-secondary:       #469fc5;
 $brand-accent:          #ffce00;
 $brand-default:         $gray-light;
@@ -49,7 +49,7 @@ $font-family-base:          $font-family-sans-serif;
 $font-family-display:       $font-family-sans-serif;
 
 // Font Sizes
-$font-size-base:        17px;
+$font-size-base:        16px;
 $font-size-large:       ceil(($font-size-base * 1.25));
 $font-size-small:       ceil(($font-size-base * 0.85));
 
@@ -273,8 +273,8 @@ $dropdown-link-active-bg:        inherit;
 
 // // Medium screen / desktop
 // // Note: Deprecated $screen-md and $screen-desktop as of v3.0.1
-// $screen-md:                  992px;
-// $screen-md-min:              $screen-md;
+$screen-md:                  992px;
+$screen-md-min:              $screen-md;
 // $screen-desktop:             $screen-md-min;
 
 // // Large screen / wide desktop
@@ -299,7 +299,7 @@ $dropdown-link-active-bg:        inherit;
 // $grid-gutter-width:         30px;
 // // Navbar collapse
 // //** Point at which the navbar becomes uncollapsed.
-// $grid-float-breakpoint:     $screen-sm-min;
+$grid-float-breakpoint:     $screen-md-min;
 // //** Point at which the navbar begins collapsing.
 // $grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
 
