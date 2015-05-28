@@ -341,7 +341,11 @@ margin-bottom: 10px;
     .creds { 
         background-color: #ffffff; 
         padding: 75px 0 75px 0;
-
+        .cred-img { 
+            margin: 0 auto; 
+            padding: 18px 0;
+        }
+        .cred-img.cred-square { padding: 0 0 0 0; }
     }
     .small-footer {
         background-color: #43439d;
