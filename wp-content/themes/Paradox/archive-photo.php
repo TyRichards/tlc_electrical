@@ -28,7 +28,7 @@
                     'post_type' => 'photo', 
 /*                      'galleries' => $current_term,  */
                     'orderby' => 'DESC',
-                    'posts_per_page' => 10,
+                    'posts_per_page' => 40,
                     'paged' => $paged,
                     ) 
                 );                 
