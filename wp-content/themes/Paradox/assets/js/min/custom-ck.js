@@ -1,1 +1,1 @@
-$("#masonry-container").masonry({isFitWidth:!0,itemSelector:".photobox"});
+jQuery(function(o){var t=o("#masonry-container");t.masonry({isFitWidth:!0,itemSelector:".photobox"})});
