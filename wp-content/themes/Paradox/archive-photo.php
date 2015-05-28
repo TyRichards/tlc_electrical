@@ -59,7 +59,7 @@
                                 $caption = $image['caption'];
                              
                                 // thumbnail
-                                $size = 'sidebar-thumb';
+                                $size = 'masonry-thumb';
                                 $thumb = $image['sizes'][ $size ];
                                 $width = $image['sizes'][ $size . '-width' ];
                                 $height = $image['sizes'][ $size . '-height' ];

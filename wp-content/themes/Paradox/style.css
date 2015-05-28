@@ -10740,10 +10740,6 @@ iframe {
   border-radius: 3px;
 }
 
-/* line 169, ../scss/partials/_modules.scss */
-.main-col img {
-  border: 1px solid #dddddd;
-}
 /* line 173, ../scss/partials/_modules.scss */
 .main-col a.btn, .main-col a.gform_button, .main-col .nav li.btn-menu a, .nav li.btn-menu .main-col a, .main-col .archive a.page-title, .archive .main-col a.page-title, .main-col a.more-link {
   margin-right: 10px;

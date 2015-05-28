@@ -238,9 +238,10 @@ require get_template_directory() . '/inc/widgets/BootstrapBasicSearchWidget.php'
 require get_template_directory() . '/inc/template-widgets-hook.php';
 
 // Image Thumbnail Sizes
-add_image_size( 'sidebar-thumb', 500, 9999 );
+// add_image_size( 'sidebar-thumb', 500, 9999 );
+add_image_size( 'masonry-thumb', 250, 9999 );
 
 // Old Thumbnail sizes
-add_image_size( 'featured-header', 574, 9999 );
-add_image_size( 'slide-image', 500, 260, true );
-add_image_size( 'slide-thumb', 192, 134, true );
+// add_image_size( 'featured-header', 574, 9999 );
+// add_image_size( 'slide-image', 500, 260, true );
+// add_image_size( 'slide-thumb', 192, 134, true );
