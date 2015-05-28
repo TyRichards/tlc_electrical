@@ -12,8 +12,8 @@
 </section>
 
 <section class="content">           
-    <div class="container-fluid">
-        <div class="row">           
+    <div class="container">
+        <div class="row">            
             <main class="col-sm-12 main-col page-content text-center">
                 <div class="row">
                     <a class="btn btn-primary" href="#" style="margin: 15px 0 0 0;"><i class="fa fa-th-list"></i>Select Catagory</a>
