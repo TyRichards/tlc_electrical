@@ -1239,10 +1239,29 @@ input:focus:-ms-input-placeholder { color:transparent; }
 
 #masonry-container { 
     margin: 0 auto; 
-    .photobox {
-        margin-bottom: 15px;
+    .photobox { 
+        position: relative;
+        margin: 10px; 
+        width: 250px; 
+        border: none;
+        img { 
+            width: 100%; 
+            @include border-radius(4 4 4 4)
+        }
+        // .panel-body { 
+        //     padding: 15px; 
+        //     h2 { 
+        //         font-size: $font-size-base; 
+        //         margin-bottom: 0; 
+        //         a { color: $gray; 
+        //             &:hover { color: $gray-dark; }
+        //         }
+        //     }
+        //     p { @extend .small; margin-bottom: 0; font-weight: $regular; }
+        // }
     }
 }
+
 
 
 /////////////////////////

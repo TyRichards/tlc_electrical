@@ -18,10 +18,7 @@
 <section class="content">           
     <div class="container">
         <div class="row">           
-            <main class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 main-col page-content">   
-                <a style="margin-top:5px;" class="btn btn-sm btn-primary" href="#">See More Like This</a>&nbsp;&nbsp;<a style="margin-top:5px;" class="btn btn-sm btn-primary" href="">Find Out More About <?php the_title(); ?></a>          
-                <br><br>                                     
-                
+            <main class="col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 main-col page-content">
                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>                    
                     <div <?php post_class(); ?>>
                     <?php                          
@@ -46,6 +43,8 @@
                                 <p class="wp-caption-text text-center"><?php echo $caption; ?></p>   
                                 <br> <br>
                                 <?php // echo $yoast_meta; ?>  
+                                <a style="margin-top:5px;" class="btn btn-sm btn-primary" href="#">See More Like This</a>&nbsp;&nbsp;<a style="margin-top:5px;" class="btn btn-sm btn-primary" href="">Find Out More About <?php the_title(); ?></a>          
+                                <br><br>                                  
 
                                 <!-- <div class="share-btns"> 
                                     <div class="share fb-share">

@@ -12037,7 +12037,17 @@ input:focus:-ms-input-placeholder {
 }
 /* line 1242, ../scss/partials/_modules.scss */
 #masonry-container .photobox {
-  margin-bottom: 15px;
+  position: relative;
+  margin: 10px;
+  width: 250px;
+  border: none;
+}
+/* line 1247, ../scss/partials/_modules.scss */
+#masonry-container .photobox img {
+  width: 100%;
+  -moz-border-radius: 4 4 4 4;
+  -webkit-border-radius: 4;
+  border-radius: 4 4 4 4;
 }
 
 @media (min-width: 768px) {
