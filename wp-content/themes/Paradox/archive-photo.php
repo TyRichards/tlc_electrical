@@ -42,7 +42,7 @@
                     <div class="next-btn"><?php echo next_posts_link('Next ►'); ?></div>
                 </div>                  
 -->                     
-                <div id="masonry-container" class="row"> 
+                <div id="masonry-container"> 
                     <?php while ( $loop->have_posts() ) : $loop->the_post(); 
                         $do_not_duplicate[] = $post->ID;
                     ?>                     
@@ -71,8 +71,7 @@
                                     <img src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" />
                                 </a> 
                             <?php endif; ?>                             
-                        </div><!-- .photobox -->   
-                        <div class="clear-fix">                 
+                        </div><!-- .photobox -->                                            
                     <?php endwhile; ?>  
                 </div><!-- end .row --> 
                 
