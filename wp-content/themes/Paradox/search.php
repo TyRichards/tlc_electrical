@@ -31,7 +31,11 @@
     <div class="container">
         <div class="row">           
             <main class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 main-col page-content">
-                <div id="main" class="site-main" role="main">                 	
+                <div id="main" class="site-main" role="main">
+                    <?php //
+                    // $wp_query->query_vars["posts_per_page"] = 20;
+                    // $wp_query->get_posts();
+                    ?>                                 	
 					<?php if (have_posts()) { ?> 
 					<header class="page-header">
 						<p class="lead text-center"><?php printf(__('Search Results for <strong><i>%s</i></strong>', 'bootstrap-basic'), '<span>' . get_search_query('showposts=999999') . '</span>'); ?></p>

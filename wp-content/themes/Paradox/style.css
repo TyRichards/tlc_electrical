@@ -7136,6 +7136,21 @@ header .navbar-brand {
           .body-content .masthead .searchbar .search-form .input-group span.input-group-btn button i {
             font-size: 33px !important; }
 
+.post .meta-blog {
+  display: block !important; }
+
+.post.category-videos .meta-blog {
+  display: none !important; }
+
+.page .meta-page {
+  display: block !important; }
+
+.type-specials .meta-special {
+  display: block !important; }
+
+.type-photos .meta-photo {
+  display: block !important; }
+
 .blip {
   padding-top: 50px;
   padding-bottom: 90px;

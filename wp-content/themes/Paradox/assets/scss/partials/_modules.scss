@@ -289,6 +289,13 @@ header .navbar-brand {
     // p.lead { margin-top: 0; }
 }
 
+.post .meta-blog { display:block!important; }
+.post.category-videos .meta-blog { display:none!important; }
+.page .meta-page { display:block!important; }
+.type-specials .meta-special { display:block!important; }
+.type-photos .meta-photo { display:block!important; }
+
+
 // Blip /////////////////////////////////
 
 .blip {
@@ -1391,3 +1398,5 @@ input:focus:-ms-input-placeholder { color:transparent; }
         }
     }
 }
+
+
