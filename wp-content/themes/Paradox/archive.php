@@ -8,10 +8,21 @@
 
 <?php get_header(); ?>
 
+<section class="masthead masthead-interior">    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h1>TLC Electrical Blog</h1>          
+                <p class="lead">TLC has you covered on all things electrical in your home and office. <br>Call or <a href="/schedule">schedule online</a> now</a>
+            </div>            
+        </div>        
+    </div>
+</section>
+
 <section class="primary-content">
     <div class="container">        
         <div class="row">         	
-            <main class="col-md-7 col-md-offset-0 col-lg-7 col-lg-offset-1 main-col page-content"> 
+            <main class="col-md-7 col-md-offset-0 col-lg-7 col-lg-offset-1 main-col page-content">
 				<div id="main" class="site-main" role="main">
 					<?php if (have_posts()) { ?> 
 
