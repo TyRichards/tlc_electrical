@@ -39,8 +39,18 @@ Template Name: Specials
                         if( $my_secondary_loop->have_posts() ):
                             while( $my_secondary_loop->have_posts() ): $my_secondary_loop->the_post(); ?>
                                 
-                            <div class="photobox">                            
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder.png" width="322" height="377" />                                
+                            <div class="photobox text-center">           
+                                <div class="special-body">
+                                    <h2><?php the_title(); ?></h2>
+                                    <p><?php the_content(); ?></p>
+                                </div>
+                                <div class="special-footer">
+                                    <a class="" href="8174242684">Call (817) 424-2684</a>
+                                    <a class="" href="/schedule">Schedule Online</a>
+                                    <a class="btn btn-primary btn-block" href="<?php the_permalink(); ?>" target="_blank"><i class="fa fa-print"></i>Print</a>
+                                    <!-- <span>Please print and present this coupon at time of service</span> -->
+                                </div>
+                                <!-- <img src="<?php // echo get_template_directory_uri(); ?>/assets/images/placeholder.png" width="322" height="377" />                                 -->
                             </div>
                                        
                         <?php endwhile; endif;

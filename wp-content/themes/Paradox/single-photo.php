@@ -38,8 +38,30 @@
                             $height = $image['sizes'][ $size . '-height' ];
                          
                         ?>                                                                                  
-                            <div class="main-img">                                  
-                                <img class="photo-lg" src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>" />
+                            <div class="main-img"> 
+                                <div class="photo-container">                                 
+                                    <div class="share-btns"> 
+                                        <div class="share fb-share">
+                                            <iframe src="//www.facebook.com/plugins/like.php?href=<?php the_permalink() ?>&amp;width&amp;layout=button&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=35&amp;appId=441793442610232" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:35px;" allowTransparency="true"></iframe>
+                                        </div>
+                                        <div class="share twitter-share">
+                                            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php the_permalink() ?>" data-text="<?php   echo $yoast_meta; ?>" data-via="tlcelectricaltx" data-count="none" data-hashtags="tlcelectrical">Tweet</a>
+                                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                                         
+                                        </div>
+                                        <div class="share pinterest-share">                                             
+                                            <a href="//www.pinterest.com/pin/create/button/?url=<?php the_permalink() ?>&media=<?php echo $thumb; ?>&description=<?php  echo $yoast_meta; ?>" data-pin-do="buttonPin" data-pin-config="none" data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
+                                            <!-- Please call pinit.js only once per page -->
+                                            <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>                      
+                                        </div>
+                                        <div class="share email-share">                                                     
+                                            <a href="mailto:?subject=TLC Electrical Photo&body=Check out this electrifying photo from TLC Electrical: <?php the_permalink() ?>%0D%0A%0D%0ATLC Electrical - TECL19542%0D%0A%0D%0A2812 Market Loop - Southlake, TX 76092%0D%0AFt. Worth (817) 424-2684 - Dallas (972) 393-0791 - Denton (940) 382-6255%0D%0Afax (817) 552-1127%0D%0Ainfo@tlcelectrical.com%0D%0A%0D%0Awww.tlcelectrical.com" class="btn btn-xs btn-primary">
+                                                <i class="fa fa-envelope"></i>
+                                                Email
+                                            </a>
+                                        </div>
+                                    </div>                                    
+                                    <img class="photo-lg" src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>" />
+                                </div>
                                 <p class="wp-caption-text text-center"><?php echo $caption; ?></p>   
                                 <br> <br>
                                 <?php // echo $yoast_meta; ?>  

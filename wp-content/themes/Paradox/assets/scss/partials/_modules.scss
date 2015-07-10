@@ -542,6 +542,45 @@ body > header > .top-navbar {
     }    
 }
 
+.content .container .cat-dropdown {  
+    button {
+        margin-top: 0;
+        margin-bottom: 0;
+    }  
+    .dropdown-menu {
+        left: 50%;
+        right: auto;
+        text-align: center;
+        transform: translate(-50%, 0);
+        background: transparent url("../Paradox/assets/images/triangle.png") 50% 0px no-repeat;
+        padding-top: 0;
+        border: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        margin-top: 0;
+        padding-left: 0;
+        li {
+            margin-bottom: 0;
+            border-top: 1px solid #eee;
+            a { 
+                background-color: white; 
+                color: #7a7a7a; 
+                &:hover {
+                    color: #3f3faa!important;
+                    // background-color: #eee;
+                }
+            }
+        }        
+        li:first-child a { @include border-radius(7px 7px 0px 0px); border: none; } 
+        li:last-child a { 
+            @include border-radius(0px 0px 7px 7px); 
+            -webkit-box-shadow: 0px 10px 13px -4px rgba(51,51,51,0.47);
+            -moz-box-shadow: 0px 10px 13px -4px rgba(51,51,51,0.47);
+            box-shadow: 0px 10px 13px -4px rgba(51,51,51,0.47);          
+        }        
+    }    
+}
+
 .navbar-toggle {
     margin-top: 23px;
     margin-bottom: 23px;
@@ -754,6 +793,10 @@ section.content {
         margin-top: 50px;
         a { margin-right: 15px; }
     }    
+}
+
+body header .top-navbar .navbar .collapse .navbar-nav .current-menu-ancestor .sub-menu .menu-item a {
+  color: #7a7a7a !important;
 }
 
 // End //
@@ -1297,3 +1340,54 @@ input:focus:-ms-input-placeholder { color:transparent; }
 
 
 /////////////////////////
+
+///  Pinterest button
+
+.photobox, .photo-container { 
+    .share-btns {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        .btn {
+            display: inline-block;
+            vertical-align: top;
+        }  
+        .fb-share iframe {
+            height: 20px!important;
+            width: 94px;
+        }      
+        .share {
+            display: inline;
+            height: auto;
+            width: auto;
+        }       
+        .email-share a { margin-top: 0px; }                 
+    }
+}
+
+.photo-container .share-btns {
+    left: 22px;
+}
+
+// Specials 
+
+.page-template-page-specials {
+    .photobox {
+        border: 6px dashed #ddd!important;
+        padding: 30px 25px 30px 25px;
+        .special-body {             
+            h2 { font-size: 26px; margin-top: 0px; }
+            p { 
+                margin-top: 22px!important; 
+                font-size: 12px!important;
+                line-height: 18px!important;
+            }
+        }
+        .special-footer { 
+            span {
+              font-size: 10px;
+              line-height: 21px!important;
+            }
+        }
+    }
+}

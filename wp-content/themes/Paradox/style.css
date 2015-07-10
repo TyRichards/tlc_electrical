@@ -7350,6 +7350,42 @@ ul.sub-menu.dropdown-menu {
     -moz-box-shadow: 0px 10px 13px -4px rgba(51, 51, 51, 0.47);
     box-shadow: 0px 10px 13px -4px rgba(51, 51, 51, 0.47); }
 
+.content .container .cat-dropdown button {
+  margin-top: 0;
+  margin-bottom: 0; }
+.content .container .cat-dropdown .dropdown-menu {
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate(-50%, 0);
+  background: transparent url("../Paradox/assets/images/triangle.png") 50% 0px no-repeat;
+  padding-top: 0;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-top: 0;
+  padding-left: 0; }
+  .content .container .cat-dropdown .dropdown-menu li {
+    margin-bottom: 0;
+    border-top: 1px solid #eee; }
+    .content .container .cat-dropdown .dropdown-menu li a {
+      background-color: white;
+      color: #7a7a7a; }
+      .content .container .cat-dropdown .dropdown-menu li a:hover {
+        color: #3f3faa !important; }
+  .content .container .cat-dropdown .dropdown-menu li:first-child a {
+    -moz-border-radius: 7px 7px 0px 0px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px 7px 0px 0px;
+    border: none; }
+  .content .container .cat-dropdown .dropdown-menu li:last-child a {
+    -moz-border-radius: 0px 0px 7px 7px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px 0px 7px 7px;
+    -webkit-box-shadow: 0px 10px 13px -4px rgba(51, 51, 51, 0.47);
+    -moz-box-shadow: 0px 10px 13px -4px rgba(51, 51, 51, 0.47);
+    box-shadow: 0px 10px 13px -4px rgba(51, 51, 51, 0.47); }
+
 .navbar-toggle {
   margin-top: 23px;
   margin-bottom: 23px;
@@ -7509,6 +7545,9 @@ section.content {
   margin-top: 50px; }
   .sidebar .widget_text .social-links a {
     margin-right: 15px; }
+
+body header .top-navbar .navbar .collapse .navbar-nav .current-menu-ancestor .sub-menu .menu-item a {
+  color: #7a7a7a !important; }
 
 .title {
   margin-bottom: 85px; }
@@ -7909,6 +7948,40 @@ input:focus:-ms-input-placeholder {
       -moz-border-radius: 4 4 4 4;
       -webkit-border-radius: 4;
       border-radius: 4 4 4 4; }
+
+.photobox .share-btns, .photo-container .share-btns {
+  position: absolute;
+  left: 10px;
+  top: 10px; }
+  .photobox .share-btns .btn, .photobox .share-btns .gform_button, .photobox .share-btns .nav li.btn-menu a, .nav li.btn-menu .photobox .share-btns a, .photobox .share-btns .archive .page-title, .archive .photobox .share-btns .page-title, .photobox .share-btns .more-link, .photo-container .share-btns .btn, .photo-container .share-btns .gform_button, .photo-container .share-btns .nav li.btn-menu a, .nav li.btn-menu .photo-container .share-btns a, .photo-container .share-btns .archive .page-title, .archive .photo-container .share-btns .page-title, .photo-container .share-btns .more-link {
+    display: inline-block;
+    vertical-align: top; }
+  .photobox .share-btns .fb-share iframe, .photo-container .share-btns .fb-share iframe {
+    height: 20px !important;
+    width: 94px; }
+  .photobox .share-btns .share, .photo-container .share-btns .share {
+    display: inline;
+    height: auto;
+    width: auto; }
+  .photobox .share-btns .email-share a, .photo-container .share-btns .email-share a {
+    margin-top: 0px; }
+
+.photo-container .share-btns {
+  left: 22px; }
+
+.page-template-page-specials .photobox {
+  border: 6px dashed #ddd !important;
+  padding: 30px 25px 30px 25px; }
+  .page-template-page-specials .photobox .special-body h2 {
+    font-size: 26px;
+    margin-top: 0px; }
+  .page-template-page-specials .photobox .special-body p {
+    margin-top: 22px !important;
+    font-size: 12px !important;
+    line-height: 18px !important; }
+  .page-template-page-specials .photobox .special-footer span {
+    font-size: 10px;
+    line-height: 21px !important; }
 
 @media (min-width: 768px) {
   .navbar-collapse .navbar-nav li {

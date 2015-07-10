@@ -64,9 +64,14 @@
 			        	</div>
 		        		<div class="col-md-4">
 			        		<div class="pull-right footer-paradox text-right">	        			
-			        			<a href="http://paradoxcreative.com" target="_blank">
-			        				Site crafted by Paradox
-			        			</a>
+			        			<ul class="list-inline">
+				        			<li>
+				        				TECL19542
+				        			</li>			        			
+				        			<li><a href="http://paradoxcreative.com" target="_blank">
+				        				Site crafted by Paradox
+				        			</a></li>
+				        		</ul>
 			        		</div>
 			        	</div>				        	
 			        </div>
