@@ -19,11 +19,11 @@
     </div>
 </section>
 
-<section class="primary-content">
-    <div class="container">        
-        <div class="row">         	
-            <main class="col-md-7 col-md-offset-0 col-lg-7 col-lg-offset-1 main-col page-content">
-				<div id="main" class="site-main" role="main">
+<section class="content">           
+    <div class="container">
+        <div class="row">           
+            <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content">
+                <div id="main" class="site-main" role="main"> 
 					<?php if (have_posts()) { ?> 
 
 					<header class="page-header">
@@ -109,7 +109,7 @@
 					<?php } //endif; ?> 
 				</div>
 			</main>
-		    <aside class="col-md-4 col-md-offset-1 col-lg-3 col-lg-offset-1 sidebar sidebar-box">		        
+		    <aside class="col-sm-4 col-md-5 col-md-offset-0 col-lg-4 col-lg-offset-0 sidebar sidebar-right">   	
             	<?php dynamic_sidebar('sidebar-blog'); ?>                     
 		    </aside>   			
 		</div>

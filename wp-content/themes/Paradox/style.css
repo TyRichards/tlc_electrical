@@ -7987,19 +7987,40 @@ input:focus:-ms-input-placeholder {
 .photo-container {
   position: relative; }
 
-.page-template-page-specials .photobox {
-  border: 6px dashed #ddd !important;
-  padding: 30px 25px 30px 25px; }
-  .page-template-page-specials .photobox .special-body h2 {
+.page-template-page-specials .photobox, .single-specials .photobox {
+  border: 3px dashed #ccc !important;
+  padding: 30px 25px 30px 25px;
+  background: #F9F9F9; }
+  .page-template-page-specials .photobox .special-body h2, .single-specials .photobox .special-body h2 {
     font-size: 26px;
     margin-top: 0px; }
-  .page-template-page-specials .photobox .special-body p {
+  .page-template-page-specials .photobox .special-body p, .single-specials .photobox .special-body p {
     margin-top: 22px !important;
     font-size: 12px !important;
     line-height: 18px !important; }
-  .page-template-page-specials .photobox .special-footer span {
+  .page-template-page-specials .photobox .special-footer span, .single-specials .photobox .special-footer span {
     font-size: 10px;
     line-height: 21px !important; }
+
+.single-specials .photobox {
+  padding: 30px 0 30px 0;
+  background: #ffffff; }
+  .single-specials .photobox .special-body {
+    padding-left: 25px;
+    padding-right: 25px; }
+    .single-specials .photobox .special-body h2 {
+      font-size: 26px;
+      margin-top: 0px; }
+    .single-specials .photobox .special-body p {
+      margin-top: 22px !important;
+      font-size: 12px !important;
+      line-height: 18px !important; }
+  .single-specials .photobox .special-footer {
+    padding-left: 25px;
+    padding-right: 25px; }
+    .single-specials .photobox .special-footer span {
+      font-size: 10px;
+      line-height: 21px !important; }
 
 @media (min-width: 768px) {
   .navbar-collapse .navbar-nav li {
@@ -8018,13 +8039,17 @@ input:focus:-ms-input-placeholder {
   .page-template-page-right-sidebar .main-col,
   .page-template-default .main-col,
   body.blog .main-col,
-  body.single-post .main-col {
+  body.single-post .main-col,
+  .archive.category .main-col,
+  .archive.date .main-col {
     padding-right: 70px; }
   .page-template-page-home .sidebar-right,
   .page-template-page-right-sidebar .sidebar-right,
   .page-template-default .sidebar-right,
   body.blog .sidebar-right,
-  body.single-post .sidebar-right {
+  body.single-post .sidebar-right,
+  .archive.category .sidebar-right,
+  .archive.date .sidebar-right {
     padding-left: 70px; }
 
   .page-template-page-left-sidebar .main-col {

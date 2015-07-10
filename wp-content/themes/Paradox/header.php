@@ -15,10 +15,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<!-- <meta name="description" content="<?php // bloginfo('description'); ?>"> -->
-		<meta name="author" content="Shelly Morgan">
+		<meta name="author" content="Tami Church">
 		<title><?php wp_title('|', true, 'right'); ?></title>		
 		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon.png">
-		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">	
+		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">		
 
 		<?php wp_head(); ?>
 	

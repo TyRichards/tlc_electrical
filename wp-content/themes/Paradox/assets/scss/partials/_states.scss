@@ -37,7 +37,9 @@
     .page-template-page-right-sidebar,
     .page-template-default, 
     body.blog,
-    body.single-post {
+    body.single-post,
+    .archive.category,
+    .archive.date {
         .main-col { padding-right: 70px; }
         .sidebar-right { padding-left: 70px; }    
     }    
