@@ -7350,10 +7350,10 @@ ul.sub-menu.dropdown-menu {
     -moz-box-shadow: 0px 10px 13px -4px rgba(51, 51, 51, 0.47);
     box-shadow: 0px 10px 13px -4px rgba(51, 51, 51, 0.47); }
 
-.content .container .cat-dropdown button {
+.cat-dropdown button {
   margin-top: 0;
   margin-bottom: 0; }
-.content .container .cat-dropdown .dropdown-menu {
+.cat-dropdown .dropdown-menu {
   left: 50%;
   right: auto;
   text-align: center;
@@ -7364,21 +7364,22 @@ ul.sub-menu.dropdown-menu {
   -webkit-box-shadow: none;
   box-shadow: none;
   margin-top: 0;
-  padding-left: 0; }
-  .content .container .cat-dropdown .dropdown-menu li {
+  padding-left: 0;
+  top: 52px; }
+  .cat-dropdown .dropdown-menu li {
     margin-bottom: 0;
     border-top: 1px solid #eee; }
-    .content .container .cat-dropdown .dropdown-menu li a {
+    .cat-dropdown .dropdown-menu li a {
       background-color: white;
       color: #7a7a7a; }
-      .content .container .cat-dropdown .dropdown-menu li a:hover {
+      .cat-dropdown .dropdown-menu li a:hover {
         color: #3f3faa !important; }
-  .content .container .cat-dropdown .dropdown-menu li:first-child a {
+  .cat-dropdown .dropdown-menu li:first-child a {
     -moz-border-radius: 7px 7px 0px 0px;
     -webkit-border-radius: 7px;
     border-radius: 7px 7px 0px 0px;
     border: none; }
-  .content .container .cat-dropdown .dropdown-menu li:last-child a {
+  .cat-dropdown .dropdown-menu li:last-child a {
     -moz-border-radius: 0px 0px 7px 7px;
     -webkit-border-radius: 0px;
     border-radius: 0px 0px 7px 7px;
@@ -7493,7 +7494,9 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 25px; }
 
 section.content {
-  background-color: #ffffff !important; }
+  background-color: #ffffff !important;
+  z-index: 0;
+  position: relative; }
   section.content .sidebar .gform_wrapper {
     margin-top: 10px !important; }
     section.content .sidebar .gform_wrapper .gform_fields {
@@ -7966,8 +7969,8 @@ input:focus:-ms-input-placeholder {
   .photobox .share-btns .email-share a, .photo-container .share-btns .email-share a {
     margin-top: 0px; }
 
-.photo-container .share-btns {
-  left: 22px; }
+.photo-container {
+  position: relative; }
 
 .page-template-page-specials .photobox {
   border: 6px dashed #ddd !important;

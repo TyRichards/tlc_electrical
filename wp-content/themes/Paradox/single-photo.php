@@ -1,6 +1,22 @@
 <?php get_header(); ?>
 
-<section class="masthead masthead-interior">    
+<?php   
+$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+$current_term = get_query_var( 'term' );                                                
+$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;                   
+// Make "Exclude From Search" false in CPT Reg                                                              
+$loop = new WP_Query( array( 
+    'post_type' => 'photo', 
+    'galleries' => $current_term, 
+    'orderby' => 'DESC',
+    'posts_per_page' => 40,
+    'paged' => $paged,
+    ) 
+); 
+                                                                            
+?>  
+
+<section class="masthead masthead-interior" style="padding-bottom: 21px;">    
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
@@ -15,8 +31,18 @@
     </div>
 </section>
 
-<section class="content">           
+<section class="content" style="padding-top: 15px;">           
     <div class="container">
+        <div class="row text-center">
+            <a class="btn btn-sm btn-primary" href="/services/<?php the_field('service_slug'); ?>" style="margin-top: 15px; margin-bottom: 21px;">
+                <i class="fa fa-question-circle"></i>More Info on <?php the_title(); ?>
+            </a>                           
+            <a class="btn btn-sm btn-primary" href="/schedule/" style="margin-top: 15px; margin-bottom: 21px;">
+                <i class="fa fa-calendar"></i>
+                Schedule Service for <?php the_title(); ?>
+            </a>      
+            <br><br>                           
+        </div>        
         <div class="row">           
             <main class="col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 main-col page-content">
                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>                    
@@ -62,11 +88,14 @@
                                     </div>                                    
                                     <img class="photo-lg" src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>" />
                                 </div>
-                                <p class="wp-caption-text text-center"><?php echo $caption; ?></p>   
-                                <br> <br>
+                                <p class="wp-caption-text text-center"><?php echo $caption; ?></p>
                                 <?php // echo $yoast_meta; ?>  
-                                <a style="margin-top:5px;" class="btn btn-sm btn-primary" href="#">See More Like This</a>&nbsp;&nbsp;<a style="margin-top:5px;" class="btn btn-sm btn-primary" href="">Find Out More About <?php the_title(); ?></a>          
-                                <br><br>                                  
+                                <p class="text-center">
+                                    <?php if(the_field('service_slug')) { ?>
+                                        <a style="margin-top:5px;" class="btn btn-sm btn-primary" href="/gallery/<?php the_field('service_slug'); ?>">See More Like This</a>          
+                                    <?php } ?>
+                                </p>
+                                <br>                       
 
                                 <!-- <div class="share-btns"> 
                                     <div class="share fb-share">

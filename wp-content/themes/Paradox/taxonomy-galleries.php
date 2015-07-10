@@ -17,37 +17,21 @@ $loop = new WP_Query( array(
 $wp_query = $loop;                                                                                
 ?>  
 
-<section class="masthead masthead-interior">    
+<section class="masthead masthead-interior" style="padding-bottom: 21px;">    
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1><?php echo apply_filters( 'the_title', $term->name ); ?> Photos</h1>  
-                <p class="lead">See what's possible with TLC Electrical</p>  
-                <a class="btn btn-sm btn-primary" href="/schedule/">
-                    <i class="fa fa-calendar"></i>
-                    Schedule Service for <?php echo apply_filters( 'the_title', $term->name ); ?>
-                </a>   
-                <a class="btn btn-sm btn-primary" href="/services/<?php echo $galleries; ?>">
-                    <i class="fa fa-question-circle"></i>More Info
-                </a>                       
-                <!-- <a class="btn btn-sm btn-primary" href="tel:8174242684">(817) 424-2684</a>                        -->
-            </div>            
-        </div>        
-    </div>
-</section>
-
-<section class="content" style="padding-top: 15px;">           
-    <div class="container">
-        <div class="row">            
-            <main class="col-sm-12 main-col page-content text-center">
+                <h1>Photos</h1>  
+                <p class="lead">See what's possible with TLC Electrical</p>
+                <br>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <div class="dropdown cat-dropdown">
-                            <span style="font-size:12px;">Select a Category:</span>
-                            <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:0;">
                                 <?php echo apply_filters( 'the_title', $term->name ); ?> <i class="fa fa-right fa-caret-down"></i>
                                 <!-- <span class="caret"></span> -->
                             </button>
+                            <span style="font-size:12px;">Select a Category <i class="fa fa-angle-up"></i></span>
                             <?php
                             //list terms in a given taxonomy (useful as a widget for twentyten)
                             $taxonomy = 'galleries';
@@ -61,9 +45,26 @@ $wp_query = $loop;
                                 }
                                 ?>                                
                             </ul>
-                        </div>                        
-                    </div>
-                </div>
+                        </div>  
+                    </div>  
+                </div>    
+            </div>            
+        </div>        
+    </div>
+</section>
+
+<section class="content" style="padding-top: 15px;">           
+    <div class="container">
+        <div class="row">            
+            <main class="col-sm-12 main-col page-content text-center">
+                <a class="btn btn-sm btn-primary" href="/services/<?php echo $galleries; ?>" style="margin-top: 15px; margin-bottom: 21px;">
+                    <i class="fa fa-question-circle"></i>More Info on <?php echo apply_filters( 'the_title', $term->name ); ?>
+                </a>                           
+                <a class="btn btn-sm btn-primary" href="/schedule/" style="margin-top: 15px; margin-bottom: 21px;">
+                    <i class="fa fa-calendar"></i>
+                    Schedule Service for <?php echo apply_filters( 'the_title', $term->name ); ?>
+                </a>                       
+                <!-- <a class="btn btn-sm btn-primary" href="tel:8174242684">(817) 424-2684</a>                        -->       
                 <br>               
                 
 <!--

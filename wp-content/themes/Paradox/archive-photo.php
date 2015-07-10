@@ -1,28 +1,20 @@
 <?php get_header(); ?>
 
-<section class="masthead masthead-interior">    
+<section class="masthead masthead-interior" style="padding-bottom: 21px;">    
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
                 <h1>Photos</h1>  
-                <p class="lead">See what's possible with TLC Electrical</p>         
-            </div>            
-        </div>        
-    </div>
-</section>
-
-<section class="content" style="padding-top: 15px;">           
-    <div class="container">
-        <div class="row">            
-            <main class="col-sm-12 main-col page-content text-center">
+                <p class="lead">See what's possible with TLC Electrical</p>                  
+                <br>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <div class="dropdown cat-dropdown">
-                            <span style="font-size:12px;">Select a Category:</span>
-                            <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:0;">
                                 All Photos <i class="fa fa-right fa-caret-down"></i>
                                 <!-- <span class="caret"></span> -->
                             </button>
+                            <span style="font-size:12px;">Select a Category <i class="fa fa-angle-up"></i></span>
                             <?php
                             //list terms in a given taxonomy (useful as a widget for twentyten)
                             $taxonomy = 'galleries';
@@ -35,7 +27,22 @@
                                 }
                                 ?>                                
                             </ul>
-                        </div>                        
+                        </div>  
+                    </div>  
+                </div>                      
+            </div>            
+        </div>        
+    </div>
+</section>
+
+<section class="content" style="padding-top: 15px;">           
+    <div class="container">
+        <div class="row">            
+            <main class="col-sm-12 main-col page-content text-center">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+
+                                              
                     </div>
                 </div>
                 <br>                
