@@ -60,7 +60,7 @@
                         window.print();  
                         return false;
                     });
-                });
+                }); 
             </script> 
             
 <?php // get_footer(); ?>
