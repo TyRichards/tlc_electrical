@@ -10,26 +10,36 @@
 			<section class="creds">
 				<div class="container">		        
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<a href="http://www.bbb.org/fort-worth/business-reviews/electric-equipment-service-and-repair/tlc-electrical-in-southlake-tx-131500473" target="_blank">
 								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
 							</a>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<a href="https://www.customerlobby.com/reviews/19501/tlc-electrical/" target="_blank">
 								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/reviews.png" alt="Reviews">
 							</a>
-						</div>
-						<div class="col-md-3">
+						</div>					
+						<div class="col-md-2">
 							<a href="https://plus.google.com/+Tlcelectricalsouthlake-electricians/" target="_blank">
 								<img class="img-responsive cred-img cred-square" src="<?php echo get_template_directory_uri(); ?>/assets/images/google-maps.png" alt="Google Maps">
 							</a>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<a href="/about-us" target="_blank">
 								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/awards.png" alt="Awards">
 							</a>
-						</div>																			
+						</div>	
+						<div class="col-md-2">
+							<a href="http://www.eaton.com/EN/Eaton/ProductsServices/Electrical/index.htm" target="_blank">
+								<img class="img-responsive cred-img cred-square" src="<?php echo get_template_directory_uri(); ?>/assets/images/eaton.png" alt="Eaton">
+							</a>
+						</div>
+						<div class="col-md-2">
+							<a href="/financing-payment-options/" target="_blank">
+								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/financing.png" alt="Financing">
+							</a>
+						</div>																						
 					</div>
 				</div>
 			</section>			
@@ -53,7 +63,7 @@
 			        		</ul>
 			        	</div>
 		        		<div class="col-md-4">
-			        		<div class="pull-right footer-paradox text-right">
+			        		<div class="pull-right footer-paradox text-right">	        			
 			        			<a href="http://paradoxcreative.com" target="_blank">
 			        				Site crafted by Paradox
 			        			</a>
