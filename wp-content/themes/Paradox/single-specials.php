@@ -61,6 +61,6 @@
                         return false;
                     });
                 });
-            </script>
+            </script> 
             
 <?php // get_footer(); ?>
