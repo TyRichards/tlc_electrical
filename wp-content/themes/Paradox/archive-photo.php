@@ -11,10 +11,9 @@
                     <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                         <div class="dropdown cat-dropdown">
                             <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin:0;">
-                                All Photos <i class="fa fa-right fa-caret-down"></i>
+                                Select Category <i class="fa fa-right fa-caret-down"></i>
                                 <!-- <span class="caret"></span> -->
-                            </button>
-                            <span style="font-size:12px;">Select a Category <i class="fa fa-angle-up"></i></span>
+                            </button>                            
                             <?php
                             //list terms in a given taxonomy (useful as a widget for twentyten)
                             $taxonomy = 'galleries';
