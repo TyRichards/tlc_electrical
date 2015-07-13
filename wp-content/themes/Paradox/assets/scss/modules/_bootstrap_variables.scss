@@ -355,7 +355,7 @@ $navbar-default-link-open-color:           darken($brand-primary, 10%);
 
 // // Navbar toggle
 $navbar-default-toggle-hover-bg:           transparent;
-$navbar-default-toggle-icon-bar-bg:        #ffffff;
+$navbar-default-toggle-icon-bar-bg:        $brand-primary;
 $navbar-default-toggle-border-color:       transparent;
 
 

@@ -79,18 +79,21 @@
 					<div class="container-fluid">						
 						<div class="navbar-header">																	
 							<button type="button" class="navbar-toggle navbar-right" data-toggle="collapse" data-target=".navbar-primary-collapse">
-								<span class="sr-only"><?php _e('Toggle navigation', 'bootstrap-basic'); ?></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>									
+								<div class="toggle-title hidden-xxs">Menu</div>
+								<div class="toggle-bars">
+									<span class="sr-only"><?php _e('Toggle navigation', 'bootstrap-basic'); ?></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>									
+								</div>
 							</button>
 							<a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>">
 								<?php // echo esc_attr(get_bloginfo('name', 'display')); ?>
-								<img style="max-width:281px;" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png">
+								<img class="img-responsive" style="max-width:281px;" src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png">
 							</a>					
 						</div>						
 						<div class="collapse navbar-collapse navbar-primary-collapse">
-							<ul class="nav navbar-nav navbar-right nav-special">
+							<ul class="nav navbar-nav navbar-right nav-special hidden-xs hidden-sm">
 								<li class="menu-item btn-menu schedule">
 									<a title="Save 10%" href="/schedule/">
 										<i class="fa fa-calendar"></i>
