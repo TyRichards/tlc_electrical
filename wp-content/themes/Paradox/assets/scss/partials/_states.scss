@@ -127,7 +127,7 @@
 // Extra small devices only (phones, less than 768px)
 @media (max-width: $screen-xs-max) { 
 
-// .cat-dropdown .dropdown-menu { transform: translate(0, 0); }    
+    .cat-dropdown .dropdown-menu { left: 0; }    
 
     .footer .creds {
         padding: 0;
@@ -222,6 +222,8 @@
 
 // Small devices only (tablets, 768px to 992px)
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+    .cat-dropdown .dropdown-menu { left: 0; }    
 
     .small-footer { 
         text-align: center;
