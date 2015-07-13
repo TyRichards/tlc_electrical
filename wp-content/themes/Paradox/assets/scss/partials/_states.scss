@@ -47,6 +47,7 @@
 
     body > header > .top-navbar {
         // border-bottom: 5px solid $gray-lighter;
+        position: relative;
         .navbar-nav ul.sub-menu.dropdown-menu {
             left: 50%;
             right: auto;
