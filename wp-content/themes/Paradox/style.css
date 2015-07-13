@@ -8037,8 +8037,7 @@ input:focus:-ms-input-placeholder {
   header .navbar-collapse .navbar-nav li .dropdown-menu .menu-item {
     border-bottom: 0 !important; }
 
-  body > header > .top-navbar .navbar-nav
-  ul.sub-menu.dropdown-menu {
+  body > header > .top-navbar .navbar-nav ul.sub-menu.dropdown-menu {
     left: 50%;
     right: auto;
     text-align: center;
@@ -8048,24 +8047,19 @@ input:focus:-ms-input-placeholder {
     border: none;
     -webkit-box-shadow: none;
     box-shadow: none; }
-    body > header > .top-navbar .navbar-nav
-    ul.sub-menu.dropdown-menu .menu-item a {
+    body > header > .top-navbar .navbar-nav ul.sub-menu.dropdown-menu .menu-item a {
       background-color: white;
       color: #7a7a7a; }
-      body > header > .top-navbar .navbar-nav
-      ul.sub-menu.dropdown-menu .menu-item a:hover {
+      body > header > .top-navbar .navbar-nav ul.sub-menu.dropdown-menu .menu-item a:hover {
         color: #3f3faa !important; }
-    body > header > .top-navbar .navbar-nav
-    ul.sub-menu.dropdown-menu .menu-item:first-child li.menu-item:first-child {
+    body > header > .top-navbar .navbar-nav ul.sub-menu.dropdown-menu .menu-item:first-child li.menu-item:first-child {
       border: none !important; }
-    body > header > .top-navbar .navbar-nav
-    ul.sub-menu.dropdown-menu .menu-item:first-child a {
+    body > header > .top-navbar .navbar-nav ul.sub-menu.dropdown-menu .menu-item:first-child a {
       -moz-border-radius: 7px 7px 0px 0px;
       -webkit-border-radius: 7px;
       border-radius: 7px 7px 0px 0px;
       border: none; }
-    body > header > .top-navbar .navbar-nav
-    ul.sub-menu.dropdown-menu .menu-item:last-child a {
+    body > header > .top-navbar .navbar-nav ul.sub-menu.dropdown-menu .menu-item:last-child a {
       -moz-border-radius: 0px 0px 7px 7px;
       -webkit-border-radius: 0px;
       border-radius: 0px 0px 7px 7px;
@@ -8121,6 +8115,9 @@ input:focus:-ms-input-placeholder {
   .hidden-xxs {
     display: none !important; } }
 @media (max-width: 767px) {
+  .cat-dropdown .dropdown-menu {
+    transform: translate(0, 0); }
+
   .footer .creds {
     padding: 0; }
     .footer .creds .cred-img {

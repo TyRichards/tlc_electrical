@@ -47,8 +47,7 @@
 
     body > header > .top-navbar {
         // border-bottom: 5px solid $gray-lighter;
-        .navbar-nav
-        ul.sub-menu.dropdown-menu {
+        .navbar-nav ul.sub-menu.dropdown-menu {
             left: 50%;
             right: auto;
             text-align: center;
@@ -126,6 +125,8 @@
 
 // Extra small devices only (phones, less than 768px)
 @media (max-width: $screen-xs-max) { 
+
+.cat-dropdown .dropdown-menu { transform: translate(0, 0); }    
 
     .footer .creds {
         padding: 0;
