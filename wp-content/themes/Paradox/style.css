@@ -8115,9 +8115,6 @@ input:focus:-ms-input-placeholder {
   .hidden-xxs {
     display: none !important; } }
 @media (max-width: 767px) {
-  .cat-dropdown .dropdown-menu {
-    transform: translate(0, 0); }
-
   .footer .creds {
     padding: 0; }
     .footer .creds .cred-img {
