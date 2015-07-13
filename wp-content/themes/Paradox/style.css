@@ -7423,6 +7423,9 @@ header .navbar-collapse .navbar-nav li {
 .nav .open .dropdown-toggle {
   color: #333185 !important; }
 
+.btn, .gform_button, .nav li.btn-menu a, .archive .page-title, .gform_wrapper .gform_button, .more-link {
+  white-space: normal; }
+
 .mobile-landing {
   padding-bottom: 10px;
   margin-bottom: 18px;
