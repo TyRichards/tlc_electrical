@@ -24,8 +24,7 @@
 							<a href="https://plus.google.com/+Tlcelectricalsouthlake-electricians/" target="_blank">
 								<img class="img-responsive cred-img cred-square" src="<?php echo get_template_directory_uri(); ?>/assets/images/google-maps.png" alt="Google Maps">
 							</a>
-						</div>
-						<div><br/><br/><br/><br/></div>
+						</div>						
 						<div class="col-sm-4 col-md-2">
 							<a href="/about-us" target="_blank">
 								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/awards.png" alt="Awards">
