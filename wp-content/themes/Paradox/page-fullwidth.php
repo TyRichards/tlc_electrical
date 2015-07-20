@@ -26,16 +26,7 @@ Template Name: Full Width
                   echo "\n\n";
 
                 } //endwhile;
-                ?> 
-                <a class="btn btn-danger" href="#">
-                    <i class="fa fa-phone fa-1x"></i>
-                    Call (972) 492-7920
-                </a>
-                    &nbsp;&nbsp;
-                <a class="btn btn-danger" href="/contact-us">
-                    <i class="fa fa-envelope fa-1x"></i>
-                    Email Us
-                </a> 
+                ?>  
             </div>           
         </section>               
     </div>
