@@ -10,6 +10,7 @@ Template Name: Full Width
     <div class="container col-no-padding-xs">        
         <section class="container main-col col-sm-12 page-content">                
             <div id="main" class="site-main" role="main">
+
                 <?php 
                 while (have_posts()) {
                   the_post();
@@ -26,7 +27,9 @@ Template Name: Full Width
                   echo "\n\n";
 
                 } //endwhile;
-                ?>  
+                ?> 
+                
+                
             </div>           
         </section>               
     </div>

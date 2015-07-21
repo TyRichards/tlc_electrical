@@ -8013,6 +8013,9 @@ input:focus:-ms-input-placeholder {
       font-size: 10px;
       line-height: 21px !important; }
 
+body .entry-content div#gform_wrapper_10 {
+  display: block !important; }
+
 @media (min-width: 768px) {
   .navbar-collapse .navbar-nav li {
     border: none; }
