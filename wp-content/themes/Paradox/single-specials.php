@@ -26,21 +26,16 @@
                                         </div>
                                                                                  
                                         <div class="special-footer">
-                                            <a class="" href="8174242684">Call (817) 424-2684</a><br>
-                                            <a class="" href="/schedule">Schedule Online</a>
+                                            <p>Call (817) 424-2684</p>
 
                                             <div class="terms" style="font-size:10px;">
                                     
-                                                <?php
-                                                 
-                                                if(get_field('disclaimer')) {
+                                                <?php if(get_field('disclaimer')) {
                                                     echo '<p>' . get_field('disclaimer') . '</p>';
+                                                    echo '<small>' . 'TECL 19542' . '<small';
                                                 } else {                                        
-                                                    echo '<p>' . 'Offers cannot be combined. Discounts are not applicable to service fee. Terms and conditions may apply. Offers subject to change without notice. Please present coupon at time of service.' . '</p>';
-                                                }
-                                                
-                                                 
-                                                ?>                                                                     
+                                                    echo '<p>' . 'Offers cannot be combined. Discounts are not applicable toward Dispatch Fee or VIP Service Agreement. Terms and conditions may apply. Offers subject to change without notice. Please present coupon at time of service.' . '</p>';
+                                                } ?>                                                                     
                                             </div>                                              
                                         </div>                                                                              
                                             </div><!-- .special-body -->

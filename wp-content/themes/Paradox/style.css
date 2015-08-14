@@ -8002,10 +8002,22 @@ input:focus:-ms-input-placeholder {
   .page-template-page-specials .photobox .special-body p, .single-specials .photobox .special-body p {
     margin-top: 22px !important;
     font-size: 12px !important;
-    line-height: 18px !important; }
+    line-height: 18px !important;
+    text-align: justify; }
+  .page-template-page-specials .photobox .special-footer .terms, .single-specials .photobox .special-footer .terms {
+    text-align: justify; }
   .page-template-page-specials .photobox .special-footer span, .single-specials .photobox .special-footer span {
     font-size: 10px;
     line-height: 21px !important; }
+
+.page-template-page-specials .photobox {
+  min-height: 425px; }
+  .page-template-page-specials .photobox .special-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 30px 25px 30px 25px;
+    width: 244px; }
 
 .single-specials .photobox {
   padding: 30px 0 30px 0;

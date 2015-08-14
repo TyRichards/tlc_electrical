@@ -1408,13 +1408,29 @@ input:focus:-ms-input-placeholder { color:transparent; }
                 margin-top: 22px!important; 
                 font-size: 12px!important;
                 line-height: 18px!important;
+                text-align: justify;
             }
         }
         .special-footer { 
+            .terms { text-align: justify; }
             span {
               font-size: 10px;
               line-height: 21px!important;
             }
+        }
+    }
+}
+
+// All specials on index page are the same height
+.page-template-page-specials {
+    .photobox {
+        min-height: 425px;
+        .special-footer { 
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 30px 25px 30px 25px;
+            width: 244px;
         }
     }
 }

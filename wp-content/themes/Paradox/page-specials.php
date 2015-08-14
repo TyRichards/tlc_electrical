@@ -46,7 +46,6 @@ Template Name: Specials
                                 </div>
                                 <div class="special-footer">
                                     <a class="" href="8174242684">Call (817) 424-2684</a>
-                                    <a class="" href="/schedule">Schedule Online</a>
                                     <a class="btn btn-primary btn-block" href="<?php the_permalink(); ?>" target="_blank"><i class="fa fa-print"></i>Print</a>
                                     <!-- <span>Please print and present this coupon at time of service</span> -->
                                 </div>
