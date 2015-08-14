@@ -9,7 +9,8 @@ Template Name: Left Sidebar
 <section class="masthead masthead-interior">    
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">
+            <div class="col-lg-10 col-lg-offset-1 text-center">                 
+
                 <?php if(get_field('headline')) {
                     echo '<h1>' . get_field('headline') . '</h1>';                        
                 } else {
@@ -52,7 +53,7 @@ Template Name: Left Sidebar
                 <?php if(get_field('gallery_slug')) { ?>
                     <div class="text-center">                       
                         <a class="btn btn-primary btn-sm btn-block" href="/galleries/<?php echo get_field('gallery_slug') ?>">                        
-                            View All Electrical Panels Photos
+                            View all photos related to this
                         </a>                 
                     </div>  
                 <?php } ?>                                              

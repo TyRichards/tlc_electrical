@@ -145,6 +145,11 @@ select {
     .main-col .well { display: none }
 }
 
+blockquote {
+    margin-top: 20px;
+    p { margin-top: 0px!important; margin-bottom: 0px!important; }
+}
+
 .list-inline > li {
     display: inline-block;
     padding-left: 15px;
@@ -548,6 +553,8 @@ header {
     }
 }
 
+.nav-special li a:hover { color: white!important; }
+
 .navbar {
     margin-bottom: 0px;
 }
@@ -725,6 +732,8 @@ h1, h2, h3, h4, h5, h6 {
     color: $brand-primary; 
     font-weight: $extra-bold;
 }
+
+.h1 { @extend h1; }
 
 .entry-content h1,
 .entry-title,
@@ -1206,6 +1215,11 @@ background: #000000;
 .page-template-page-features-php .product.product-2 {
     margin-top: 75px;
 }
+
+
+// Home custom ///////
+
+body.page-template-page-home .top-navbar { padding-bottom: 10px!important; }
 
 // Quotes /////////////////
 

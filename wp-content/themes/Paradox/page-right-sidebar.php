@@ -10,13 +10,18 @@ Template Name: Right Sidebar
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
-                <?php if(get_field('headline')) {
+
+                <?php if (get_field('headline')) {
                     echo '<h1>' . get_field('headline') . '</h1>';                        
                 } else {
                     echo the_title( '<h1>', '</h1>' ); 
                 } ?>   
+                
+                <?php if (is_page( array( 8, 6, 1525 ))) { ?>
+                    <p style="margin-top:0!important;">Electricians Available Today - <strong><?php echo date('l F jS'); ?></strong></p>
+                <?php } ?>          
 
-                <?php if(get_field('subhead')) {
+                <?php if (get_field('subhead')) {
                     echo '<p>' . get_field('subhead') . '</p>';                        
                 } ?>                
             </div>            
@@ -47,7 +52,7 @@ Template Name: Right Sidebar
                     <div class="text-center">                       
                         <a class="btn btn-primary btn-lg btn-block hidden-sm hidden-xs" href="/schedule">
                             Schedule Service Online
-                            <span>for <?php the_title(); ?> — Save 10%</span>
+                            <span>for <?php the_title(); ?><br/><strong>Save 10%</strong></span>
                         </a>
                         <a class="btn btn-primary btn-lg btn-block visible-sm visible-xs" href="/schedule">
                             Schedule Online
@@ -62,12 +67,12 @@ Template Name: Right Sidebar
                     <div class="flex-video widescreen">                
                         <iframe src="//www.youtube.com/embed/<?php echo get_field('sidebar_video') ?>?autohide=1&amp;modestbranding=1&amp;rel=0&amp;showinfo=0" height="200" width="300" controls="2" allowfullscreen="" frameborder="0"></iframe>
                     </div>                                    
-                <?php } ?>      
+                <?php } ?>  
 
                 <?php if(get_field('gallery_slug')) { ?>
                     <div class="text-center">                       
                         <a class="btn btn-primary btn-sm btn-block" href="/galleries/<?php echo get_field('gallery_slug') ?>">                        
-                            View All Electrical Panels Photos
+                            View all photos related to this
                         </a>                 
                     </div>  
                 <?php } ?> 

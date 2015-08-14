@@ -9,23 +9,19 @@ Template Name: Home
 <section class="masthead">    
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">                               
-                <?php if(get_field('headline')) {
-                    echo '<h1>' . get_field('headline') . '</h1>';                        
-                } else {
-                    echo the_title( '<h1>', '</h1>' ); 
-                } ?>   
-
-                <?php if(get_field('subhead')) {
-                    echo '<p class="lead">' . get_field('subhead') . '</p>';                        
-                } ?>                  
-                <p class="lead header-cta">Electricians Available Today <strong><?php echo date('l F jS'); ?></strong></p>
+            <div class="col-lg-10 col-lg-offset-1 text-center">  
+                <h1 style="margin-top:0!important;">Electricians Available Today</h1>
+                <h2 class="h1" style="margin-top:0!important;"><?php echo date('l F jS'); ?></h1>
                 <div class="row">                                 
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 searchbar">                                                
-                        <p class="search-label small text-center">What seems to be the problem?</p>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 searchbar" style="margin-top:25px;">                                                
+<!--                         <p class="search-label small text-center">
+                            <?php // if(get_field('headline')) {
+                                // echo get_field('headline');                        
+                            // } ?>
+                        </p> -->
                         <?php include (TEMPLATEPATH . '/searchform.php'); ?>
                         <p class="search-sublabel text-center small">
-                            See a list of all <a href="<?php echo get_site_url(); ?>/list-of-services">Services</a>
+                            See a list of all <a href="<?php echo get_site_url(); ?>/services">Services</a>
                         </p>
                     </div>
                 </div>                

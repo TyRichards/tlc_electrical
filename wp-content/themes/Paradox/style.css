@@ -56,7 +56,7 @@ a:active,
 a:hover {
   outline: 0; }
 
-h1 {
+h1, .h1 {
   font-size: 2em;
   margin: 0.67em 0; }
 
@@ -335,14 +335,15 @@ hr {
   clip: rect(0, 0, 0, 0);
   border: 0; }
 
-h1, h2, h3, h4, h5, h6,
+h1, .h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   line-height: 1.1;
   color: #413faa; }
-  h1 small,
-  h1 .small, h2 small,
+  h1 small, .h1 small,
+  h1 .small,
+  .h1 .small, h2 small,
   h2 .small, h3 small,
   h3 .small, h4 small,
   h4 .small, h5 small,
@@ -359,13 +360,14 @@ h1, h2, h3, h4, h5, h6,
     line-height: 1;
     color: gray; }
 
-h1,
+h1, .h1,
 h2,
 h3 {
   margin-top: 28px;
   margin-bottom: 14px; }
-  h1 small,
+  h1 small, .h1 small,
   h1 .small,
+  .h1 .small,
   h2 small,
   h2 .small,
   h3 small,
@@ -385,7 +387,7 @@ h6 {
   h6 .small {
     font-size: 75%; }
 
-h1, .h1 {
+h1, .h1, .h1 {
   font-size: 48px; }
 
 h2, .h2 {
@@ -3847,7 +3849,7 @@ a.list-group-item.active > .badge,
   line-height: 2.7;
   color: inherit;
   background-color: #eeeeee; }
-  .jumbotron h1,
+  .jumbotron h1, .jumbotron .h1,
   .jumbotron .h1 {
     line-height: 1;
     color: inherit; }
@@ -3864,7 +3866,7 @@ a.list-group-item.active > .badge,
       .container .jumbotron {
         padding-left: 60px;
         padding-right: 60px; }
-      .jumbotron h1,
+      .jumbotron h1, .jumbotron .h1,
       .jumbotron .h1 {
         font-size: 72px; } }
 
@@ -6930,7 +6932,7 @@ body.blog .bg-image {
   background-size: cover;
   opacity: .25; }
 
-.body-content .masthead-interior h1 {
+.body-content .masthead-interior h1, .body-content .masthead-interior .h1 {
   margin-top: 0 !important; }
 
 body .bg-image {
@@ -6972,7 +6974,7 @@ a, .button, .gform_button, .btn, .gform_button, .nav li.btn-menu a, .archive .pa
 hr {
   border-top: 1px solid #999999; }
 
-h1 {
+h1, .h1 {
   font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
 
 ol {
@@ -7011,6 +7013,12 @@ input, select, textarea {
 
 .blog .main-col .well, .archive .main-col .well {
   display: none; }
+
+blockquote {
+  margin-top: 20px; }
+  blockquote p {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important; }
 
 .list-inline > li, .footer .small-footer .footer-credits #menu-footer-links > li, .footer .bottom-footer .bottom-nav ul > li {
   display: inline-block;
@@ -7092,7 +7100,7 @@ header .navbar-brand {
 .body-content .masthead {
   color: #626262;
   background-color: transparent; }
-  .body-content .masthead h1 {
+  .body-content .masthead h1, .body-content .masthead .h1 {
     padding-top: 0;
     font-size: 48px;
     margin-top: 20px; }
@@ -7351,6 +7359,9 @@ header .navbar-collapse .navbar-nav li {
     top: 5px;
     left: 20px; }
 
+.nav-special li a:hover {
+  color: white !important; }
+
 .navbar {
   margin-bottom: 0px; }
 
@@ -7481,13 +7492,13 @@ article .feature-video, article .feature-image {
     .footer-credits a:hover {
       color: #ffffff; }
 
-h1, h2, h3, h4, h5, h6 {
+h1, .h1, h2, h3, h4, h5, h6 {
   margin-top: 40px;
   margin-bottom: 0px;
   color: #413faa;
   font-weight: 800; }
 
-.entry-content h1,
+.entry-content h1, .entry-content .h1,
 .entry-title,
 .page-id-4 h2 {
   margin-top: 0; }
@@ -7561,7 +7572,7 @@ body header .top-navbar .navbar .collapse .navbar-nav .current-menu-ancestor .su
 .title {
   margin-bottom: 85px; }
 
-.block.bg-dark h1, .block.bg-dark h2, .block.bg-dark h3, .block.bg-dark h4, .block.bg-dark h5, .block.bg-dark h6 {
+.block.bg-dark h1, .block.bg-dark .h1, .block.bg-dark h2, .block.bg-dark h3, .block.bg-dark h4, .block.bg-dark h5, .block.bg-dark h6 {
   color: #ffffff; }
 
 .page-template-page-pricing-php .block,
@@ -7844,6 +7855,9 @@ body .gform_wrapper .gform_footer {
 
 .page-template-page-features-php .product.product-2 {
   margin-top: 75px; }
+
+body.page-template-page-home .top-navbar {
+  padding-bottom: 10px !important; }
 
 .quotes p:first-child {
   margin-top: 0; }
@@ -8154,7 +8168,7 @@ body .entry-content div#gform_wrapper_10 {
     padding-top: 25px;
     padding-bottom: 25px; }
 
-  .body-content h1 {
+  .body-content h1, .body-content .h1 {
     font-size: 33.6px; }
   .body-content h2 {
     font-size: 26.6px; }
