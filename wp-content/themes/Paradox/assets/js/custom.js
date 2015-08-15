@@ -41,14 +41,14 @@
         navSelector  : ".wp-prev-next",        
         nextSelector : ".wp-prev-next .next a:first",
         itemSelector : ".post",
-
-        loadingText: 'Loading the next page',
-        loadingMsgRevealSpeed: 0,
-        donetext: 'No more pages to load',
-        debug: false,
-        loadingImg: '/wp-content/uploads/2015/08/loading.gif',
+        bufferPx: 50,
+        // animate: true,
         loading: {
-            finishedMsg: 'No more pages to load.'
+            finishedMsg: 'No more items to load',    
+            msgText: 'Loading...',
+            speed: 0,
+            debug: false,
+            img: '/wp-content/themes/Paradox/assets/images/loader-black.gif',          
             }        
         // animate: false,
         // bufferPx: 80,

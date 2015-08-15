@@ -9,7 +9,7 @@ $loop = new WP_Query( array(
     'post_type' => 'photo', 
     'galleries' => $current_term, 
     'orderby' => 'DESC',
-    'posts_per_page' => 16,
+    'posts_per_page' => 30,
     'paged' => $paged,
     ) 
 ); 
