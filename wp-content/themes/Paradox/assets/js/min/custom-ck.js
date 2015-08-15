@@ -1,1 +1,1 @@
-jQuery(window).on("load",function(){var o=jQuery,n=o("#masonry-container");n.masonry({isFitWidth:!0,itemSelector:".photobox"})});
+jQuery(window).on("load",function(){var $=jQuery,o=$("#masonry-container");o.masonry({isFitWidth:!0,itemSelector:".photobox"})});

@@ -21,7 +21,7 @@
 <section class="content">           
     <div class="container">
         <div class="row">           
-            <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content">
+            <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content inf-page-content">
                 <div id="main" class="site-main" role="main">                	
 					<?php if (have_posts()) { ?> 
 					<?php 

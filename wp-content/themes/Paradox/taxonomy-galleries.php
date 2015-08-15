@@ -74,12 +74,12 @@ $wp_query = $loop;
                     <div class="next-btn"><?php echo next_posts_link('Next ►'); ?></div>
                 </div>                  
 -->                     
-                <div id="masonry-container"> 
+                <div id="masonry-container inf-page-content"> 
                     <?php while ( $loop->have_posts() ) : $loop->the_post(); 
                         $do_not_duplicate[] = $post->ID;
                     ?>                     
                         <!-- <div <?php post_class(); ?> > -->
-                        <div class="photobox">                                                                         
+                        <div class="photobox post">                                                                         
                             <?php                                  
                             $image = get_field('photo'); 
                             $yoast_meta = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);                                                            
@@ -122,8 +122,8 @@ $wp_query = $loop;
                             <?php bones_page_navi(); ?>
                         <?php } else { ?>
                             <nav class="wp-prev-next">
-                                <ul class="list-inline">
-                                    <li class="prev-link"><?php next_posts_link(__('<i class="fa fa-arrow-left fa-left"></i>Older Entries', "bonestheme")) ?></li>
+                                <ul class="list-inline inf-pagination">
+                                    <li class="prev-link next"><?php next_posts_link(__('<i class="fa fa-arrow-left fa-left"></i>Older Entries', "bonestheme")) ?></li>
                                     |
                                     <li class="next-link"><?php previous_posts_link(__('Newer Entries<i class="fa fa-arrow-right fa-right"></i>', "bonestheme")) ?></li>
                                 </ul>

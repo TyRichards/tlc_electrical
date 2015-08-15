@@ -6,6 +6,15 @@ var $container = $('#masonry-container');
     });
 });
 
+// $(function(){
+//   $('#masonry-container').masonry({
+//     // options
+//     itemSelector : '.photobox',
+//     isFitWidth: true,  
+//     // columnWidth : 250
+//   });
+// });
+
 // $('#masonry-container').masonry({
 //   // columnWidth: 250,
 //   // gutter: 15,

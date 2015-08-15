@@ -216,7 +216,7 @@ function bootstrapBasicPagination($pagination_align_class = 'pagination-center p
 		
 		if (is_array($pagination_array) && !empty($pagination_array)) {
 			echo '<nav class="' . $pagination_align_class . '">';
-			echo '<ul class="pagination">';
+			echo '<ul class="pagination inf-pagination">';
 			foreach ($pagination_array as $page) {
 				echo '<li';
 				if (strpos($page, '<a') === false && strpos($page, '&hellip;') === false) {
