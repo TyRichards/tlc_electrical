@@ -8042,6 +8042,11 @@ input:focus:-ms-input-placeholder {
 body .entry-content div#gform_wrapper_10 {
   display: block !important; }
 
+#infscr-loading {
+  text-align: center; }
+  #infscr-loading img {
+    margin: 0 auto !important; }
+
 @media (min-width: 768px) {
   .navbar-collapse .navbar-nav li {
     border: none; }

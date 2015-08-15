@@ -9,7 +9,7 @@ $loop = new WP_Query( array(
     'post_type' => 'photo', 
     'galleries' => $current_term, 
     'orderby' => 'DESC',
-    'posts_per_page' => 8,
+    'posts_per_page' => 16,
     'paged' => $paged,
     ) 
 ); 
@@ -74,7 +74,8 @@ $wp_query = $loop;
                     <div class="next-btn"><?php echo next_posts_link('Next ►'); ?></div>
                 </div>                  
 -->                     
-                <div id="masonry-container inf-page-content"> 
+                <!-- <div id="masonry-container">  -->
+                <div id="masonry-container"> 
                     <?php while ( $loop->have_posts() ) : $loop->the_post(); 
                         $do_not_duplicate[] = $post->ID;
                     ?>                     
@@ -117,19 +118,14 @@ $wp_query = $loop;
                 
                 <div class="clearfix"> 
 
-                <div class="row">                
-                    <?php if (function_exists('bones_page_navi')) { ?>
-                            <?php bones_page_navi(); ?>
-                        <?php } else { ?>
-                            <nav class="wp-prev-next">
-                                <ul class="list-inline inf-pagination">
-                                    <li class="prev-link next"><?php next_posts_link(__('<i class="fa fa-arrow-left fa-left"></i>Older Entries', "bonestheme")) ?></li>
-                                    |
-                                    <li class="next-link"><?php previous_posts_link(__('Newer Entries<i class="fa fa-arrow-right fa-right"></i>', "bonestheme")) ?></li>
-                                </ul>
-                            </nav>
-                        <?php } ?>
-                    <?php end; ?>   
+                <div class="row">
+
+                    <nav class="wp-prev-next">
+                        <ul class="pager">
+                            <li class="next"><?php next_posts_link(_e('', "wpbootstrap")) ?></li>
+                            <li class="prev"><?php previous_posts_link(_e('', "wpbootstrap")) ?></li>
+                        </ul>
+                    </nav> 
                 </div><!-- .row -->                
             </main>
         </div>

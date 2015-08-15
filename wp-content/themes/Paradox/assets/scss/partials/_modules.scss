@@ -1462,3 +1462,10 @@ input:focus:-ms-input-placeholder { color:transparent; }
 }
 
 body .entry-content div#gform_wrapper_10 { display: block!important; }
+
+// Infinite scrolling
+
+#infscr-loading { 
+    text-align: center; 
+    img { margin: 0 auto!important; }
+}
