@@ -25,26 +25,6 @@
 		<!--[if lte IE 8]>
 			<meta http-equiv="REFRESH" content="0;url=http://www.browsehappy.com/">
 		<![endif]-->	
-
-		<!-- SMOOTH SCROLL -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script>
-		$(function() {
-		  $('a[href*=#]:not([href=#])').click(function() {
-		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-		      var target = $(this.hash);
-		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-		      if (target.length) {
-		        $('html,body').animate({
-		          scrollTop: target.offset().top
-		        }, 300);
-		        return false;
-		      }
-		    }
-		  });
-		});
-		</script>
-		<!-- End of SMOOTH SCROLL -->
 	</head>
 	<body <?php body_class(); ?> >               		
 
@@ -69,8 +49,6 @@
 			<div class="bg-image feature-image wp-post-image" style="background-image: url('<?php echo $feature_img ?>')" alt="<?php wp_title('|', true, 'right'); ?>">
 			</div>                    	           
         <?php } ?> 
-
-<!-- 		<div id="bg-image" class="feature-image attachment-sidebar-thumb wp-post-image" style="background-image: url(<?php //echo $image[0]; ?> ) !important;" alt="<?php //wp_title('|', true, 'right'); ?>"></div> -->		
 		
 		<?php do_action('before'); ?> 
 		<header>				
@@ -121,10 +99,7 @@
 				</nav>				
 			</section> <!-- section-navbar -->
 		</header>		
-			
-			
 		<div class="body-content">
-
 			<!-- Mobile Landing Section -->
 			<section class="mobile-landing visible-xs visible-sm col-xs-12">
 			    <div class="col-xs-6 col-no-padding-xs call-to-action">

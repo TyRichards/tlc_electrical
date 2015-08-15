@@ -123,7 +123,6 @@ $wp_query = $loop;
                     <nav class="wp-prev-next">
                         <ul class="pager">
                             <li class="next"><?php next_posts_link(_e('', "wpbootstrap")) ?></li>
-                            <li class="prev"><?php previous_posts_link(_e('', "wpbootstrap")) ?></li>
                         </ul>
                     </nav> 
                 </div><!-- .row -->                

@@ -90,6 +90,11 @@
       	</footer>			
 		<!--wordpress footer-->
 		<?php wp_footer(); ?> 
+		
+		<!-- Infinite Scroll Callback -->
+		<script> 
+
+		</script>		
 
 		<!-- Typekit -->
 		<script src="//use.typekit.net/ics8vpr.js"></script>
