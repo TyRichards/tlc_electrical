@@ -90,6 +90,7 @@
       	</footer>			
 		<!--wordpress footer-->
 		<?php wp_footer(); ?> 
+
 		<!-- Typekit -->
 		<script src="//use.typekit.net/ics8vpr.js"></script>
 		<script>try{Typekit.load();}catch(e){}</script>		
