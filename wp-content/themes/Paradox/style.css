@@ -8074,6 +8074,9 @@ body .entry-content div#gform_wrapper_10 {
   max-width: none;
   display: block; }
 
+.modal-content {
+  border-radius: 10px !important; }
+
 @media (min-width: 768px) {
   .navbar-collapse .navbar-nav li {
     border: none; }
