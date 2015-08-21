@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Left Sidebar
+Template Name: Service (Left Sidebar)
 */
 ?>
 
@@ -56,11 +56,7 @@ Template Name: Left Sidebar
                             View all photos related to this
                         </a>                 
                     </div>  
-                <?php } ?>   
-                <div class="cta">                    
-                    <a class="btn btn-primary btn-block"><i class="fa fa-calendar"></i>Schedule Online</a>
-                    <a class="btn btn-primary btn-block" style="margin-top:0;"><i class="fa fa-phone"></i>(817) 424-2684</a>
-                </div>                                                              
+                <?php } ?>                                              
             </aside>            
             <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-0 main-col page-content">
                 <div id="main" class="site-main" role="main">
@@ -81,6 +77,10 @@ Template Name: Left Sidebar
 
                     } //endwhile;
                     ?> 
+                    <div class="cta">                    
+                        <a class="btn btn-primary"><i class="fa fa-calendar"></i>Schedule Online</a>
+                        <a class="btn btn-primary"><i class="fa fa-phone"></i>(817) 424-2684</a>
+                    </div>                                 
                 </div>           
             </main>
         </div>      
