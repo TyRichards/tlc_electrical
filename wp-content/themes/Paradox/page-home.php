@@ -67,6 +67,7 @@ Template Name: Home
                         <p class="spot-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque aliquet ipsum velit, quis rhoncus orci viverra ac. Quisque eget lobortis eros, non impe rdiet leo. Nam felis nisl, aliquet at. aliquam ut, elementum quis odio. Morbi elit orci, gravida in fermentum ac, tincidunt in.</p> -->
                     </div>                       
                 </div>
+                <?php get_sidebar('default'); ?> 
             </aside>
         </div>
     </div>
