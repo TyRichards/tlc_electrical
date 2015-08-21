@@ -18,7 +18,7 @@
 						</div>
 						<div class="col-sm-4 col-md-2">
 							<a href="https://www.customerlobby.com/reviews/19501/tlc-electrical/" target="_blank">
-								<img style="padding:16px 9px;"  class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/customer-lobby.gif" alt="Reviews">
+								<img style="padding:16px 9px;max-width: 205px;"  class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/customer-lobby.gif" alt="Reviews">
 							</a>
 						</div>	
 						<div class="col-sm-4 col-md-2">
