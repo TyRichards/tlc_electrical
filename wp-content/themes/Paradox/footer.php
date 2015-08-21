@@ -32,7 +32,7 @@
 							</a>
 						</div>																						
 						<div class="col-sm-4 col-md-2">
-							<a href="/about-tlc-electrical">
+							<a href="/awards">
 								<img style="padding:21px 12px;" class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/awards2.png" alt="Awards">
 							</a>
 						</div>																					
