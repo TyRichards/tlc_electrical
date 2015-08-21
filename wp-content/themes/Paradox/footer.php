@@ -13,12 +13,12 @@
 						<div class="col-md-1"></div>
 						<div class="col-sm-4 col-md-2">
 							<a href="http://www.bbb.org/fort-worth/business-reviews/electric-equipment-service-and-repair/tlc-electrical-in-southlake-tx-131500473" target="_blank">
-								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
+								<img style="padding-top:21px;" class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/bbb.png" alt="BBB">
 							</a>
 						</div>
 						<div class="col-sm-4 col-md-2">
 							<a href="https://www.customerlobby.com/reviews/19501/tlc-electrical/" target="_blank">
-								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/customer-lobby.gif" alt="Reviews">
+								<img style="padding:16px 9px;"  class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/customer-lobby.gif" alt="Reviews">
 							</a>
 						</div>	
 						<div class="col-sm-4 col-md-2">
@@ -28,12 +28,12 @@
 						</div>	
 						<div class="col-sm-4 col-md-2">
 							<a href="/financing-payment-options/">
-								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/financing2.png" alt="Financing">
+								<img style="padding:21px 12px;" class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/financing2.png" alt="Financing">
 							</a>
 						</div>																						
 						<div class="col-sm-4 col-md-2">
 							<a href="/about-tlc-electrical">
-								<img class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/awards2.png" alt="Awards">
+								<img style="padding:21px 12px;" class="img-responsive cred-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/awards2.png" alt="Awards">
 							</a>
 						</div>																					
 					</div>
