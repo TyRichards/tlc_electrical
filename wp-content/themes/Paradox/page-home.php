@@ -68,6 +68,10 @@ Template Name: Home
                     </div>                       
                 </div>
                 <?php get_sidebar('default'); ?> 
+                <div class="cta">                    
+                    <a class="btn btn-primary btn-block"><i class="fa fa-calendar"></i>Schedule Online</a>
+                    <a class="btn btn-primary btn-block" style="margin-top:0;"><i class="fa fa-phone"></i>(817) 424-2684</a>
+                </div>
             </aside>
         </div>
     </div>

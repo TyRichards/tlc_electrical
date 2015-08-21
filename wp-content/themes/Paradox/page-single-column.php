@@ -18,7 +18,7 @@ Template Name: Single Column
 
                 <?php if(get_field('subhead')) {
                     echo '<p>' . get_field('subhead') . '</p>';                        
-                } ?>                
+                } ?>                               
             </div>            
         </div>        
     </div>
@@ -42,6 +42,10 @@ Template Name: Single Column
                     } //endwhile;
                     ?>              
                 </div> 
+                <div class="cta">                    
+                    <a class="btn btn-primary"><i class="fa fa-calendar"></i>Schedule Online</a>
+                    <a class="btn btn-primary"><i class="fa fa-phone"></i>(817) 424-2684</a>
+                </div>                 
             </main>            
         </div>
     </div>

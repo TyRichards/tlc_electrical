@@ -29,7 +29,10 @@ Template Name: Full Width
                 } //endwhile;
                 ?> 
                 
-                
+                <div class="cta">                    
+                    <a class="btn btn-primary"><i class="fa fa-calendar"></i>Schedule Online</a>
+                    <a class="btn btn-primary"><i class="fa fa-phone"></i>(817) 424-2684</a>
+                </div>                    
             </div>           
         </section>               
     </div>
