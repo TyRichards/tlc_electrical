@@ -73,7 +73,7 @@
                         $do_not_duplicate[] = $post->ID;
                     ?>                     
                         <!-- <div <?php post_class(); ?> > -->
-                        <div class="photobox">                                                                         
+                        <div class="photobox post">                                                                         
                             <?php                                  
                             $image = get_field('photo'); 
                             $yoast_meta = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);                                                            
@@ -112,18 +112,11 @@
                 <div class="clearfix"> 
 
                 <div class="row">                
-                    <?php if (function_exists('bones_page_navi')) { ?>
-                            <?php bones_page_navi(); ?>
-                        <?php } else { ?>
-                            <nav class="wp-prev-next">
-                                <ul class="list-inline">
-                                    <li class="prev-link"><?php next_posts_link(__('<i class="fa fa-arrow-left fa-left"></i>Older Entries', "bonestheme")) ?></li>
-                                    |
-                                    <li class="next-link"><?php previous_posts_link(__('Newer Entries<i class="fa fa-arrow-right fa-right"></i>', "bonestheme")) ?></li>
-                                </ul>
-                            </nav>
-                        <?php } ?>
-                    <?php end; ?>   
+                    <nav class="wp-prev-next">
+                        <ul class="pager">
+                            <li class="next"><?php next_posts_link(_e('', "wpbootstrap")) ?></li>
+                        </ul>
+                    </nav> 
                 </div><!-- .row -->                
             </main>
         </div>

@@ -9,7 +9,7 @@ $loop = new WP_Query( array(
     'post_type' => 'photo', 
     'galleries' => $current_term, 
     'orderby' => 'DESC',
-    'posts_per_page' => 30,
+    'posts_per_page' => 40,
     'paged' => $paged,
     ) 
 ); 
@@ -119,7 +119,6 @@ $wp_query = $loop;
                 <div class="clearfix"> 
 
                 <div class="row">
-
                     <nav class="wp-prev-next">
                         <ul class="pager">
                             <li class="next"><?php next_posts_link(_e('', "wpbootstrap")) ?></li>
