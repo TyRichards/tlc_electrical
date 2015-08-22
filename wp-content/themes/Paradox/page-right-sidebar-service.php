@@ -33,10 +33,10 @@ Template Name: Service (Right Sidebar)
         <div class="row">           
             <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content">   
 
-                <!-- Residential Services Nav -->   
-                <div class="visible-xs visible-sm">           
+                <!-- Residential Services Page -->  
+                <div class="visible-md visible-lg">             
                     <?php if (is_page( array( 6 ))) { 
-                        get_template_part( 'nav-residential' ); 
+                        get_template_part( 'nav-residential2' ); 
                     } ?>
                 </div>
 

@@ -60,7 +60,7 @@ Template Name: Right Sidebar
                 <!-- Residential Services Page -->  
                 <div class="visible-md visible-lg">             
                     <?php if (is_page( array( 6 ))) { 
-                        get_template_part( 'nav-residential' ); 
+                        get_template_part( 'nav-residential2' ); 
                     } ?>
                 </div>
          
