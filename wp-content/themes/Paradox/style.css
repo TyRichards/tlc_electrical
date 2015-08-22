@@ -6943,6 +6943,11 @@ body.category-videos.category-59 .bg-image {
   background-image: url("../Paradox/assets/images/bg-video.gif") !important;
   background-position: 50% 126px; }
 
+body.post-type-archive-photo .bg-image {
+  background-image: url("../Paradox/assets/images/bg-photos.jpg") !important;
+  background-position: 50% -714px;
+  opacity: .25; }
+
 body.blog .bg-image {
   background-image: url("../Paradox/assets/images/blog-bg.jpg") !important;
   position: fixed;
