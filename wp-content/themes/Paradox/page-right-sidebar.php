@@ -32,6 +32,14 @@ Template Name: Right Sidebar
     <div class="container">        
         <div class="row">           
             <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content">   
+
+                <!-- Residential Services Nav -->   
+                <div class="visible-xs visible-sm">           
+                    <?php if (is_page( array( 6 ))) { 
+                        get_template_part( 'nav-residential' ); 
+                    } ?>
+                </div>
+
                 <div id="main" class="site-main" role="main">
                     <?php
                     while (have_posts()) {
@@ -49,7 +57,7 @@ Template Name: Right Sidebar
             </main>
             <aside class="col-sm-4 col-md-5 col-md-offset-0 col-lg-4 col-lg-offset-0 sidebar sidebar-right">    
 
-                <!-- Residential Services Page -->              
+                <!-- Residential Services Nav -->              
                 <?php if (is_page( array( 6 ))) { 
                     get_template_part( 'nav-residential' ); 
                 } ?>

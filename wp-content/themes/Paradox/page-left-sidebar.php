@@ -30,7 +30,7 @@ Template Name: Left Sidebar
         <div class="row">            
             <aside class="col-sm-4 col-md-5 col-md-offset-0 col-lg-4 col-lg-offset-1 sidebar sidebar-left">   
 
-                <!-- Residential Services Page -->              
+                <!-- Residential Services Nav -->              
                 <?php if (is_page( array( 6 ))) { 
                     get_template_part( 'nav-residential' ); 
                 } ?>
