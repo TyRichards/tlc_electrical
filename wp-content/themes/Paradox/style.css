@@ -6908,9 +6908,6 @@ section.content {
   .credit-footer ul, .credit-footer ol, .credit-footer p {
     margin-bottom: 0; }
 
-body.single-post .bg-image {
-  background-image: none !important; }
-
 body.page-template-page-home .bg-image {
   opacity: .25; }
 
