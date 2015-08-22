@@ -52,6 +52,12 @@ Template Name: Service (Right Sidebar)
                 </div>
             </main>
             <aside class="col-sm-4 col-md-5 col-md-offset-0 col-lg-4 col-lg-offset-0 sidebar sidebar-right">   
+
+                <!-- Residential Services Page -->              
+                <?php if (is_page( array( 6 ))) { 
+                    get_template_part( 'nav-residential' ); 
+                } ?>
+
                 <?php if(get_field('service_page')) { ?>
                     <div class="text-center">                       
                         <a class="btn btn-primary btn-lg btn-block hidden-sm hidden-xs" href="/schedule">

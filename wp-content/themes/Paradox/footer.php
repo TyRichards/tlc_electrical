@@ -99,7 +99,7 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h5 class="modal-title text-center" id="myModalLabel">What is Eaton Certified Contractor Network (ECCN)?</h5>
 		      </div>
-		      <div class="modal-body">
+		      <div class="modal-body small">
 		        <ul>
 		        	<li>A new national network of highly qualified, certified electricians installing the world’s best home electrical / communications systems.</li> 
 		        	<li>An alliance between electrical contractors, suppliers and Eaton for personalized, professional service.</li>
