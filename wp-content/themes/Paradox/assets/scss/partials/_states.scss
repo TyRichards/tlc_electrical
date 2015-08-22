@@ -81,6 +81,7 @@
 
     .page-template-page-home, 
     .page-template-page-right-sidebar,
+    .page-template-page-right-sidebar-service,
     .page-template-default, 
     body.blog,
     body.single-post,
@@ -90,7 +91,8 @@
         .sidebar-right { padding-left: 70px; }    
     }    
 
-    .page-template-page-left-sidebar {
+    .page-template-page-left-sidebar,
+    .page-template-page-left-sidebar-service, {
         .main-col { padding-left: 70px; }
         .sidebar-left { padding-right: 70px; }    
     }        

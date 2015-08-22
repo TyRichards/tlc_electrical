@@ -8186,6 +8186,7 @@ li#field_11_1 {
 
   .page-template-page-home .main-col,
   .page-template-page-right-sidebar .main-col,
+  .page-template-page-right-sidebar-service .main-col,
   .page-template-default .main-col,
   body.blog .main-col,
   body.single-post .main-col,
@@ -8194,6 +8195,7 @@ li#field_11_1 {
     padding-right: 70px; }
   .page-template-page-home .sidebar-right,
   .page-template-page-right-sidebar .sidebar-right,
+  .page-template-page-right-sidebar-service .sidebar-right,
   .page-template-default .sidebar-right,
   body.blog .sidebar-right,
   body.single-post .sidebar-right,
@@ -8201,9 +8203,11 @@ li#field_11_1 {
   .archive.date .sidebar-right {
     padding-left: 70px; }
 
-  .page-template-page-left-sidebar .main-col {
+  .page-template-page-left-sidebar .main-col,
+  .page-template-page-left-sidebar-service .main-col {
     padding-left: 70px; }
-  .page-template-page-left-sidebar .sidebar-left {
+  .page-template-page-left-sidebar .sidebar-left,
+  .page-template-page-left-sidebar-service .sidebar-left {
     padding-right: 70px; }
 
   .sidebar-right {
