@@ -1,5 +1,14 @@
 <div class="panel-group sidebar-nav" id="accordion2" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <a href="/247-emergency-electricians">
+                    24/7 Emergency Electricians                    
+                </a>
+            </div>
+        </div>    
+    </div>    
+    <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingFive">
             <div class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">

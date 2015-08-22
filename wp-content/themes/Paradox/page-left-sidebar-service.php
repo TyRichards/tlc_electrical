@@ -17,6 +17,10 @@ Template Name: Service (Left Sidebar)
                     echo the_title( '<h1>', '</h1>' ); 
                 } ?>   
 
+                <?php if (is_page( array( 8, 6, 1525 ))) { ?>
+                    <p style="margin-top:0!important;">Electricians Available Today - <strong><?php echo date('l F jS'); ?></strong></p>
+                <?php } ?>                  
+
                 <?php if(get_field('subhead')) {
                     echo '<p>' . get_field('subhead') . '</p>';                        
                 } ?>                
