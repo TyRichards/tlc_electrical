@@ -12,23 +12,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1>TLC Electrical Blog</h1>          
-                <p class="lead">TLC has you covered on all things electrical in your home and office. <br>Call or <a href="/schedule">schedule online</a> now</a>
-            </div>            
-        </div>        
-    </div>
-</section>
-
-<section class="content">           
-    <div class="container">
-        <div class="row">           
-            <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content inf-page-content">
-                <div id="main" class="site-main" role="main"> 
-					<?php if (have_posts()) { ?> 
-
-					<header class="page-header">
-						<h1 class="page-title">
-							<?php
+                <h1>
+<?php
 							if (is_category()) :
 								single_cat_title();
 
@@ -75,9 +60,21 @@
 								_e('Archives', 'bootstrap-basic');
 
 							endif;
-							?> 
-						</h1>
-						
+							?>                 
+                </h1>          
+            </div>            
+        </div>        
+    </div>
+</section>
+
+<section class="content">           
+    <div class="container">
+        <div class="row">           
+            <main class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content inf-page-content">
+                <div id="main" class="site-main" role="main"> 
+					<?php if (have_posts()) { ?> 
+
+					<header class="page-header">											
 						<?php
 						// Show an optional term description.
 						$term_description = term_description();

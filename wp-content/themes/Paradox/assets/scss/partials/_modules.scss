@@ -38,13 +38,13 @@ body.search-results {
 
 body.blog {
     .bg-image { 
-        background-image: url('../Paradox/assets/images/bg-blog.jpg')!important;
+        background-image: url('../Paradox/assets/images/blog-bg.jpg')!important;
         position: fixed;
         top: 0;
         z-index: -1;
         width: 100%;
         height: 100%;
-        background-position: 50% 50%;
+        background-position: 50% -275px;
         background-repeat: no-repeat;
         -webkit-background-size: cover;
         -moz-background-size: cover;

@@ -12,8 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h1>TLC Electrical Blog</h1>          
-                <p class="lead">TLC has you covered on all things electrical in your home and office. <br>Call or <a href="/schedule">schedule online</a> now</a>
+                <h1>Let's Connect</h1>          
             </div>            
         </div>        
     </div>
@@ -22,7 +21,10 @@
     <div class="container">
         <div class="row">           
             <main id="inf-page-content" class="col-sm-8 col-md-7 col-md-offset-0 col-lg-6 col-lg-offset-1 main-col page-content">
-                <div id="main" class="site-main" role="main">                	
+                <div id="main" class="site-main" role="main">
+
+                    <?php query_posts('cat=-59'); ?>
+
 					<?php if (have_posts()) { ?> 
 					<?php 
 					// start the loop
