@@ -8117,7 +8117,7 @@ main .panel-group {
   margin-top: 0 !important; }
 
 li#field_11_1 {
-  margin-bottom: -5px; }
+  margin-bottom: -5px !important; }
 
 .gform_wrapper .ginput_complex input[type=text] {
   width: 100% !important; }
