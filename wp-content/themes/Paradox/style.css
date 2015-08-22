@@ -6917,8 +6917,11 @@ body.page-template-page-home .bg-image {
 body.search-results .bg-image {
   background-image: url("../Paradox/assets/images/bg-search.jpg") !important; }
 
-.page-id-225 .bg-image.feature-image, .page-id-227 .bg-image.feature-image {
+.page-id-225 .bg-image.feature-image {
   background-size: 29% auto; }
+
+.page-id-227 .bg-image.feature-image {
+  background-size: 84% auto; }
 
 body.blog .bg-image {
   background-image: url("../Paradox/assets/images/bg-blog.jpg") !important;
