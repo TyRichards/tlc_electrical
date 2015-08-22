@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="panel-title">
-                <a href="/247-emergency-electricians">
+                <a href="/247-emergency-electricians" style="color: #E02323;">
                     24/7 Emergency Electricians                    
                 </a>
             </div>
