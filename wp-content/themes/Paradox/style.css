@@ -8113,6 +8113,9 @@ aside .panel-group.sidebar-nav, main .panel-group.sidebar-nav {
             display: block;
             font-weight: 700; }
 
+main .panel-group {
+  margin-top: 0; }
+
 @media (min-width: 768px) {
   .navbar-collapse .navbar-nav li {
     border: none; }
