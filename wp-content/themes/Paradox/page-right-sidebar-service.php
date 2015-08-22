@@ -39,7 +39,7 @@ Template Name: Service (Right Sidebar)
                         get_template_part( 'nav-residential' ); 
                     } ?>
                 </div>
-                
+
                 <div id="main" class="site-main" role="main">
                     <?php
                     while (have_posts()) {
@@ -61,10 +61,12 @@ Template Name: Service (Right Sidebar)
             </main>
             <aside class="col-sm-4 col-md-5 col-md-offset-0 col-lg-4 col-lg-offset-0 sidebar sidebar-right">   
 
-                <!-- Residential Services Page -->              
-                <?php if (is_page( array( 6 ))) { 
-                    get_template_part( 'nav-residential' ); 
-                } ?>
+                <!-- Residential Services Page -->  
+                <div class="visible-md visible-lg">             
+                    <?php if (is_page( array( 6 ))) { 
+                        get_template_part( 'nav-residential' ); 
+                    } ?>
+                </div>
 
                 <?php if(get_field('service_page')) { ?>
                     <div class="text-center">                       
