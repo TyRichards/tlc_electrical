@@ -6939,6 +6939,10 @@ body.search-results .bg-image {
 .page-id-12 .bg-image.feature-image {
   background-position: 50% 132px; }
 
+body.category-videos.category-59 .bg-image {
+  background-image: url("../Paradox/assets/images/bg-video.gif") !important;
+  background-position: 50% 126px; }
+
 body.blog .bg-image {
   background-image: url("../Paradox/assets/images/blog-bg.jpg") !important;
   position: fixed;

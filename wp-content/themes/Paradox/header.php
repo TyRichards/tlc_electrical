@@ -48,6 +48,9 @@
 			
 			<div class="bg-image feature-image wp-post-image" style="background-image: url('<?php echo $feature_img ?>')" alt="<?php wp_title('|', true, 'right'); ?>">
 			</div>                    	           
+        <?php } else { ?>
+			<div class="bg-image feature-image wp-post-image" alt="<?php wp_title('|', true, 'right'); ?>">
+			</div> 
         <?php } ?> 
 		
 		<?php do_action('before'); ?> 
