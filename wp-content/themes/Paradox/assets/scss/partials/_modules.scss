@@ -26,8 +26,9 @@ body.search-results {
     }
 }
 
-.page-id-225 .bg-image.feature-image {
-    background-size: 29% auto;
+// Small Bgs
+.page-id-225, .page-id-227 { 
+    .bg-image.feature-image { background-size: 29% auto; }
 }
 
 body.blog {
