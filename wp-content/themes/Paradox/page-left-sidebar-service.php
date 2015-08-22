@@ -39,7 +39,7 @@ Template Name: Service (Left Sidebar)
                     <div class="text-center">                       
                         <a class="btn btn-primary btn-lg btn-block hidden-sm hidden-xs" href="/schedule">
                             Schedule Service Online
-                            <span>for <?php the_title(); ?> — Save 10%</span>
+                            <span>for <?php the_title(); ?><br/>Save 10%</span>
                         </a>
                         <a class="btn btn-primary btn-lg btn-block visible-sm visible-xs" href="/schedule">
                             Schedule Online
