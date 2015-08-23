@@ -98,7 +98,7 @@
 								'walker' => new BootstrapBasicMyWalkerNavMenu()
 								)
 							); ?>	
-			                <div class="row">                                 
+			                <div class="row" style="display:none;">                                 
 			                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-4 searchbar visible-lg pull-right" style="margin-top:25px;">
 			                        <?php include (TEMPLATEPATH . '/searchform.php'); ?>
 			                    </div>
