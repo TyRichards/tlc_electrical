@@ -284,6 +284,11 @@
 // Large devices only (large desktops, 1200px and up)
 @media (min-width: $screen-lg-min) {
 
+    // Home page special things
+    .page-template-page-home .nav-special {
+        margin-top: -28px!important;
+    }    
+
     .col-no-padding-lg {
         padding-left: 0px;
         padding-right: 0px;

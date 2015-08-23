@@ -7128,6 +7128,46 @@ header .navbar-brand {
   min-width: 50%;
   min-height: 50%; }
 
+body.home .masthead {
+  padding-top: 30px;
+  padding-bottom: 80px; }
+
+.navbar .searchbar {
+  width: 500px !important;
+  margin-top: -12px !important; }
+  .navbar .searchbar .search-label {
+    margin-bottom: 10px;
+    margin-top: 50px; }
+  .navbar .searchbar .search-sublabel {
+    margin-top: 10px; }
+  .navbar .searchbar .search-form {
+    position: relative; }
+    .navbar .searchbar .search-form .input-group {
+      width: 100%; }
+      .navbar .searchbar .search-form .input-group input.form-control, .navbar .searchbar .search-form .input-group .ginput_container input, .ginput_container .navbar .searchbar .search-form .input-group input, .navbar .searchbar .search-form .input-group input {
+        -moz-border-radius: 40px !important;
+        -webkit-border-radius: 40px;
+        border-radius: 40px !important;
+        padding-left: 20px !important;
+        border: 5px solid #d9d9d9;
+        font-size: 20px !important;
+        height: 58px; }
+      .navbar .searchbar .search-form .input-group span.input-group-btn {
+        display: static; }
+        .navbar .searchbar .search-form .input-group span.input-group-btn button {
+          position: absolute;
+          margin: 0;
+          top: 0;
+          right: 0;
+          background: none;
+          border: none;
+          font-size: 26px;
+          color: #2d2d90;
+          line-height: 1.8;
+          padding-right: 24px; }
+          .navbar .searchbar .search-form .input-group span.input-group-btn button i {
+            font-size: 33px !important; }
+
 .body-content .masthead {
   color: #626262;
   background-color: transparent; }
@@ -8373,6 +8413,9 @@ li#field_11_1 {
   .no-float-md {
     float: none !important; } }
 @media (min-width: 1200px) {
+  .page-template-page-home .nav-special {
+    margin-top: -28px !important; }
+
   .col-no-padding-lg {
     padding-left: 0px;
     padding-right: 0px; }

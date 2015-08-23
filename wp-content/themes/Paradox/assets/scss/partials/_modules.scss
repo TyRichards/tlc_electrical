@@ -271,6 +271,47 @@ header .navbar-brand {
 
 // Masthead /////////////////////////////////////////////////////////////////
 
+body.home .masthead {
+    padding-top: 30px;
+    padding-bottom: 80px;
+}
+
+.navbar .searchbar {
+    width: 500px!important;
+    margin-top: -12px!important;    
+    .search-label { margin-bottom: 10px; margin-top: 50px; }
+    .search-sublabel { margin-top: 10px; }
+    .search-form {
+        position: relative;
+        .input-group {
+            width: 100%;
+            input.form-control { 
+                @include border-radius(40px!important); 
+                padding-left: 20px!important;
+                border: 5px solid #d9d9d9;
+                font-size: 20px!important;
+                height: 58px;                    
+            }
+            span.input-group-btn {                    
+                display: static;
+                button { 
+                    position: absolute;
+                    margin: 0;
+                    top: 0;
+                    right: 0;
+                    background: none;
+                    border: none;
+                    font-size: 26px;
+                    color: #2d2d90;
+                    line-height: 1.8;
+                    padding-right: 24px;
+                    i { font-size: 33px!important; }                    
+                }
+            }
+        }
+    }
+}
+
 .body-content .masthead {
     color: #626262;
     background-color: transparent;

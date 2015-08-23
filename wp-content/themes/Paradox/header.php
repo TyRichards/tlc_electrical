@@ -89,14 +89,20 @@
 										<span>— 24-Hr Service –</span>
 									</a>									
 								</li>								
-							</ul>								
+							</ul>	 
+
 							<?php wp_nav_menu(array(
 								'theme_location' => 'primary', 
 								'container' => false, 
 								'menu_class' => 'nav navbar-nav navbar-right primary-menu', 
 								'walker' => new BootstrapBasicMyWalkerNavMenu()
 								)
-							); ?>													
+							); ?>	
+			                <div class="row">                                 
+			                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-4 searchbar visible-lg pull-right" style="margin-top:25px;">
+			                        <?php include (TEMPLATEPATH . '/searchform.php'); ?>
+			                    </div>
+			                </div>     																			
 						</div><!--.navbar-collapse-->
 					</div>
 				</nav>				

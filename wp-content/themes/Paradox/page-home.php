@@ -12,8 +12,11 @@ Template Name: Home
             <div class="col-lg-10 col-lg-offset-1 text-center">  
                 <h1 style="margin-top:0!important;">Electricians Available Today</h1>
                 <h2 class="h1" style="margin-top:0!important;"><?php echo date('l F jS'); ?></h1>
+                <p style="margin-top:15px!important;">
+                    Our Electricians Solve Your Electrical Problems 24/7
+                </p>                    
                 <div class="row">                                 
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3 searchbar" style="margin-top:25px;">                                                
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 searchbar hidden-lg" style="margin-top:25px;">                                                
 <!--                         <p class="search-label small text-center">
                             <?php // if(get_field('headline')) {
                                 // echo get_field('headline');                        
