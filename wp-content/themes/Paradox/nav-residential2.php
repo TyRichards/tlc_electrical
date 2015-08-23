@@ -94,6 +94,15 @@
                 ?>
                 <?php wp_nav_menu($menu_args);?>                                  
             </div>
-        </div>
+        </div>        
     </div>  
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <a href="/financing-payment-options/">
+                    Financing & Payment Options               
+                </a>
+            </div>
+        </div>    
+    </div>         
 </div> <!-- .panel-group -->
