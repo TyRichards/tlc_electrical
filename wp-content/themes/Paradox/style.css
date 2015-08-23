@@ -7132,9 +7132,6 @@ body.home .masthead {
   padding-top: 30px;
   padding-bottom: 80px; }
 
-.navbar .searchbar {
-  display: none; }
-
 body.home .navbar .searchbar {
   display: block !important;
   width: 500px !important;
