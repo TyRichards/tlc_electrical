@@ -12,7 +12,7 @@
         <div class="panel-heading" role="tab" id="headingOne">
             <div class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    Electrical Panel Installation
+                    Electrical Panels, Circuits & Breakers
                     <i class="fa fa-arrow-circle-down pull-right"></i>
                 </a>
             </div>
@@ -56,7 +56,7 @@
         <div class="panel-heading" role="tab" id="headingThree">
             <div class="panel-title">
                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Pool Equipment Repair & Installation
+                    Swimming Pool Service
                     <i class="fa fa-arrow-circle-down pull-right"></i>
                 </a>
             </div>
@@ -78,7 +78,7 @@
         <div class="panel-heading" role="tab" id="headingFour">
             <div class="panel-title">
                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                    General Services
+                    General Electrical Services
                     <i class="fa fa-arrow-circle-down pull-right"></i>
                 </a>
             </div>
