@@ -276,7 +276,10 @@ body.home .masthead {
     padding-bottom: 80px;
 }
 
-.navbar .searchbar {
+.navbar .searchbar { display: none;}
+
+body.home .navbar .searchbar {
+    display: block!important;
     width: 500px!important;
     margin-top: -12px!important;    
     .search-label { margin-bottom: 10px; margin-top: 50px; }

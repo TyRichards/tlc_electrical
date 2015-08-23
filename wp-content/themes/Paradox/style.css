@@ -7133,18 +7133,22 @@ body.home .masthead {
   padding-bottom: 80px; }
 
 .navbar .searchbar {
+  display: none; }
+
+body.home .navbar .searchbar {
+  display: block !important;
   width: 500px !important;
   margin-top: -12px !important; }
-  .navbar .searchbar .search-label {
+  body.home .navbar .searchbar .search-label {
     margin-bottom: 10px;
     margin-top: 50px; }
-  .navbar .searchbar .search-sublabel {
+  body.home .navbar .searchbar .search-sublabel {
     margin-top: 10px; }
-  .navbar .searchbar .search-form {
+  body.home .navbar .searchbar .search-form {
     position: relative; }
-    .navbar .searchbar .search-form .input-group {
+    body.home .navbar .searchbar .search-form .input-group {
       width: 100%; }
-      .navbar .searchbar .search-form .input-group input.form-control, .navbar .searchbar .search-form .input-group .ginput_container input, .ginput_container .navbar .searchbar .search-form .input-group input, .navbar .searchbar .search-form .input-group input {
+      body.home .navbar .searchbar .search-form .input-group input.form-control, body.home .navbar .searchbar .search-form .input-group .ginput_container input, .ginput_container body.home .navbar .searchbar .search-form .input-group input, body.home .navbar .searchbar .search-form .input-group input {
         -moz-border-radius: 40px !important;
         -webkit-border-radius: 40px;
         border-radius: 40px !important;
@@ -7152,9 +7156,9 @@ body.home .masthead {
         border: 5px solid #d9d9d9;
         font-size: 20px !important;
         height: 58px; }
-      .navbar .searchbar .search-form .input-group span.input-group-btn {
+      body.home .navbar .searchbar .search-form .input-group span.input-group-btn {
         display: static; }
-        .navbar .searchbar .search-form .input-group span.input-group-btn button {
+        body.home .navbar .searchbar .search-form .input-group span.input-group-btn button {
           position: absolute;
           margin: 0;
           top: 0;
@@ -7165,7 +7169,7 @@ body.home .masthead {
           color: #2d2d90;
           line-height: 1.8;
           padding-right: 24px; }
-          .navbar .searchbar .search-form .input-group span.input-group-btn button i {
+          body.home .navbar .searchbar .search-form .input-group span.input-group-btn button i {
             font-size: 33px !important; }
 
 .body-content .masthead {
